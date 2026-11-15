@@ -9,6 +9,7 @@ flowchart BT
     ualg_core["ualg/core"]
     ualg_site["ualg/site"]
     qgeom_core["qgeom/core"]
+    qprob_asymptotic["qprob/asymptotic"]
   end
   subgraph L1["Package layer 1"]
     algebra_core["algebra/core"]
@@ -25,6 +26,7 @@ flowchart BT
     condensed_core["condensed/core"]
     ualg_demorgan["ualg/demorgan"]
     qgeom_hal["qgeom/hal"]
+    qprob_unbounded["qprob/unbounded"]
   end
   subgraph L2["Package layer 2"]
     algebra["algebra"]
@@ -42,6 +44,7 @@ flowchart BT
     ualg_cube["ualg/cube"]
     qgeom_geom["qgeom/geom"]
     qgeom_susy["qgeom/susy"]
+    qprob_fock["qprob/fock"]
   end
   subgraph L3["Package layer 3"]
     cubical_hermitian["cubical/hermitian"]
@@ -57,6 +60,7 @@ flowchart BT
     discovery_kernel["conjecture/kernel"]
     cmd_ualg["cmd/ualg"]
     qgeom_qk["qgeom/qk"]
+    qprob_ccr_field["qprob/ccr_field"]
   end
   subgraph L4["Package layer 4"]
     semiring_app["semiring/app"]
@@ -64,11 +68,13 @@ flowchart BT
     semiring_par_host["semiring/par_host"]
     accel["accel"]
     cmd_qgeom["cmd/qgeom"]
+    qprob_nc_measure["qprob/nc_measure"]
   end
   subgraph L5["Package layer 5"]
     cubical_autonomy["cubical/autonomy"]
     conjecture["conjecture"]
     cmd_semiringreport["cmd/semiringreport"]
+    cmd_qprob["cmd/qprob"]
   end
   subgraph L6["Package layer 6"]
     cubical_structures["cubical/structures"]
@@ -154,6 +160,7 @@ flowchart BT
   semiring_graph --> semiring_app
   semiring_bp --> semiring_app
   semiring_nf --> semiring_app
+  semiring_cat --> semiring_app
   semiring_algebra --> semiring_bp
   semiring_algebra --> semiring_io
   gcd --> topos
@@ -214,6 +221,7 @@ flowchart BT
   semiring_graph --> cmd_showcase
   symlib --> cmd_showcase
   root --> cmd_showcase
+  semiring_app --> cmd_showcase
   semiring_par --> semiring_par_host
   semiring_algebra --> cmd_semiringreport
   semiring_matrix --> cmd_semiringreport
@@ -269,3 +277,18 @@ flowchart BT
   qgeom_geom --> cmd_qgeom
   qgeom_susy --> cmd_qgeom
   qgeom_qk --> cmd_qgeom
+  qprob_asymptotic --> qprob_unbounded
+  qprob_asymptotic --> qprob_fock
+  qprob_unbounded --> qprob_fock
+  qprob_asymptotic --> qprob_ccr_field
+  qprob_unbounded --> qprob_ccr_field
+  qprob_fock --> qprob_ccr_field
+  qprob_asymptotic --> qprob_nc_measure
+  qprob_unbounded --> qprob_nc_measure
+  qprob_fock --> qprob_nc_measure
+  qprob_ccr_field --> qprob_nc_measure
+  qprob_asymptotic --> cmd_qprob
+  qprob_unbounded --> cmd_qprob
+  qprob_fock --> cmd_qprob
+  qprob_ccr_field --> cmd_qprob
+  qprob_nc_measure --> cmd_qprob

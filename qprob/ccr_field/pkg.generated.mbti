@@ -1,0 +1,95 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/ccr_field"
+
+import {
+  "vv0101v01/cubical-hermitian/qprob/asymptotic",
+  "vv0101v01/cubical-hermitian/qprob/unbounded",
+}
+
+// Values
+pub fn ccr_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn complex_field_inner(ComplexFieldFn, ComplexFieldFn) -> @unbounded.QComplex
+
+pub fn continuum_l2_inner(ContinuumTestFn, ContinuumTestFn) -> @asymptotic.QVal
+
+pub fn fock_lattice_bosonic_commutator(ContinuumTestFn, ContinuumTestFn, Int32) -> @asymptotic.QVal
+
+pub fn law_continuum_smearing_limit() -> Array[(String, Bool)]
+
+pub fn law_hudson_parthasarathy_ito() -> Array[(String, Bool)]
+
+pub fn law_weyl_symplectic_cocycle() -> Array[(String, Bool)]
+
+pub fn law_wick_normal_ordering() -> Array[(String, Bool)]
+
+pub fn poly_definite_integral(Array[@asymptotic.QVal], @asymptotic.QVal, @asymptotic.QVal) -> @asymptotic.QVal
+
+pub fn qsde_add(QuantumSdeIncrement, QuantumSdeIncrement) -> QuantumSdeIncrement
+
+pub fn qsde_adjoint(QuantumSdeIncrement) -> QuantumSdeIncrement
+
+pub fn qsde_eq(QuantumSdeIncrement, QuantumSdeIncrement) -> Bool
+
+pub fn qsde_ito_product(QuantumSdeIncrement, QuantumSdeIncrement) -> QuantumSdeIncrement
+
+pub fn quantum_ito_mul(QuantumItoDiff, QuantumItoDiff) -> QuantumItoDiff
+
+pub fn test_fn_add(ContinuumTestFn, ContinuumTestFn) -> ContinuumTestFn
+
+pub fn test_fn_eval(ContinuumTestFn, @asymptotic.QVal) -> @asymptotic.QVal
+
+pub fn test_fn_scale(@asymptotic.QVal, ContinuumTestFn) -> ContinuumTestFn
+
+pub fn weyl_symplectic_form(ComplexFieldFn, ComplexFieldFn) -> @asymptotic.QVal
+
+pub fn wick_normal_order(Array[FieldFactor]) -> Array[WickNormalTerm]
+
+pub fn wick_vacuum_expectation(Array[FieldFactor]) -> @asymptotic.QVal
+
+// Errors
+
+// Types and methods
+pub(all) struct ComplexFieldFn {
+  re : ContinuumTestFn
+  im : ContinuumTestFn
+}
+
+pub(all) struct ContinuumTestFn {
+  t_start : @asymptotic.QVal
+  t_end : @asymptotic.QVal
+  coeffs : Array[@asymptotic.QVal]
+}
+
+pub(all) enum FieldFactor {
+  Create(ContinuumTestFn)
+  Annihilate(ContinuumTestFn)
+}
+
+#derive(Eq)
+pub(all) enum QuantumItoDiff {
+  ZeroDiff
+  Dt
+  DA
+  DADag
+  DLambda
+}
+pub fn QuantumItoDiff::equal(Self, Self) -> Bool
+pub fn QuantumItoDiff::not_equal(Self, Self) -> Bool
+
+pub(all) struct QuantumSdeIncrement {
+  c_dt : @unbounded.QComplex
+  c_da : @unbounded.QComplex
+  c_dadag : @unbounded.QComplex
+  c_dlambda : @unbounded.QComplex
+}
+
+pub(all) struct WickNormalTerm {
+  coeff : @asymptotic.QVal
+  creators : Array[ContinuumTestFn]
+  annihilators : Array[ContinuumTestFn]
+}
+
+// Type aliases
+
+// Traits

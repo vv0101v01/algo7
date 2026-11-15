@@ -1,8 +1,8 @@
 # `semiring/app/` — 兩個「半環直接解應用的問題」樣板（F3 · Layer 4）
 
-> **套件**：`vv0101v01/cubical-hermitian/semiring/app` · **Layer 4** · 依賴 `semiring-algebra`
-> **被依賴**：`cmd-semiringreport`、`root`
-> **2 檔 371 行** —— 整個 F3 聯邦中最小的套件，但它是**「半環不是數學玩具」**的證據。
+> **套件**：`vv0101v01/cubical-hermitian/semiring/app` · **Layer 4** · 依賴 `semiring-{algebra,matrix,sim,trop,graph,bp,nf,cat}`
+> **被依賴**：`cmd-semiringreport`
+> **3 檔 665 行** —— F3 半環聯邦的應用示範與 `wasm-gc` 全演算法整合驗證套件。
 
 ---
 
@@ -23,6 +23,7 @@
 |---|---:|---|
 | `closed.mbt` | 203 | 以 `BoolSr` 為係數的傳遞閉包，含三種算法對照 |
 | `portfolio.mbt` | 168 | 投資組合的熱帶／機率雙解讀 |
+| `wasm_verify.mbt` | 294 | `verify_semiring_wasm_suite()`：SWAR 位元矩陣、Karp 最小平均權重環、Johnson 重加權全點對最短路、Min-Fill 變數消去與 Valmari 雙模擬分割細化之可攜整合驗證 |
 
 ---
 
@@ -71,9 +72,9 @@ println(rep.expected_value)  // +,× 的解
 
 ## 6. 依賴邊界與驗證
 
-* 只用 `semiring-algebra` 的 trait 與 `BoolSr`/`TropF`/`Prob` —— **不依賴 `matrix`**，因此可在 `matrix` 尚未編譯時獨立驗證（便於教學與最小重現）。
-* 被 `cmd/semiringreport` 引用為「應用示範」小節。
+* `closed.mbt` 與 `portfolio.mbt` 示範傳遞閉包與熱帶／機率雙解讀；`wasm_verify.mbt` 匯聚 `semiring/{algebra,matrix,sim,trop,graph,bp,nf,cat}` 執行跨套件整合對照證書。
+* 被 `cmd/semiringreport`（第 15 節仲裁與整合證書）直接呼叫並驗算。
 
 ```bash
-moon test semiring/app --target wasm-gc
+moon run cmd/semiringreport --target wasm-gc
 ```

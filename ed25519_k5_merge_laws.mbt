@@ -177,6 +177,42 @@ pub fn check_phase16_schema_large_open_positivity() -> Bool {
     None => return false
   }
 
+  // Open IR telescope with external term argument (`dopen_arg_external`) and
+  // first-order decoded value argument (`dopen_arg_decoded_val` + `dopen_val_term`),
+  // plus negative control when the decoded value has the wrong type.
+  let ext_val_open = dopen_simultaneous_ir_spec(
+    "OpenExtValU",
+    0,
+    [
+      dopen_ir_constructor("ext_flag_c", [dopen_arg_external("flag", DBoolTy)]),
+      dopen_ir_constructor("pointed_c", [
+        dopen_arg_code("a"),
+        dopen_arg_decoded_val("pt", 0, 0),
+      ]),
+    ],
+    [dopen_ir_decoder("El", 0, [DBoolTy, DTVar(1)])],
+  )
+  if !open_ir_validate(ext_val_open) {
+    return false
+  }
+  let c_ext_true = dopen_ir_intro(0, [dopen_val_term(DBoolLit(true))])
+  let c_pointed = dopen_ir_intro(1, [
+    dopen_val_code(c_ext_true),
+    dopen_val_term(DBoolLit(false)),
+  ])
+  let c_pointed_bad = dopen_ir_intro(1, [
+    dopen_val_code(c_ext_true),
+    dopen_val_term(DUnitLit),
+  ])
+  if !open_ir_check_code(ext_val_open, c_pointed) ||
+    open_ir_check_code(ext_val_open, c_pointed_bad) {
+    return false
+  }
+  match open_ir_eval_decode(ext_val_open, 0, c_pointed) {
+    Some(v) => if !conv_ty(0, 0, v, DVBoolTy) { return false }
+    None => return false
+  }
+
   // Negative check: ill-scoped open IR decoder reference (`decoder_idx = 2 >= m`).
   let bad_open = dopen_simultaneous_ir_spec(
     "BadOpenU",

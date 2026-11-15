@@ -1,0 +1,118 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/unbounded"
+
+import {
+  "vv0101v01/cubical-hermitian/qprob/asymptotic",
+}
+
+// Values
+pub fn check_robertson_schrodinger(QuantumProbState, UnboundedOp, UnboundedOp) -> UncertaintyBound
+
+pub fn law_quantum_prob_states() -> Array[(String, Bool)]
+
+pub fn law_unbounded_star_algebra() -> Array[(String, Bool)]
+
+pub fn law_uncertainty_principle() -> Array[(String, Bool)]
+
+pub fn law_yosida_and_moment_reconstruction() -> Array[(String, Bool)]
+
+pub fn qc_add(QComplex, QComplex) -> QComplex
+
+pub fn qc_conj(QComplex) -> QComplex
+
+pub fn qc_i() -> QComplex
+
+pub fn qc_make(@asymptotic.QVal, @asymptotic.QVal) -> QComplex
+
+pub fn qc_mul(QComplex, QComplex) -> QComplex
+
+pub fn qc_neg(QComplex) -> QComplex
+
+pub fn qc_norm_sq(QComplex) -> @asymptotic.QVal
+
+pub fn qc_one() -> QComplex
+
+pub fn qc_real(@asymptotic.QVal) -> QComplex
+
+pub fn qc_zero() -> QComplex
+
+pub fn qstate_diagonal_gibbs(Array[@asymptotic.QVal]) -> QuantumProbState?
+
+pub fn qstate_expect(QuantumProbState, UnboundedOp) -> QComplex
+
+pub fn qstate_pure(Array[QComplex]) -> QuantumProbState?
+
+pub fn qstate_variance(QuantumProbState, UnboundedOp) -> @asymptotic.QVal
+
+pub fn reconstruct_jacobi_from_moments(Array[@asymptotic.QVal], Int32) -> JacobiMomentReconstruction?
+
+pub fn unbounded_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn uop_add(UnboundedOp, UnboundedOp) -> UnboundedOp
+
+pub fn uop_adjoint(UnboundedOp) -> UnboundedOp
+
+pub fn uop_anticommutator(UnboundedOp, UnboundedOp) -> UnboundedOp
+
+pub fn uop_commutator(UnboundedOp, UnboundedOp) -> UnboundedOp
+
+pub fn uop_dual_momentum_tridiag(Array[@asymptotic.QVal], Int32) -> UnboundedOp
+
+pub fn uop_eq(UnboundedOp, UnboundedOp) -> Bool
+
+pub fn uop_identity(Int32) -> UnboundedOp
+
+pub fn uop_is_self_adjoint(UnboundedOp) -> Bool
+
+pub fn uop_jacobi_tridiag(Array[@asymptotic.QVal], Array[@asymptotic.QVal]) -> UnboundedOp
+
+pub fn uop_mul(UnboundedOp, UnboundedOp) -> UnboundedOp
+
+pub fn uop_number_op(Int32) -> UnboundedOp
+
+pub fn uop_scale(QComplex, UnboundedOp) -> UnboundedOp
+
+pub fn uop_sub(UnboundedOp, UnboundedOp) -> UnboundedOp
+
+pub fn uop_zero(Int32) -> UnboundedOp
+
+pub fn yosida_diagonal_approximant(Array[@asymptotic.QVal], @asymptotic.QVal) -> UnboundedOp?
+
+// Errors
+
+// Types and methods
+pub(all) struct JacobiMomentReconstruction {
+  alphas : Array[@asymptotic.QVal]
+  betas : Array[@asymptotic.QVal]
+}
+
+#derive(Eq)
+pub(all) struct QComplex {
+  re : @asymptotic.QVal
+  im : @asymptotic.QVal
+}
+pub fn QComplex::equal(Self, Self) -> Bool
+pub fn QComplex::not_equal(Self, Self) -> Bool
+
+pub(all) struct QuantumProbState {
+  dim : Int32
+  rho : UnboundedOp
+}
+
+pub(all) struct UnboundedOp {
+  dim : Int32
+  growth_deg : Int32
+  entries : Array[QComplex]
+}
+
+pub(all) struct UncertaintyBound {
+  lhs_prod : @asymptotic.QVal
+  commutator_term : @asymptotic.QVal
+  covariance_term : @asymptotic.QVal
+  rhs_total : @asymptotic.QVal
+  holds : Bool
+}
+
+// Type aliases
+
+// Traits

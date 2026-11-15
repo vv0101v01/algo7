@@ -1,5 +1,6 @@
 import {
   "vv0101v01/cubical-hermitian/bridge",
+  "vv0101v01/cubical-hermitian/semiring/app" @sapp,
   "vv0101v01/cubical-hermitian/semiring/graph" @sgraph,
   "vv0101v01/cubical-hermitian/symlib" @sym,
   "vv0101v01/cubical-hermitian" @cub,

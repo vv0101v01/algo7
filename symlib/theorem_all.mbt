@@ -9,16 +9,6 @@
 /// 編號註解（`// 1 …`、`// 2 …`）與 `Cert.name` 一一對應，便於定位失敗項。
 
 ///|
-/// # Theorem (all) — 全庫定理電池 `prove_all`
-///
-/// `prove_all(cap)` 一次跑完 20 條跨模組定理證書（範疇公理、(co)limit 泛性質、米田引理、
-/// Kan = 歸納/上歸納、Frobenius 互反、單子律、CSP=極限 vs 單子搜索、Cayley、標記矩陣、
-/// SGS 元素表、已知 |Aut| 文獻值…），並由 `cert_report` 彙整。
-/// 每條證書皆為**有限情形之逐點計算**：以一條演算法驗證另一條演算法。
-///
-/// 編號註解（`// 1 …`、`// 2 …`）與 `Cert.name` 一一對應，便於定位失敗項。
-
-///|
 /// 全庫定理電池：範疇 / 單子 / 群作用 / G-集 / Cayley / CSP。
 pub fn prove_all(cap : Int32) -> Array[Cert] {
   let out : Array[Cert] = []
@@ -103,9 +93,13 @@ pub fn prove_all(cap : Int32) -> Array[Cert] {
       }
     }
   }
+  // 非薄單對象群胚 BG（G = S₃）上的一般米田雙射：|Nat(Hom_BG(-,0), F)| == |F(0)| = 3
+  let s3_grp = PermGroup::symmetric(3)
+  let s3_p = presheaf_from_gset(s3_grp, gset_points(s3_grp, cap), cap)
+  ok3 = ok3 && verify_general_yoneda_bijection(s3_p, 0, 1000)
   out.push(
     cert(
-      "yoneda-lemma", ok3, "Nat(h^a,F) ≅ F(a)：兩個預層 × 三個對象，雙向映射互逆且計數相等",
+      "yoneda-lemma", ok3, "Nat(h^a,F) ≅ F(a)：偏序預層與非薄群胚 BG=S₃ 雙向映射互逆且計數相等",
     ),
   )
   // 4 Kan 沿恆等函子
@@ -368,11 +362,35 @@ fn cert_marks(out : Array[Cert], cap : Int32) -> Unit {
     }
     det13 = det13 + "|G|=" + gord.to_string() + ":" + ns.to_string() + "類 "
   }
+  // 以 Burnside Möbius 上三角反演求解器分解超八面體群 B₂ ≃ D₄（|B₂| = 2²·2! = 8）之點與序對作用
+  let b2 = PermGroup::hyperoctahedral(2)
+  let subs_b2 = subgroup_classes(b2, cap)
+  let m_b2 = table_of_marks(b2, subs_b2, cap)
+  let gs_b2 = gset_pairs(b2, cap)
+  let mv_b2 = mark_vector(gs_b2, subs_b2)
+  let mobius_ok = b2.order() == 8L &&
+    (match burnside_mobius_solve(m_b2, mv_b2) {
+      None => false
+      Some(mults) => {
+        let mut recon_ok = true
+        for i in 0..<subs_b2.length() {
+          let mut dot = 0
+          for j in i..<subs_b2.length() {
+            dot = dot + m_b2[i][j] * mults[j]
+          }
+          if dot != mv_b2[i] {
+            recon_ok = false
+          }
+        }
+        recon_ok
+      }
+    }) &&
+    burnside_mobius_solve(m_b2, Array::make(subs_b2.length(), -1)) is None
   out.push(
     cert(
       "marks-triangular",
-      ok13,
-      "table of marks 下三角 + 對角正 ⇒ 可逆 ⇒ 標記向量為完全不變量；" +
+      ok13 && mobius_ok,
+      "table of marks 下三角 + 對角正 + Möbius 反演（含 B₂=8）；" +
       det13,
     ),
   )

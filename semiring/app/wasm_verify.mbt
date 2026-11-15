@@ -235,13 +235,23 @@ pub fn verify_semiring_wasm_suite() -> Bool {
     return false
   }
 
-  // 8. 稀疏 CSR × 稠密矩陣同態、分塊乘法、熱帶指派與星半環定律覆蓋
+  // 8. 稀疏 CSR × 稠密矩陣同態、範疇化見證加法、分塊乘法、熱帶指派與星半環定律覆蓋
   let csr_a = @mat.Csr::from_dense(ma)
   let csr_b = @mat.Csr::from_dense(mb)
   let (r0_lo, r0_hi) = csr_a.row_range(0)
   if r0_hi - r0_lo != 2 ||
     !@mat.mat_equal(@mat.csr_mul(csr_a, csr_b).to_dense(), prod_swar) ||
     !@mat.mat_equal(@mat.mul_blocked_auto(ma, mb), prod_swar) {
+    return false
+  }
+  let dag3 = @cat.DiGraph::new(3)
+  dag3.edge(0, 1)
+  dag3.edge(1, 2)
+  dag3.edge(0, 2)
+  let hom_sm = dag3.hom_setmat()
+  let sm_double = @cat.smat_plus(hom_sm, hom_sm)
+  if @cat.decategorify(hom_sm).get(0, 2).value() != 2L ||
+    @cat.decategorify(sm_double).get(0, 2).value() < 2L {
     return false
   }
   let flat2 : FixedArray[@alg.BoolSr] = [

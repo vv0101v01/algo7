@@ -1225,3 +1225,31 @@ Dev.txt（本節）、agent.md、agent.v2.md、lean/README.md、lean/UNIVERSAL.m
 - 憑證只以單次 URL 形式用於 `git push`，未寫入 `.git/config`、未寫入任何檔案或報告；
   推送後檢查 `.git/` 內無 token 字串。
 - 未觸發遠端 CI：`algo7` 沒有 workflow run 紀錄可引用，**不宣稱任何遠端綠燈**。
+
+
+## 2026-11-15（第三輪）：qprob 子聯邦 — 五階量子概率與非交換隨機空間結構演化（第七聯邦內）
+
+- 工具鏈核對：官方正式版 `moon 0.1.20261104 (940aa18)`、`moonc v0.10.20+65efd5b93`（與 `.moonbit-version` 一致），啟用現行 `#derive(...)`、`pub extend T with Trait::{...}`、`[ for .. => .. ]`、`guard .. is Some(..) else`、`StringBuilder()`、`moon.mod`/`moon.pkg` 語法。
+- 新增 `qprob/{asymptotic,unbounded,fock,ccr_field,nc_measure}` + `cmd/qprob`（L0→L5，掛載於第七聯邦 `discovery`）：12 個 `.mbt` 檔、4,429 行、20 章、70 條結構演化命題；公開宣告 177 個、0 死碼。
+- 修正紀錄：(1) 雙模態幾何序列加速由疊代 Aitken 改為精確 Wynn `ε`-算法菱形遞迴，5 點零誤差命中極限 `2`（Tier B 驗證後即刪 `test` 區塊）；(2) `FreePoisson(5)` 四階 Narayana 矩實算確認為 `1530`。
+- 閘門：`moon check --deny-warn`、`moon build`、`moon info`、`moon fmt`、`arch_check.py`（69 packages / 78 components）、`federation_docs.py --check`、`gen_laws.py`、`moon run cmd/qprob --target wasm-gc`（70/70）全部通過。
+
+
+## 2026-11-15（第四輪）：全倉代碼健檢、去重、除錯、清死碼、減債與分支 `7.1` CI
+
+- **全倉健檢指標**（`tools/health_scan.py` 補齊 `cmd/{symbench,ualg,qgeom,qprob}/main.mbt` 入口保護後複跑）：6,748 個函式／方法定義，**遞移死碼候選 `40 → 0`、零引用型別 `0`、空殼列舉 `0`、完全相同／同包 α 等價重複組 `1 → 0`**。
+- **除錯與邊界防禦（`qprob`）**：
+  1. `qv_pow` 修復負整數指數（`exp < 0` 取逆後以二進位平方求冪，並在 `asymptotic/laws.mbt` 驗證 `(2/3)⁻³ = 27/8` 與群逆律）；
+  2. `uop_scale(qc_zero(), a)` 修復零純量縮放後殘留非零 `growth_deg` 之錯誤；`yosida_diagonal_approximant` 拒絕負特徵值（非正半定譜）；
+  3. 補齊 `quad_{add,sub,mul}`（根號 `rad` 一致）、`qmat_{vec_mul,mul,rank}`、`tower_transition`、`uop_{zero,identity,add,sub,adjoint,mul}`、`qstate_expect`、`fock_{add,sub,create_left,annihilate_q}`、`ContinuumTestFn` 區間一致、`povm_effect`、`moments_to_{free,classical}_cumulants`（`m_0 == 1`）等前置域檢查；
+  4. `wick_normal_order` 正規化時合併同類算子詞並消去零係數項；`moments_to_free_cumulants` 改為遞推維護 Cauchy 卷積冪，免除重複重算 `moment_conv_power`；`qmat_rank` 由全列 Gauss–Jordan 精簡為上三角列梯形消去。
+- **去重與減債**：
+  1. `qprob` 內部合併 `qv_sub`、`quad_sub`、`qmat_vec_mul`、`uop_zero`、`uop_center`（共用中心化算子消除 `qstate_variance` 與 `check_robertson_schrodinger` 重複）、`fock_sub`、`pad_left_int`，並清除 `nc_measure/laws.mbt` 草稿推導註解與未引用的 `qc_sub`；
+  2. 清除 `symlib/theorem_all.mbt` 檔首重複模組註解，修正 `semiring/app/README.md` 過時描述（`3 檔 665 行`、`wasm_verify.mbt`），並同步 `qprob/*/README.md` 行數表；
+  3. `ualg/site/poset.mbt::show_ints` 改以列表推導與 `join(",")` 表達（維持 `ualg/site` 零外部依賴且消除全倉唯一完全重複體）。
+- **死碼接線（40 → 0，不誤刪公開語意 API）**：
+  1. `semiring/app/wasm_verify.mbt` 補驗 `DiGraph::hom_setmat` 與 `smat_plus`，並接入 `cmd/showcase` 與 `cmd/semiringreport`（遵守 2026-11-14 審計邊界，不將 `semiring/app` 加回 `bridge`），一次接通 29 個半環驗證宣告；
+  2. `symlib/theorem_all.mbt` 將非薄群胚 `BG = S₃` 一般米田雙射 `verify_general_yoneda_bijection`、超八面體群 `PermGroup::hyperoctahedral(2)` 與 `burnside_mobius_solve` 併入既有證書（維持 20 條證書契約不變）；
+  3. `ed25519_k5_merge_laws.mbt`、`facade.mbt`、`spec.mbt` 補齊 `dopen_arg_external`、`dopen_arg_decoded_val`、`dopen_val_term` 的正負控制檢驗。
+- **CI 與遠端分支 `7.1`**：`.github/workflows/ci.yml` 新增 `branches: [main, "7.*"]` 與 `cmd/qprob`（70/70）閘門；本地全套閘門（`moon check --deny-warn`、`moon build`、`moon info`、`moon fmt`、`gen_laws`、`gen_labels`、`federation_docs --check`、`arch_check`、`health_scan`、`cmd/{metatheory,ualg,qgeom,qprob,symdemo,showcase}`、`run_pipeline.py --require-full` 139/139）通過後推送至 `vv0101v01/algo7` 分支 `7.1`。
+

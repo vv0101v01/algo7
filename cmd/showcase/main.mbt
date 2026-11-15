@@ -160,8 +160,9 @@ fn main {
     Some(back) => back.equal(perm)
     None => false
   }
+  let semiring_wasm_ok = @sapp.verify_semiring_wasm_suite()
   println(
-    "weighted C4: symmetries=\{weighted.weighted_symmetry_count}, reach=\{weighted.reachable_pairs}, symmetry-average projector=\{@cub.is_projector(weighted.symmetry_projector)}, Perm/Wiring roundtrip=\{wiring_ok}",
+    "weighted C4: symmetries=\{weighted.weighted_symmetry_count}, reach=\{weighted.reachable_pairs}, symmetry-average projector=\{@cub.is_projector(weighted.symmetry_projector)}, Perm/Wiring roundtrip=\{wiring_ok}, semiring-wasm-suite=\{semiring_wasm_ok}",
   )
 
   println(
@@ -184,7 +185,8 @@ fn main {
     f851.all_holds &&
     f236.all_holds &&
     frontier.all_holds &&
-    wiring_ok else {
+    wiring_ok &&
+    semiring_wasm_ok else {
     abort(
       "showcase failed: see failed construction, coverage or negative control above",
     )

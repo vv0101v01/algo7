@@ -1470,3 +1470,75 @@ moon run cmd/qgeom --target wasm-gc         通過 179 / 179（章節計數不�
 - REST 核對：`default_branch = main`、head = `df1ed384`、上一筆 = `e43d0424`。
 - 憑證僅以單次推送 URL 使用，未落入 `.git/config` 或任何檔案；推送後掃過 `.git/` 無 token 字串。
 - `algo7` 沒有 CI run 可引用，**不宣稱遠端綠燈**；本地閘門見第 4 節。
+
+
+## 2026-11-15（第三輪）：qprob 子聯邦 — 五階量子概率與非交換隨機空間結構演化（70 條命題）
+
+### 1. 交付內容與分層（What changed & Why）
+
+在第七聯邦 `discovery` 之下新增 `qprob` 子聯邦：**5 個數學套件 + 1 個執行入口**，嚴格沿 `Layer 0 → Layer 5` 單向演化，
+將「代數子場與無窮漸近極限空間 → 無界算子概率空間 → 全量子福克空間 → 連續創生與湮滅算子場 → 非交換隨機分佈與測度空間」構造為可核驗的精確有理／超實算術體系。
+
+| 套件 | Layer | 結構階層 | 檔案（行數） | 章節 | 命題 |
+|---|---:|---|---|---:|---:|
+| `qprob/asymptotic` | 0 | 代數子場塔 `ℚ ⊂ ℚ(√d) ⊂ ℚ((ε))` 與無窮漸近極限空間 | `subfield` (519)／`projective_limit` (326)／`laws` (349) | 4 | 21 |
+| `qprob/unbounded` | 1 | 無界算子 `*-`代數概率空間 `(𝒟, Op*(𝒟), φ)` 與矩重構 | `probability_space` (516)／`laws` (363) | 4 | 12 |
+| `qprob/fock` | 2 | 全量子福克空間 `ℱ_0(ℋ)` 與 `q`-變形三統計分裂 | `full_fock` (427)／`laws` (341) | 4 | 13 |
+| `qprob/ccr_field` | 3 | 連續創生與湮滅算子場、Wick 正規序與量子 Itô 代數 | `continuum_field` (414)／`laws` (302) | 4 | 11 |
+| `qprob/nc_measure` | 4 | 非交換隨機分佈、POVM 算子測度與自由累積量統合 | `noncommutative_measure` (369)／`laws` (435) | 4 | 13 |
+| `cmd/qprob` | 5 | 五階結構演化定律總表執行檔 | `main` (68) | — | **70** |
+
+合計 **12 個 `.mbt` 檔、4,429 行、20 章、70 條命題**；`qprob` 內部 177 個公開宣告經機械掃描 **0 死碼**。
+
+### 2. 被計算抓出並修正的真實差異
+
+1. **疊代 Aitken `Δ²` vs 真正 Wynn `ε`-算法**：對雙模態暫態 `2 + (1/2)^n + (−1/3)^n`，簡單疊代兩次 Aitken `Δ²` 並不等於 Hankel 行列式比（無法在 5 點消除雙指數項）；改寫為精確 Wynn 菱形遞迴 `ε_{k+1}^{(n)} = ε_{k-1}^{(n+1)} + (ε_k^{(n+1)} − ε_k^{(n)})⁻¹` 後，`ε_4^{(0)}` 在 5 點零誤差命中極限 `2`（Tier B 局部測試實測輸出 `"2"` 後立即刪除）。
+2. **Narayana 四階多項式手算疏漏**：`FreePoisson(5)` 的四階矩為 `Σ_{k=1}^4 N(4,k) 5^k = 5 + 6·25 + 6·125 + 625 = 1530`（初稿誤寫 `1330`，被 `free_cumulants_to_moments` 實算抓出）。
+
+### 3. 本地驗收（How it was verified）
+
+```
+moon check --deny-warn --target wasm-gc     → 0 warnings, 0 errors
+moon build --target wasm-gc / moon info / moon fmt   → ok
+python3 tools/arch_check.py                 → architecture ok: 10 federations + unification apex, 69 packages, 78 components, 356 .mbt files, 215,919 lines
+python3 tools/gen_laws.py                   → 無差異（104 meta law functions）
+python3 tools/federation_docs.py --check    → fresh（39 active / 6 retired / 69 packages）
+moon run cmd/qprob --target wasm-gc         → 通過 70 / 70 個結構演化定理與演算法命題
+Tier B 臨時測試                              → qprob/asymptotic 驗得 wynn_epsilon_limit = "2"，已立即刪除（0 殘留 test 區塊）
+```
+
+### 4. 界線（What is still open）
+
+- 全部 70 條命題為有限截斷維度、多項式測試函數 `ℚ[t] ⊂ L²([a,b])` 與精確有理樣本上的重算檢核，並非 Lean 任意無窮維希爾伯特空間的形式化證明。
+- 本次為本地工作區實作與驗證，未執行遠端推送或 GitHub Actions。
+
+
+## 2026-11-15（第四輪）：全倉代碼健檢、去重、除錯、清死碼、減債與分支 `7.1` 遠端 CI
+
+### 1. 變更摘要（What changed & Why）
+
+1. **健檢工具校準（`tools/health_scan.py`）**：將 `cmd/{symbench,ualg,qgeom,qprob}/main.mbt` 納入 `PROTECTED_ENTRYPOINTS`，消除因漏保護執行入口造成的假性與隱藏死碼盲區。
+2. **邊界除錯與不變量守門（`qprob/*`）**：
+   - `qv_pow` 支援負指數（`exp < 0` 取逆後二進位平方求冪），並在 `asymptotic/laws.mbt` 驗證 `(2/3)⁻³ = 27/8` 與乘法逆律；
+   - `uop_scale(qc_zero(), a)` 歸零時同步將 `growth_deg` 設為 `0`；`yosida_diagonal_approximant` 拒絕負特徵值（非正半定譜）；
+   - 為 `quad_{add,sub,mul}`、`qmat_{vec_mul,mul,rank}`、`tower_transition`、`uop_{zero,identity,add,sub,adjoint,mul}`、`qstate_expect`、`fock_{add,sub,create_left,annihilate_q}`、`ContinuumTestFn` 區間端點、`povm_effect`、`moments_to_{free,classical}_cumulants`（`m_0 == 1`）補上顯式前置檢查；
+   - `wick_normal_order` 正規化時合併同類算子詞並濾除零係數；`moments_to_free_cumulants` 改以遞推維護 Cauchy 卷積冪；`qmat_rank` 精簡為上三角列梯形消去。
+3. **去重、減債與清死碼（全倉遞移死碼 `40 → 0`、完全重複組 `1 → 0`）**：
+   - 合併 `qv_sub`、`quad_sub`、`qmat_vec_mul`、`uop_zero`、`uop_center`、`fock_sub`、`pad_left_int`；刪除未引用的 `qc_sub` 與 `nc_measure/laws.mbt` 草稿註解；
+   - `ualg/site/poset.mbt::show_ints` 改用列表推導與 `join(",")`（保持 `ualg/site` 零外部依賴並消除唯一完全重複體）；
+   - 刪除 `symlib/theorem_all.mbt` 檔首重複模組註解，將 `verify_general_yoneda_bijection`（非薄群胚 `BG = S₃`）、`PermGroup::hyperoctahedral(2)` 與 `burnside_mobius_solve` 併入既有證書（維持 20 條證書總數不變）；
+   - `semiring/app/wasm_verify.mbt` 補驗 `DiGraph::hom_setmat` 與 `smat_plus`，接入 `cmd/showcase` 與 `cmd/semiringreport`（不修改 `bridge/moon.pkg`），並修正 `semiring/app/README.md` 與 `qprob/*/README.md` 統計；
+   - `ed25519_k5_merge_laws.mbt`、`facade.mbt`、`spec.mbt` 補驗 `dopen_arg_external`、`dopen_arg_decoded_val`、`dopen_val_term` 正負控制。
+
+### 2. 本地與 CI 閘門（How it was verified）
+
+```text
+moon info --target wasm-gc / moon fmt                 → clean
+python3 tools/gen_laws.py / gen_labels.py             → 104 law fns / 631 labels, zero diff
+python3 tools/federation_docs.py --check              → fresh (39 active, 6 retired, 69 packages)
+moon check --deny-warn --target wasm-gc / moon build  → 0 warnings, 0 errors
+python3 tools/arch_check.py                           → 10 federations + apex, 69 packages, 78 components, 356 .mbt, 216,043 lines
+python3 tools/health_scan.py                          → 6,748 defs, 0 dead functions, 0 dead types, 0 empty enums, 0 exact duplicates
+moon run cmd/{metatheory,ualg,qgeom,qprob,showcase}   → 631/631, 167/167, 179/179, 70/70, 39 active + 50/50 certs + semiring-wasm-suite=true
+python3 tools/run_pipeline.py --jobs=4 --require-full → 139/139 passed, full_verified=true
+```

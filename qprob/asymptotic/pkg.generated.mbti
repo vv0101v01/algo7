@@ -1,0 +1,171 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/asymptotic"
+
+import {
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn asym_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn cesaro_mean(Array[QVal]) -> QVal?
+
+pub fn chk(Array[(String, Bool)], String, Bool) -> Unit
+
+pub fn ints_show(Array[Int32]) -> String
+
+pub fn jet_add(AsymJet, AsymJet) -> AsymJet
+
+pub fn jet_cmp(AsymJet, AsymJet) -> Int32
+
+pub fn jet_coeff(AsymJet, Int32) -> QVal
+
+pub fn jet_const(QVal, Int32) -> AsymJet
+
+pub fn jet_eq(AsymJet, AsymJet) -> Bool
+
+pub fn jet_inv(AsymJet) -> AsymJet?
+
+pub fn jet_is_bounded(AsymJet) -> Bool
+
+pub fn jet_is_infinitesimal(AsymJet) -> Bool
+
+pub fn jet_is_zero(AsymJet) -> Bool
+
+pub fn jet_monomial(QVal, Int32, Int32) -> AsymJet
+
+pub fn jet_mul(AsymJet, AsymJet) -> AsymJet
+
+pub fn jet_normalize(Int32, Int32, Array[QVal]) -> AsymJet
+
+pub fn jet_standard_part(AsymJet) -> QVal?
+
+pub fn jet_sub(AsymJet, AsymJet) -> AsymJet
+
+pub fn jet_valuation(AsymJet) -> Int32?
+
+pub fn jet_zero(Int32) -> AsymJet
+
+pub fn law_asymptotic_acceleration() -> Array[(String, Bool)]
+
+pub fn law_asymptotic_jet_field() -> Array[(String, Bool)]
+
+pub fn law_projective_limit_space() -> Array[(String, Bool)]
+
+pub fn law_subfield_tower() -> Array[(String, Bool)]
+
+pub fn pad_left_int(Int32, Int32) -> String
+
+pub fn qmat_mul(Array[QVal], Int32, Int32, Array[QVal], Int32) -> Array[QVal]
+
+pub fn qmat_rank(Array[QVal], Int32, Int32) -> Int32
+
+pub fn qmat_vec_mul(Array[QVal], Int32, Int32, Array[QVal]) -> Array[QVal]
+
+pub fn quad_add(QuadElem, QuadElem) -> QuadElem
+
+pub fn quad_conj(QuadElem) -> QuadElem
+
+pub fn quad_eq(QuadElem, QuadElem) -> Bool
+
+pub fn quad_in_base_subfield(QuadElem) -> Bool
+
+pub fn quad_inv(QuadElem) -> QuadElem?
+
+pub fn quad_make(QVal, QVal, Int32) -> QuadElem
+
+pub fn quad_mul(QuadElem, QuadElem) -> QuadElem
+
+pub fn quad_norm(QuadElem) -> QVal
+
+pub fn quad_of_qv(QVal, Int32) -> QuadElem
+
+pub fn quad_sub(QuadElem, QuadElem) -> QuadElem
+
+pub fn quad_trace(QuadElem) -> QVal
+
+pub fn qv_add(QVal, QVal) -> QVal
+
+pub fn qv_cmp(QVal, QVal) -> Int32
+
+pub fn qv_div(QVal, QVal) -> QVal
+
+pub fn qv_eq(QVal, QVal) -> Bool
+
+pub fn qv_frac(Int32, Int32) -> QVal
+
+pub fn qv_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
+pub fn qv_int(Int32) -> QVal
+
+pub fn qv_inv(QVal) -> QVal?
+
+pub fn qv_is_zero(QVal) -> Bool
+
+pub fn qv_le(QVal, QVal) -> Bool
+
+pub fn qv_lt(QVal, QVal) -> Bool
+
+pub fn qv_make(@bigint.BigInt, @bigint.BigInt) -> QVal
+
+pub fn qv_mul(QVal, QVal) -> QVal
+
+pub fn qv_neg(QVal) -> QVal
+
+pub fn qv_one() -> QVal
+
+pub fn qv_pow(QVal, Int32) -> QVal
+
+pub fn qv_show(QVal) -> String
+
+pub fn qv_sub(QVal, QVal) -> QVal
+
+pub fn qv_vec_eq(Array[QVal], Array[QVal]) -> Bool
+
+pub fn qv_zero() -> QVal
+
+pub fn richardson_extrapolate_limit(Array[Int32], Array[QVal]) -> QVal?
+
+pub fn shanks_aitken_step(Array[QVal]) -> Array[QVal]
+
+pub fn tower_canonical_truncation(Array[Int32]) -> ProjectiveTower
+
+pub fn tower_is_coherent_thread(ProjectiveTower, Array[Array[QVal]]) -> Bool
+
+pub fn tower_mittag_leffler_stable_rank(ProjectiveTower, Int32) -> Int32
+
+pub fn tower_transition(ProjectiveTower, Int32, Int32) -> Array[QVal]
+
+pub fn wynn_epsilon_limit(Array[QVal]) -> QVal?
+
+// Errors
+
+// Types and methods
+pub(all) struct AsymJet {
+  min_exp : Int32
+  cutoff : Int32
+  coeffs : Array[QVal]
+}
+
+pub(all) struct ProjectiveTower {
+  dims : Array[Int32]
+  maps : Array[Array[QVal]]
+}
+
+#derive(Eq)
+pub(all) struct QVal {
+  num : @bigint.BigInt
+  den : @bigint.BigInt
+}
+pub fn QVal::equal(Self, Self) -> Bool
+pub fn QVal::not_equal(Self, Self) -> Bool
+
+pub(all) struct QuadElem {
+  re : QVal
+  surd : QVal
+  rad : Int32
+}
+
+// Type aliases
+
+// Traits

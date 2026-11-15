@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/nc_measure"
+
+import {
+  "vv0101v01/cubical-hermitian/qprob/asymptotic",
+  "vv0101v01/cubical-hermitian/qprob/unbounded",
+}
+
+// Values
+pub fn apply_cptp_channel(Array[@unbounded.UnboundedOp], @unbounded.QuantumProbState) -> @unbounded.QuantumProbState?
+
+pub fn free_additive_convolution_moments(Array[@asymptotic.QVal], Array[@asymptotic.QVal]) -> Array[@asymptotic.QVal]
+
+pub fn free_clt_scaled_moments(Array[@asymptotic.QVal], Int32) -> Array[@asymptotic.QVal]
+
+pub fn free_cumulants_to_moments(Array[@asymptotic.QVal]) -> Array[@asymptotic.QVal]
+
+pub fn law_free_clt_and_grand_synthesis() -> Array[(String, Bool)]
+
+pub fn law_free_cumulants_and_semicircle() -> Array[(String, Bool)]
+
+pub fn law_naimark_dilation_theorem() -> Array[(String, Bool)]
+
+pub fn law_povm_and_born_measure() -> Array[(String, Bool)]
+
+pub fn moments_to_classical_cumulants(Array[@asymptotic.QVal]) -> Array[@asymptotic.QVal]
+
+pub fn moments_to_free_cumulants(Array[@asymptotic.QVal]) -> Array[@asymptotic.QVal]
+
+pub fn nc_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn povm_born_probabilities(PovmMeasure, @unbounded.QuantumProbState) -> Array[@asymptotic.QVal]
+
+pub fn povm_effect(PovmMeasure, Int32) -> @unbounded.UnboundedOp
+
+pub fn povm_is_complete(PovmMeasure) -> Bool
+
+pub fn povm_is_projective(PovmMeasure) -> Bool
+
+pub fn verify_naimark_dilation(PovmMeasure) -> (Int32, Bool)
+
+// Errors
+
+// Types and methods
+pub(all) struct PovmMeasure {
+  dim : Int32
+  kraus_roots : Array[@unbounded.UnboundedOp]
+}
+
+// Type aliases
+
+// Traits

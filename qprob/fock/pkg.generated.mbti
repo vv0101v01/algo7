@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/fock"
+
+import {
+  "vv0101v01/cubical-hermitian/qprob/asymptotic",
+}
+
+// Values
+pub fn fock_add(FullFockVec, FullFockVec) -> FullFockVec
+
+pub fn fock_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn fock_annihilate_q(@asymptotic.QVal, Array[@asymptotic.QVal], FullFockVec) -> FullFockVec
+
+pub fn fock_create_left(Array[@asymptotic.QVal], FullFockVec) -> FullFockVec
+
+pub fn fock_dgamma(Array[@asymptotic.QVal], Int32, FullFockVec) -> FullFockVec
+
+pub fn fock_eq(FullFockVec, FullFockVec) -> Bool
+
+pub fn fock_gamma(Array[@asymptotic.QVal], Int32, FullFockVec) -> FullFockVec
+
+pub fn fock_inner_q(@asymptotic.QVal, FullFockVec, FullFockVec) -> @asymptotic.QVal
+
+pub fn fock_normalize(Int32, Array[(FockWord, @asymptotic.QVal)]) -> FullFockVec
+
+pub fn fock_q_gram_matrix(@asymptotic.QVal, Int32, Int32) -> (Int32, Array[@asymptotic.QVal])
+
+pub fn fock_scale(@asymptotic.QVal, FullFockVec) -> FullFockVec
+
+pub fn fock_sector_words(Int32, Int32) -> Array[FockWord]
+
+pub fn fock_sub(FullFockVec, FullFockVec) -> FullFockVec
+
+pub fn fock_vacuum(Int32) -> FullFockVec
+
+pub fn fock_zero(Int32) -> FullFockVec
+
+pub fn law_full_fock_cuntz_toeplitz() -> Array[(String, Bool)]
+
+pub fn law_q_commutation_and_adjoint() -> Array[(String, Bool)]
+
+pub fn law_second_quantization_functors() -> Array[(String, Bool)]
+
+pub fn law_three_statistics_splitting() -> Array[(String, Bool)]
+
+pub fn perm_inversions(Array[Int32]) -> Int32
+
+pub fn symmetric_group_perms(Int32) -> Array[Array[Int32]]
+
+pub fn word_eq(FockWord, FockWord) -> Bool
+
+pub fn word_inner_q(@asymptotic.QVal, FockWord, FockWord) -> @asymptotic.QVal
+
+// Errors
+
+// Types and methods
+pub(all) struct FockWord {
+  letters : Array[Int32]
+}
+
+pub(all) struct FullFockVec {
+  single_dim : Int32
+  terms : Array[(FockWord, @asymptotic.QVal)]
+}
+
+// Type aliases
+
+// Traits

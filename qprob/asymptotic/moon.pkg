@@ -1,0 +1,2 @@
+// qprob/asymptotic — 無窮漸近極限空間與有序代數子場（L0 零外部依賴核心）。
+// 只用 `moonbitlang/core` 內建的 `BigInt`／`Array`。

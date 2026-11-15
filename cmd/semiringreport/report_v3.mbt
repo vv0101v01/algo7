@@ -586,8 +586,9 @@ pub fn sec17_app_portfolio() -> Unit {
   )
   line("")
   let vw = @app.consensus_trop(m, 1, inject_wrong=true)
+  let wasm_suite_ok = @app.verify_semiring_wasm_suite()
   line(
-    "注入一個**故意錯的**候選（只截斷到 I+A+A²）：一致 = \{vw.agree}，被標成不一致的有 \{count_disagrees(vw)} 個（其餘仍一致）。",
+    "注入一個**故意錯的**候選（只截斷到 I+A+A²）：一致 = \{vw.agree}，被標成不一致的有 \{count_disagrees(vw)} 個（其餘仍一致）；可攜 SWAR／Karp／Johnson／Min-Fill／Valmari 整合證書 = \{wasm_suite_ok}。",
   )
   line(
     "仲裁器若不能拒絕，就等於沒有仲裁器——這一行是負面對照存在的理由。",

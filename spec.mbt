@@ -1415,9 +1415,10 @@ pub fn spec_registry() -> Array[SpecEntry] {
       SpecStructure,
       [
         "simultaneous_ir_joint_motive_level", "DOpenIRArgKind", "DOpenIRArg", "dopen_arg_code",
-        "dopen_arg_decoded_code_fn", "DOpenIRConstructor", "dopen_ir_constructor",
-        "DOpenIRDecoder", "dopen_ir_decoder", "DOpenSimultaneousIRSpec", "dopen_simultaneous_ir_spec",
-        "DOpenIRArgVal", "dopen_val_code", "dopen_val_code_fn", "DOpenIRCode", "dopen_ir_intro",
+        "dopen_arg_external", "dopen_arg_decoded_val", "dopen_arg_decoded_code_fn",
+        "DOpenIRConstructor", "dopen_ir_constructor", "DOpenIRDecoder", "dopen_ir_decoder",
+        "DOpenSimultaneousIRSpec", "dopen_simultaneous_ir_spec", "DOpenIRArgVal",
+        "dopen_val_term", "dopen_val_code", "dopen_val_code_fn", "DOpenIRCode", "dopen_ir_intro",
         "open_ir_validate", "open_ir_check_code", "open_ir_eval_decode", "open_ir_elim_value",
         "open_ir_lower_single_decoder", "DFunctorPositivityEvidence", "DFunctorialPositivityCert",
         "dfunctorial_positivity_covariant_cert", "dfunctorial_positivity_container_cert",

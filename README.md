@@ -6,13 +6,15 @@
 
 ## 當前狀態（2026-11-15 審計）
 
-- **10 聯邦 + observer 頂點；63 packages、72 components。** 檔數、行數及每層完整配置由[架構清單](docs/FEDERATION_ARCHITECTURE.md)自動產生。
+- **10 聯邦 + observer 頂點；69 packages、78 components。** 檔數、行數及每層完整配置由[架構清單](docs/FEDERATION_ARCHITECTURE.md)自動產生。
 - **39 條 active 配對橋，6 條已刪除。** 歷史 45 個配對槽位仍可追溯，但執行圖是 **K₁₀ 的子圖**，不是 45/45 完全圖。
 - `cmd/showcase` 產生 **50 個原生／圖譜／輔助證書**（含 18 個 atlas），與配對橋數分開。原來的 X 交換性「證書」已移除，沒有用其他旗標填回數目。
 - 最新非 nightly 官方通道在本次核對為 **`moonc v0.10.20+65efd5b93`**；CI 以同一版本固定重建。
 - **`qgeom` 子聯邦（第八聯邦內）：5 個套件 + 1 執行檔，`moon run cmd/qgeom --target wasm-gc` 重算 179 個命題。**
   軸向交換張量變體、高維合體運算硬體抽象層、平移射影、超對稱四元數頂點對偶、雙射緊緻四元雅可比簇、
   複形四元數德朗姆型恆等、四元數凱勒曲率張量群空間、雅可布全射張量積——見 [`qgeom/README.md`](qgeom/README.md)。
+- **`qprob` 子聯邦（第七聯邦內）：5 個套件 + 1 執行檔，`moon run cmd/qprob --target wasm-gc` 重算 70 個結構演化命題。**
+  有序代數子場塔與無窮漸近極限空間、無界算子概率空間與矩重構、全量子福克空間與 `q`-變形分裂、連續創生與湮滅算子場（Wick 正規序與量子 Itô 代數）、非交換隨機分佈與正算子值測度空間（Naimark 擴張與自由累積量）——見 [`qprob/README.md`](qprob/README.md)。
 - 歷史工作紀錄留在 [`agent.v2.md`](agent.v2.md) 與 [`Dev.txt`](Dev.txt)。舊日期的 45/45、40 active、51/51 等數字是歷史截面，不是當前承諾。
 
 ## 全局圖與閱讀入口

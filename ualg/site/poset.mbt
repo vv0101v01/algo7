@@ -223,16 +223,7 @@ fn chk(out : Array[(String, Bool)], label : String, cond : Bool) -> Unit {
 
 ///|
 fn show_ints(xs : Array[Int32]) -> String {
-  let sb = StringBuilder()
-  sb.write_string("[")
-  for i, x in xs {
-    if i > 0 {
-      sb.write_string(",")
-    }
-    sb.write_string(x.to_string())
-  }
-  sb.write_string("]")
-  sb.to_string()
+  "[" + [ for x in xs => "\{x}" ].join(",") + "]"
 }
 
 ///|

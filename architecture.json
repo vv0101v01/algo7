@@ -123,7 +123,13 @@
       "packages": [
         "tensor",
         "discovery-kernel",
-        "conjecture"
+        "conjecture",
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field",
+        "qprob-nc-measure",
+        "cmd-qprob"
       ],
       "allowed_external_packages": [
         "condensed:gcd",
@@ -136,8 +142,8 @@
         "accel:accel-swar",
         "topos:topos-site"
       ],
-      "summary_en": "Federation 7 (Multilinear Tensor Geometry & Lakatosian Conjecture Discovery Loop) — F_3 6,561-tensor Cayley hyperdeterminant & rank atlas, discrete Radon inversion, Clifford Ramond spinors & T^2 gauge moduli, non-crossing sheaves, Vietoris–Rips homology, 6 evolutionary transfer laws, 5 epistemic lenses, and 7 resolved conjectures.",
-      "summary_zh": "第七聯邦（多線性張量場論與 Lakatos 猜想演化創造聯邦） — F_3 全體 6,561 張量超行列式與秩圖譜、有限平面離散 Radon 反演、Clifford 拉蒙旋量與 T² 規範模空間、非交叉森林層景、VR 持續同調、6 大演化轉移定律、5 大認識論透鏡與 7 項已決猜想。"
+      "summary_en": "Federation 7 (Multilinear Tensor Geometry & Lakatosian Conjecture Discovery Loop) — F_3 6,561-tensor Cayley hyperdeterminant & rank atlas, discrete Radon inversion, Clifford Ramond spinors & T^2 gauge moduli, non-crossing sheaves, Vietoris–Rips homology, 6 evolutionary transfer laws, 5 epistemic lenses, and 7 resolved conjectures. Federation 7 additionally hosts the qprob sub-federation (qprob/asymptotic, qprob/unbounded, qprob/fock, qprob/ccr_field, qprob/nc_measure, cmd/qprob): ordered algebraic subfield towers and infinite asymptotic limit spaces, unbounded *-algebra probability spaces with Favard–Lanczos moment reconstruction, full/q-deformed quantum Fock spaces, continuum smeared creation/annihilation operator fields with Wick normal ordering and Hudson–Parthasarathy quantum Ito calculus, and noncommutative random distributions with POVM Naimark dilation and Speicher free cumulants — 70 propositions recomputed by cmd/qprob.",
+      "summary_zh": "第七聯邦（多線性張量場論與 Lakatos 猜想演化創造聯邦） — F_3 全體 6,561 張量超行列式與秩圖譜、有限平面離散 Radon 反演、Clifford 拉蒙旋量與 T² 規範模空間、非交叉森林層景、VR 持續同調、6 大演化轉移定律、5 大認識論透鏡與 7 項已決猜想。 第七聯邦另設 qprob 子聯邦（qprob/asymptotic、qprob/unbounded、qprob/fock、qprob/ccr_field、qprob/nc_measure、cmd/qprob）：有序代數子場塔與無窮漸近極限空間、無界 *-代數概率空間與 Favard–Lanczos 矩重構、全量子／q-變形福克空間、連續塗抹創生與湮滅算子場（Wick 正規序與 Hudson–Parthasarathy 量子 Itô 微積分），以及非交換隨機分佈與正算子值測度空間（Naimark 擴張與 Speicher 自由累積量）——由 cmd/qprob 重算 70 個結構演化命題。"
     },
     {
       "id": "accel",
@@ -530,7 +536,8 @@
         "semiring-trop",
         "semiring-graph",
         "semiring-bp",
-        "semiring-nf"
+        "semiring-nf",
+        "semiring-cat"
       ],
       "summary_en": "Algebraic path problems with independent implementation arbitration.",
       "summary_zh": "代數路徑問題與多實作仲裁。"
@@ -707,7 +714,8 @@
         "bridge",
         "semiring-graph",
         "symlib",
-        "root"
+        "root",
+        "semiring-app"
       ],
       "summary_en": "Single-snapshot active bridge inventory, native certificates and negative controls; no retired bridge execution.",
       "summary_zh": "單次快照的 active 橋功能枚舉、原生證書與負控制；不執行已刪橋。"
@@ -1000,6 +1008,80 @@
       ],
       "summary_en": "Executable law table for the qgeom federation: recomputes and prints every proposition of qgeom/core, qgeom/hal, qgeom/geom, qgeom/susy and qgeom/qk (179 propositions); exits non-zero if any is false.",
       "summary_zh": "qgeom 聯邦的定律總表執行檔：當場重算並印出 qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk 的每個命題（179 個）；任何一條為假即以非零狀態結束。"
+    },
+    {
+      "id": "qprob-asymptotic",
+      "path": "qprob/asymptotic",
+      "moon": "vv0101v01/cubical-hermitian/qprob/asymptotic",
+      "layer": 0,
+      "depends_on": [],
+      "summary_en": "L0 zero-dependency ordered subfield tower and infinite asymptotic limit space: canonical BigInt rationals Q, quadratic extension subfields Q(sqrt(d)) with Galois fixed-field characterisation, non-Archimedean truncated Laurent jets Q((eps)) with standard-part quotient homomorphism, projective limit towers with Mittag-Leffler stable ranks, and exact Richardson, Shanks–Aitken, Wynn epsilon and Cesaro limit acceleration algorithms.",
+      "summary_zh": "L0 零依賴有序代數子場塔與無窮漸近極限空間：正規形有理數 Q、二次擴張子場 Q(√d) 與 Galois 不動子場刻畫、非阿基米德截斷 Laurent 漸近噴流場 Q((ε)) 與標準部商同態、射影極限塔與 Mittag-Leffler 穩定秩，以及精確 Richardson、Shanks–Aitken、Wynn ε-算法與 Cesàro 漸近極限加速演算法。"
+    },
+    {
+      "id": "qprob-unbounded",
+      "path": "qprob/unbounded",
+      "moon": "vv0101v01/cubical-hermitian/qprob/unbounded",
+      "layer": 1,
+      "depends_on": [
+        "qprob-asymptotic"
+      ],
+      "summary_en": "L1 unbounded operator probability space (D, Op*(D), phi): dense common-domain unbounded *-algebra with Sobolev polynomial growth degrees, pure and Gibbs states satisfying GNS Cauchy–Schwarz, Robertson–Schrodinger uncertainty inequalities with vacuum saturation, Yosida bounded resolvent regularisation, and exact Favard–Lanczos Jacobi tridiagonal reconstruction from unbounded moments.",
+      "summary_zh": "L1 無界算子概率空間 (𝒟, Op*(𝒟), φ)：具多項式成長階之共同稠密核無界 *-代數、滿足 GNS Cauchy–Schwarz 之純態與 Gibbs 混合態、Robertson–Schrödinger 無界不確定性原理與真空飽和、Yosida 有界預解正則化，以及由無界矩序列重構 Jacobi 三對角算子之 Favard–Lanczos 演算法。"
+    },
+    {
+      "id": "qprob-fock",
+      "path": "qprob/fock",
+      "moon": "vv0101v01/cubical-hermitian/qprob/fock",
+      "layer": 2,
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded"
+      ],
+      "summary_en": "L2 full and q-deformed quantum Fock space: Boltzmann full Fock tensor algebra with Cuntz–Toeplitz isometries and Wigner semicircle Catalan vacuum moments, Bozejko–Speicher q-commutation relations and inversion-weighted inner products, unified Hilbert-quotient rank splitting across free (q=0), bosonic (q=1) and fermionic Pauli-exclusion (q=-1) statistics, plus multiplicative Gamma(T) and differential dGamma(H) second-quantisation functors.",
+      "summary_zh": "L2 全量子福克空間與 q-變形子空間：具 Cuntz–Toeplitz 等距恆等式與半圓律 Catalan 真空矩之全福克張量空間、Bożejko–Speicher q-對易關係與逆序數加權內積、自由（q=0）／玻色（q=+1）／費米 Pauli 核（q=−1）三統計商維度統一分裂，以及乘法 Γ(T) 與微分 dΓ(H) 二次量子化函子。"
+    },
+    {
+      "id": "qprob-ccr-field",
+      "path": "qprob/ccr_field",
+      "moon": "vv0101v01/cubical-hermitian/qprob/ccr_field",
+      "layer": 3,
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock"
+      ],
+      "summary_en": "L3 continuum creation and annihilation operator fields: L2-smeared polynomial operator fields [A(g), A+(f)] = <g,f>_L2, exact N->infinity continuum limit from discrete Fock lattices via Richardson extrapolation, algorithmic Wick normal ordering and 4-point Gaussian field correlations, Weyl symplectic 2-cocycles, and associative Hudson–Parthasarathy quantum Ito calculus with QSDE unitarity.",
+      "summary_zh": "L3 連續創生與湮滅算子場：L² 塗抹多項式算子場 [A(g), A†(f)] = ⟨g,f⟩_{L²}、離散福克格點經 Richardson 外推收斂至連續場之漸近極限、Wick 正規序展開演算法與連續高斯場 4 點關聯函數、Weyl 相空間辛 2-上循環，以及 Hudson–Parthasarathy 量子 Itô 微元代數與隨機演化么正性判準。"
+    },
+    {
+      "id": "qprob-nc-measure",
+      "path": "qprob/nc_measure",
+      "moon": "vv0101v01/cubical-hermitian/qprob/nc_measure",
+      "layer": 4,
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field"
+      ],
+      "summary_en": "L4 noncommutative random distributions and operator-valued measure spaces: overcomplete non-commuting POVMs with Born probability laws and CPTP Kraus Markov channels, constructive Naimark isometric dilation into orthogonal PVMs, Speicher non-crossing moment-to-free-cumulant bijection, classical vs free cumulant bifurcation, Voiculescu free additive convolution and Free CLT, and the 5-stage synthesis closing continuum Wick fields with full-Fock semicircle laws.",
+      "summary_zh": "L4 非交換隨機分佈與算子測度空間：非交換過完備 POVM、Born 機率律與 CPTP 量子馬可夫通道、Naimark 正交 PVM 等距擴張定理、Speicher 非交叉矩與自由累積量雙向轉換演算法、古典對非交換四階累積量分岔、Voiculescu 自由加性卷積與自由中心極限定理，以及五階結構大統一閉環。"
+    },
+    {
+      "id": "cmd-qprob",
+      "path": "cmd/qprob",
+      "moon": "vv0101v01/cubical-hermitian/cmd/qprob",
+      "layer": 5,
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field",
+        "qprob-nc-measure"
+      ],
+      "summary_en": "Executable law runner for the 5-stage qprob mathematical-structure evolution chain: recomputes all 70 propositions and exits non-zero on any failure.",
+      "summary_zh": "qprob 五階數學結構演化鏈定律總表執行檔：當場重算並印出全部 70 個定理與演算法命題；任何一條為假即以非零狀態中止。"
     }
   ],
   "components": [
@@ -1397,7 +1479,8 @@
         "semiring-trop",
         "semiring-graph",
         "semiring-bp",
-        "semiring-nf"
+        "semiring-nf",
+        "semiring-cat"
       ],
       "summary_en": "Algebraic path problems with independent implementation arbitration.",
       "summary_zh": "代數路徑問題與多實作仲裁。"
@@ -1517,7 +1600,8 @@
         "cmd/showcase/*.mbt"
       ],
       "depends_on": [
-        "*"
+        "*",
+        "semiring-app"
       ],
       "observer": true,
       "summary_en": "Ten-federation observer: 39 active bounded pairwise comparisons, 6 retired implementations removed; reusable structure transports, exact inventory validation, logical translations and 18 atlas entries. No lower federation may import this observer.",
@@ -2080,6 +2164,92 @@
       ],
       "summary_en": "Executable law table for the qgeom federation: recomputes and prints every proposition of qgeom/core, qgeom/hal, qgeom/geom, qgeom/susy and qgeom/qk (179 propositions); exits non-zero if any is false.",
       "summary_zh": "qgeom 聯邦的定律總表執行檔：當場重算並印出 qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk 的每個命題（179 個）；任何一條為假即以非零狀態結束。"
+    },
+    {
+      "id": "qprob-asymptotic",
+      "package": "qprob-asymptotic",
+      "layer": 0,
+      "files": [
+        "qprob/asymptotic/*.mbt"
+      ],
+      "depends_on": [],
+      "summary_en": "L0 zero-dependency ordered subfield tower and infinite asymptotic limit space: canonical BigInt rationals Q, quadratic extension subfields Q(sqrt(d)) with Galois fixed-field characterisation, non-Archimedean truncated Laurent jets Q((eps)) with standard-part quotient homomorphism, projective limit towers with Mittag-Leffler stable ranks, and exact Richardson, Shanks–Aitken, Wynn epsilon and Cesaro limit acceleration algorithms.",
+      "summary_zh": "L0 零依賴有序代數子場塔與無窮漸近極限空間：正規形有理數 Q、二次擴張子場 Q(√d) 與 Galois 不動子場刻畫、非阿基米德截斷 Laurent 漸近噴流場 Q((ε)) 與標準部商同態、射影極限塔與 Mittag-Leffler 穩定秩，以及精確 Richardson、Shanks–Aitken、Wynn ε-算法與 Cesàro 漸近極限加速演算法。"
+    },
+    {
+      "id": "qprob-unbounded",
+      "package": "qprob-unbounded",
+      "layer": 1,
+      "files": [
+        "qprob/unbounded/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic"
+      ],
+      "summary_en": "L1 unbounded operator probability space (D, Op*(D), phi): dense common-domain unbounded *-algebra with Sobolev polynomial growth degrees, pure and Gibbs states satisfying GNS Cauchy–Schwarz, Robertson–Schrodinger uncertainty inequalities with vacuum saturation, Yosida bounded resolvent regularisation, and exact Favard–Lanczos Jacobi tridiagonal reconstruction from unbounded moments.",
+      "summary_zh": "L1 無界算子概率空間 (𝒟, Op*(𝒟), φ)：具多項式成長階之共同稠密核無界 *-代數、滿足 GNS Cauchy–Schwarz 之純態與 Gibbs 混合態、Robertson–Schrödinger 無界不確定性原理與真空飽和、Yosida 有界預解正則化，以及由無界矩序列重構 Jacobi 三對角算子之 Favard–Lanczos 演算法。"
+    },
+    {
+      "id": "qprob-fock",
+      "package": "qprob-fock",
+      "layer": 2,
+      "files": [
+        "qprob/fock/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded"
+      ],
+      "summary_en": "L2 full and q-deformed quantum Fock space: Boltzmann full Fock tensor algebra with Cuntz–Toeplitz isometries and Wigner semicircle Catalan vacuum moments, Bozejko–Speicher q-commutation relations and inversion-weighted inner products, unified Hilbert-quotient rank splitting across free (q=0), bosonic (q=1) and fermionic Pauli-exclusion (q=-1) statistics, plus multiplicative Gamma(T) and differential dGamma(H) second-quantisation functors.",
+      "summary_zh": "L2 全量子福克空間與 q-變形子空間：具 Cuntz–Toeplitz 等距恆等式與半圓律 Catalan 真空矩之全福克張量空間、Bożejko–Speicher q-對易關係與逆序數加權內積、自由（q=0）／玻色（q=+1）／費米 Pauli 核（q=−1）三統計商維度統一分裂，以及乘法 Γ(T) 與微分 dΓ(H) 二次量子化函子。"
+    },
+    {
+      "id": "qprob-ccr-field",
+      "package": "qprob-ccr-field",
+      "layer": 3,
+      "files": [
+        "qprob/ccr_field/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock"
+      ],
+      "summary_en": "L3 continuum creation and annihilation operator fields: L2-smeared polynomial operator fields [A(g), A+(f)] = <g,f>_L2, exact N->infinity continuum limit from discrete Fock lattices via Richardson extrapolation, algorithmic Wick normal ordering and 4-point Gaussian field correlations, Weyl symplectic 2-cocycles, and associative Hudson–Parthasarathy quantum Ito calculus with QSDE unitarity.",
+      "summary_zh": "L3 連續創生與湮滅算子場：L² 塗抹多項式算子場 [A(g), A†(f)] = ⟨g,f⟩_{L²}、離散福克格點經 Richardson 外推收斂至連續場之漸近極限、Wick 正規序展開演算法與連續高斯場 4 點關聯函數、Weyl 相空間辛 2-上循環，以及 Hudson–Parthasarathy 量子 Itô 微元代數與隨機演化么正性判準。"
+    },
+    {
+      "id": "qprob-nc-measure",
+      "package": "qprob-nc-measure",
+      "layer": 4,
+      "files": [
+        "qprob/nc_measure/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field"
+      ],
+      "summary_en": "L4 noncommutative random distributions and operator-valued measure spaces: overcomplete non-commuting POVMs with Born probability laws and CPTP Kraus Markov channels, constructive Naimark isometric dilation into orthogonal PVMs, Speicher non-crossing moment-to-free-cumulant bijection, classical vs free cumulant bifurcation, Voiculescu free additive convolution and Free CLT, and the 5-stage synthesis closing continuum Wick fields with full-Fock semicircle laws.",
+      "summary_zh": "L4 非交換隨機分佈與算子測度空間：非交換過完備 POVM、Born 機率律與 CPTP 量子馬可夫通道、Naimark 正交 PVM 等距擴張定理、Speicher 非交叉矩與自由累積量雙向轉換演算法、古典對非交換四階累積量分岔、Voiculescu 自由加性卷積與自由中心極限定理，以及五階結構大統一閉環。"
+    },
+    {
+      "id": "cmd-qprob",
+      "package": "cmd-qprob",
+      "layer": 5,
+      "files": [
+        "cmd/qprob/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field",
+        "qprob-nc-measure"
+      ],
+      "summary_en": "Executable law runner for the 5-stage qprob mathematical-structure evolution chain: recomputes all 70 propositions and exits non-zero on any failure.",
+      "summary_zh": "qprob 五階數學結構演化鏈定律總表執行檔：當場重算並印出全部 70 個定理與演算法命題；任何一條為假即以非零狀態中止。"
     }
   ],
   "exceptions": []
