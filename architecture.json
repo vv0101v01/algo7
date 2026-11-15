@@ -143,7 +143,13 @@
       "id": "accel",
       "packages": [
         "accel-swar",
-        "accel"
+        "accel",
+        "qgeom-core",
+        "qgeom-hal",
+        "qgeom-geom",
+        "qgeom-susy",
+        "qgeom-qk",
+        "cmd-qgeom"
       ],
       "allowed_external_packages": [
         "condensed:gcd",
@@ -152,8 +158,8 @@
         "semiring:semiring-trop",
         "discovery:tensor"
       ],
-      "summary_en": "Federation 8 (CPU SWAR & Browser Free WebGPU Frontier Acceleration) — L0 zero-dependency SWAR substrate (`accel/swar`), M4RI GF(2) Gray-code GEMM & RREF, dual-rail 64-trit GF(3) bitslicing across all 6,561 2x2x2 Cayley hyperdeterminants, 64-way Face SWAR #SAT, Ozaki Scheme II INT8 DP4A CRT exact/FP64 GEMM, 32-bit RNS Stockham Auto-Sort NTT & 30-bit Montgomery REDC, Scanbox decoupled look-back prefix scan, 3-phase padded Tropical Kleene closure, HVM2 flat-arena parallel Interaction Combinators + closed Peano lambda evaluator, and 8 audited W3C Browser WebGPU WGSL compute shaders.",
-      "summary_zh": "第八聯邦（CPU SWAR 與瀏覽器免費 WebGPU 前沿硬體加速聯邦） — L0 零依賴 SWAR 硬體底層（`accel/swar`）、M4RI GF(2) 格雷碼矩陣乘與行最簡消元、雙軌 64-trit GF(3) 位切片全體 6,561 張量超行列式掃描、64 路 Face 超立方體 #SAT、Ozaki Scheme II INT8 DP4A 中國剩餘定理精確／FP64 矩陣乘、32 位 RNS Stockham 免位反轉 NTT 與 30 位 Montgomery 規約、Scanbox 解耦回看前綴掃描、三相無衝突共享記憶體熱帶 Kleene 閉包、HVM2 扁平競技場並行交互組合子與閉合 Peano λ 求值器，以及 8 個經靜態可移植性審計之 W3C 瀏覽器 WebGPU WGSL 計算著色器。"
+      "summary_en": "Federation 8 (CPU SWAR & Browser Free WebGPU Frontier Acceleration) — L0 zero-dependency SWAR substrate (`accel/swar`), M4RI GF(2) Gray-code GEMM & RREF, dual-rail 64-trit GF(3) bitslicing across all 6,561 2x2x2 Cayley hyperdeterminants, 64-way Face SWAR #SAT, Ozaki Scheme II INT8 DP4A CRT exact/FP64 GEMM, 32-bit RNS Stockham Auto-Sort NTT & 30-bit Montgomery REDC, Scanbox decoupled look-back prefix scan, 3-phase padded Tropical Kleene closure, HVM2 flat-arena parallel Interaction Combinators + closed Peano lambda evaluator, and 8 audited W3C Browser WebGPU WGSL compute shaders. Federation 8 additionally hosts the qgeom sub-federation (qgeom/core, qgeom/hal, qgeom/geom, qgeom/susy, qgeom/qk, cmd/qgeom): axial-exchange tensor variants, the high-dimensional fused-operation HAL, translation-projective geometry with Jacobian surjective tensor products, supersymmetric quaternionic vertex duality with complexified-quaternion de Rham complexes, and quaternionic Kaehler curvature tensor group spaces with bijective compact quaternionic Jacobian varieties — 179 propositions recomputed by cmd/qgeom.",
+      "summary_zh": "第八聯邦（CPU SWAR 與瀏覽器免費 WebGPU 前沿硬體加速聯邦） — L0 零依賴 SWAR 硬體底層（`accel/swar`）、M4RI GF(2) 格雷碼矩陣乘與行最簡消元、雙軌 64-trit GF(3) 位切片全體 6,561 張量超行列式掃描、64 路 Face 超立方體 #SAT、Ozaki Scheme II INT8 DP4A 中國剩餘定理精確／FP64 矩陣乘、32 位 RNS Stockham 免位反轉 NTT 與 30 位 Montgomery 規約、Scanbox 解耦回看前綴掃描、三相無衝突共享記憶體熱帶 Kleene 閉包、HVM2 扁平競技場並行交互組合子與閉合 Peano λ 求值器，以及 8 個經靜態可移植性審計之 W3C 瀏覽器 WebGPU WGSL 計算著色器。第八聯邦另設 qgeom 子聯邦（qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk、cmd/qgeom）：軸向交換張量變體、高維合體運算硬體抽象層、平移射影與雅可布全射張量積、超對稱四元數頂點對偶與複形四元數德朗姆複形，以及四元數凱勒曲率張量群空間與雙射緊緻四元雅可比簇——由 cmd/qgeom 重算 179 個命題。"
     },
     {
       "id": "meta",
@@ -926,6 +932,74 @@
       ],
       "summary_en": "Cubical sheafification and the cubical double-negation nucleus: the face Heyting algebra's two computations of j = ¬¬ (Heyting negation vs vertex closure), nuclei axioms on all opens of V^n (n <= 3), Glivenko's theorem Fix(¬¬) ≅ P(vertices) (4, 16, 256 regular subcomplexes), j ⊣ i left adjoint on Ω, the third path to the [T-Bool] Boolean-reflection kernel, sphere vs filling under ¬¬ (∂σ ~ ↓σ for dim >= 1), j not preserving joins (484 counterexamples on V, V²), quantifier-vs-Booleanization non-commutation (∃i 4, ∀i 44 counterexamples on 𝔽(2)); Sh_¬¬(□^n) ≃ Set^{vertices} via rho bijectivity and explicit rho : F ≅ F̂(F|verts) natural iso, subterminal sheaves = regular subcomplexes (4, 16, 256), sheafification of subcomplexes = vertex closure (a(K) = u_{verts K}, all 5 + 48, V³ sampled), the formula a(F)(x) = ∏_{v≤x} |F(v)| (all 70 size ≤ 2 presheaves on V, 112 on V², constants on V³ with 256/6561-element top fibers), a depends only on vertex restrictions (a(aF⊠aG) = a(F⊠G), a(F×G) = aF×aG, a(F+G) = a(aF+aG)), |Ω_¬¬(x)| = 2^{2^{dim x}} (n ≤ 3), a ⊣ i counted on V and V², and |Nat(F,G)| = ∏_v |G(v)|^|F(v)| for sheaves.",
       "summary_zh": "立方體上的層化與立方體雙重否定核子：面 Heyting 代數上 j = ¬¬ 的兩條獨立計算（Heyting 否定對頂點閉包）、Vⁿ（n ≤ 3）全部開集上的核子公理、Glivenko 定理 Fix(¬¬) ≅ P(頂點)（4、16、256 個正則子複形）、Ω 上的左伴隨 j ⊣ i、[T-Bool] 布林反射核的第三條路徑、球面與填充在 ¬¬ 下不可分（維數 ≥ 1 的面共 25 個）、j 不保併（V、V² 共 484 組反例）、量詞與布林化不交換（∃i 4 組、∀i 44 組反例）；Sh_¬¬(□ⁿ) ≃ Set^{頂點}（ρ 雙射與顯式自然同構 F ≅ F̂(F|頂點)）、子終層 = 正則子複形（4、16、256）、子複形的層化 = 頂點閉包（V¹、V² 全部 5、48 個，V³ 樣本 60 個）、a(F)(x) = ∏_{v≤x}|F(v)|（V¹ 全部 70 個大小 ≤ 2 預層、V² 112 個、V³ 常數預層頂纖維 256／6561）、層化只經由頂點決定（a(aF⊠aG) = a(F⊠G)、a(F×G) = aF×aG、a(F+G) = a(aF+aG)）、|Ω_¬¬(x)| = 2^{2^{dim x}}（n ≤ 3）、V 與 V² 上的 a ⊣ i 計數，以及層之間 |Nat(F,G)| = ∏_v |G(v)|^|F(v)|。"
+    },
+    {
+      "id": "qgeom-core",
+      "path": "qgeom/core",
+      "moon": "vv0101v01/cubical-hermitian/qgeom/core",
+      "layer": 0,
+      "depends_on": [],
+      "summary_en": "L0 zero-dependency exact quaternion geometry core: BigInt rationals with canonical form, Hamilton quaternions (norm multiplicativity, no zero divisors, left/right regular representation), arbitrary-rank QQ tensors with the three axial-exchange variants (exchange tau with Yang-Baxter and S_n Coxeter relations, signed sigma = -tau, cyclic rho with Burnside orbit counts), symmetric/antisymmetric projector decomposition, and exact rational linear algebra (rank, determinant, span coordinates).",
+      "summary_zh": "L0 零依賴精確四元數幾何核心：BigInt 正規形有理數、Hamilton 四元數（範數乘法性、無零因子、左／右正則表示）、任意秩 QQ 張量與三個軸向交換變體（交換 τ 的 Yang–Baxter 與 S_n Coxeter 關係、帶號 σ = −τ、循環 ρ 的 Burnside 軌道數）、對稱／反對稱投影分解，以及精確有理線性代數（秩、行列式、張成座標）。"
+    },
+    {
+      "id": "qgeom-hal",
+      "path": "qgeom/hal",
+      "moon": "vv0101v01/cubical-hermitian/qgeom/hal",
+      "layer": 1,
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Hardware abstraction layer for high-dimensional fused (hête) operations: a `FusedBackend` trait with scalar, lane-interleaved and blocked emulations, reference vs backend interpreters agreeing bit-for-bit over 18 executable plans x 7 backends, fusion identity contract(tau T, ax) = contract(T, ax+1), plan normalisation that preserves semantics and is idempotent, tiling partitions covering 0..<n exactly once, and a fused-vs-unfused memory traffic model.",
+      "summary_zh": "高維合體運算的硬體抽象層：`FusedBackend` trait 與純量／向量道交錯／分塊三種模擬後端，參考直譯器與各後端在 18 條可執行計畫 × 7 後端上逐位元一致；合體恆等 contract(τT, ax) = contract(T, ax+1)；保存語意且冪等的計畫正規化；分塊恰好覆蓋 0..<n 一次；合併與未合併的記憶體流量模型。"
+    },
+    {
+      "id": "qgeom-geom",
+      "path": "qgeom/geom",
+      "moon": "vv0101v01/cubical-hermitian/qgeom/geom",
+      "layer": 2,
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Translation-projective geometry and the Jacobian surjective tensor product: the unique projective lift M(t) = [[I,t],[0,1]] with its group law, invariance of the hyperplane at infinity, unipotence (M-I)^2 = 0 and infinite order, cross-ratio invariance under translations and general Mobius maps with harmonic conjugates, plus exact polynomial Jacobians satisfying the chain rule, rank(A (x) B) = rank A . rank B, preservation of surjectivity and the nullity identity.",
+      "summary_zh": "平移射影與雅可布全射張量積：唯一的射影提升 M(t) = [[I,t],[0,1]] 及其群律、無窮遠超平面不變、拋物性 (M−I)² = 0 與無限階、交比在平移與一般分式線性映射下的不變性與調和共軛；以及精確多項式雅可比的鏈鎖律、rank(A⊗B) = rank A·rank B、全射性的保存與核維數恆等。"
+    },
+    {
+      "id": "qgeom-susy",
+      "path": "qgeom/susy",
+      "moon": "vv0101v01/cubical-hermitian/qgeom/susy",
+      "layer": 2,
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Supersymmetric quaternionic vertex duality and complexified-quaternion de Rham geometry: graded commutator with graded Jacobi and the real supertrace, quaternion vertex operators V(z) whose duals satisfy the adjoint pairing equation mode by mode, truncated vertex algebra associativity, finite simplicial chain complexes over Q and over H (x) C with dd = 0, Betti numbers, Euler characteristics, the Hodge Laplacian identity dim ker Delta_k = beta_k, the supercharge identity Q^2 = (+-)Delta and the Z2 grading.",
+      "summary_zh": "超對稱四元數頂點對偶與複形四元數德朗姆幾何：分次交換子、分次 Jacobi 與實超跡；四元數頂點算子 V(z) 的對偶逐模滿足伴隨配對方程；截斷頂點代數結合律；Q 上與 H⊗C 上的有限單純鏈複形（∂∂ = 0、Betti 數、Euler 特徵、Hodge 拉普拉斯 dim ker Δ_k = β_k、超電荷 Q² = ⊕Δ_k 與 Z₂ 分次）。"
+    },
+    {
+      "id": "qgeom-qk",
+      "path": "qgeom/qk",
+      "moon": "vv0101v01/cubical-hermitian/qgeom/qk",
+      "layer": 3,
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Quaternionic Kaehler curvature tensor group space and the bijective compact quaternionic Jacobian variety: sp(2) with basis/Jacobi, the Cartan decomposition sp(2) = k (+) m with k = sp(1)(+)sp(1), the left/right quaternion actions realising I, J, K on m, symmetric-space curvature R(X,Y)Z = -[[X,Y],Z] with all algebraic identities, and integral structure matrices acting bijectively on the lattice with Sp(2g,Z)-invariant identity tensor and polarisation.",
+      "summary_zh": "四元數凱勒曲率張量群空間與雙射緊緻四元雅可比簇：sp(2) 的基底與 Jacobi、Cartan 分解 sp(2) = k ⊕ m（k = sp(1)⊕sp(1)）、在 m 上實現 I、J、K 的左／右四元數作用、對稱空間曲率 R(X,Y)Z = −[[X,Y],Z] 與全部代數恆等式，以及整數結構矩陣在格子上的雙射、Sp(2g,Z) 不變的恆等張量與極化。"
+    },
+    {
+      "id": "cmd-qgeom",
+      "path": "cmd/qgeom",
+      "moon": "vv0101v01/cubical-hermitian/cmd/qgeom",
+      "layer": 4,
+      "depends_on": [
+        "qgeom-core",
+        "qgeom-hal",
+        "qgeom-geom",
+        "qgeom-susy",
+        "qgeom-qk"
+      ],
+      "summary_en": "Executable law table for the qgeom federation: recomputes and prints every proposition of qgeom/core, qgeom/hal, qgeom/geom, qgeom/susy and qgeom/qk (179 propositions); exits non-zero if any is false.",
+      "summary_zh": "qgeom 聯邦的定律總表執行檔：當場重算並印出 qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk 的每個命題（179 個）；任何一條為假即以非零狀態結束。"
     }
   ],
   "components": [
@@ -1926,6 +2000,86 @@
       ],
       "summary_en": "Cubical sheafification and the cubical double-negation nucleus: the face Heyting algebra's two computations of j = ¬¬ (Heyting negation vs vertex closure), nuclei axioms on all opens of V^n (n <= 3), Glivenko's theorem Fix(¬¬) ≅ P(vertices) (4, 16, 256 regular subcomplexes), j ⊣ i left adjoint on Ω, the third path to the [T-Bool] Boolean-reflection kernel, sphere vs filling under ¬¬ (∂σ ~ ↓σ for dim >= 1), j not preserving joins (484 counterexamples on V, V²), quantifier-vs-Booleanization non-commutation (∃i 4, ∀i 44 counterexamples on 𝔽(2)); Sh_¬¬(□^n) ≃ Set^{vertices} via rho bijectivity and explicit rho : F ≅ F̂(F|verts) natural iso, subterminal sheaves = regular subcomplexes (4, 16, 256), sheafification of subcomplexes = vertex closure (a(K) = u_{verts K}, all 5 + 48, V³ sampled), the formula a(F)(x) = ∏_{v≤x} |F(v)| (all 70 size ≤ 2 presheaves on V, 112 on V², constants on V³ with 256/6561-element top fibers), a depends only on vertex restrictions (a(aF⊠aG) = a(F⊠G), a(F×G) = aF×aG, a(F+G) = a(aF+aG)), |Ω_¬¬(x)| = 2^{2^{dim x}} (n ≤ 3), a ⊣ i counted on V and V², and |Nat(F,G)| = ∏_v |G(v)|^|F(v)| for sheaves.",
       "summary_zh": "立方體上的層化與立方體雙重否定核子：面 Heyting 代數上 j = ¬¬ 的兩條獨立計算（Heyting 否定對頂點閉包）、Vⁿ（n ≤ 3）全部開集上的核子公理、Glivenko 定理 Fix(¬¬) ≅ P(頂點)（4、16、256 個正則子複形）、Ω 上的左伴隨 j ⊣ i、[T-Bool] 布林反射核的第三條路徑、球面與填充在 ¬¬ 下不可分（維數 ≥ 1 的面共 25 個）、j 不保併（V、V² 共 484 組反例）、量詞與布林化不交換（∃i 4 組、∀i 44 組反例）；Sh_¬¬(□ⁿ) ≃ Set^{頂點}（ρ 雙射與顯式自然同構 F ≅ F̂(F|頂點)）、子終層 = 正則子複形（4、16、256）、子複形的層化 = 頂點閉包（V¹、V² 全部 5、48 個，V³ 樣本 60 個）、a(F)(x) = ∏_{v≤x}|F(v)|（V¹ 全部 70 個大小 ≤ 2 預層、V² 112 個、V³ 常數預層頂纖維 256／6561）、層化只經由頂點決定（a(aF⊠aG) = a(F⊠G)、a(F×G) = aF×aG、a(F+G) = a(aF+aG)）、|Ω_¬¬(x)| = 2^{2^{dim x}}（n ≤ 3）、V 與 V² 上的 a ⊣ i 計數，以及層之間 |Nat(F,G)| = ∏_v |G(v)|^|F(v)|。"
+    },
+    {
+      "id": "qgeom-core",
+      "package": "qgeom-core",
+      "layer": 0,
+      "files": [
+        "qgeom/core/*.mbt"
+      ],
+      "depends_on": [],
+      "summary_en": "L0 zero-dependency exact quaternion geometry core: BigInt rationals with canonical form, Hamilton quaternions (norm multiplicativity, no zero divisors, left/right regular representation), arbitrary-rank QQ tensors with the three axial-exchange variants (exchange tau with Yang-Baxter and S_n Coxeter relations, signed sigma = -tau, cyclic rho with Burnside orbit counts), symmetric/antisymmetric projector decomposition, and exact rational linear algebra (rank, determinant, span coordinates).",
+      "summary_zh": "L0 零依賴精確四元數幾何核心：BigInt 正規形有理數、Hamilton 四元數（範數乘法性、無零因子、左／右正則表示）、任意秩 QQ 張量與三個軸向交換變體（交換 τ 的 Yang–Baxter 與 S_n Coxeter 關係、帶號 σ = −τ、循環 ρ 的 Burnside 軌道數）、對稱／反對稱投影分解，以及精確有理線性代數（秩、行列式、張成座標）。"
+    },
+    {
+      "id": "qgeom-hal",
+      "package": "qgeom-hal",
+      "layer": 1,
+      "files": [
+        "qgeom/hal/*.mbt"
+      ],
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Hardware abstraction layer for high-dimensional fused (hête) operations: a `FusedBackend` trait with scalar, lane-interleaved and blocked emulations, reference vs backend interpreters agreeing bit-for-bit over 18 executable plans x 7 backends, fusion identity contract(tau T, ax) = contract(T, ax+1), plan normalisation that preserves semantics and is idempotent, tiling partitions covering 0..<n exactly once, and a fused-vs-unfused memory traffic model.",
+      "summary_zh": "高維合體運算的硬體抽象層：`FusedBackend` trait 與純量／向量道交錯／分塊三種模擬後端，參考直譯器與各後端在 18 條可執行計畫 × 7 後端上逐位元一致；合體恆等 contract(τT, ax) = contract(T, ax+1)；保存語意且冪等的計畫正規化；分塊恰好覆蓋 0..<n 一次；合併與未合併的記憶體流量模型。"
+    },
+    {
+      "id": "qgeom-geom",
+      "package": "qgeom-geom",
+      "layer": 2,
+      "files": [
+        "qgeom/geom/*.mbt"
+      ],
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Translation-projective geometry and the Jacobian surjective tensor product: the unique projective lift M(t) = [[I,t],[0,1]] with its group law, invariance of the hyperplane at infinity, unipotence (M-I)^2 = 0 and infinite order, cross-ratio invariance under translations and general Mobius maps with harmonic conjugates, plus exact polynomial Jacobians satisfying the chain rule, rank(A (x) B) = rank A . rank B, preservation of surjectivity and the nullity identity.",
+      "summary_zh": "平移射影與雅可布全射張量積：唯一的射影提升 M(t) = [[I,t],[0,1]] 及其群律、無窮遠超平面不變、拋物性 (M−I)² = 0 與無限階、交比在平移與一般分式線性映射下的不變性與調和共軛；以及精確多項式雅可比的鏈鎖律、rank(A⊗B) = rank A·rank B、全射性的保存與核維數恆等。"
+    },
+    {
+      "id": "qgeom-susy",
+      "package": "qgeom-susy",
+      "layer": 2,
+      "files": [
+        "qgeom/susy/*.mbt"
+      ],
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Supersymmetric quaternionic vertex duality and complexified-quaternion de Rham geometry: graded commutator with graded Jacobi and the real supertrace, quaternion vertex operators V(z) whose duals satisfy the adjoint pairing equation mode by mode, truncated vertex algebra associativity, finite simplicial chain complexes over Q and over H (x) C with dd = 0, Betti numbers, Euler characteristics, the Hodge Laplacian identity dim ker Delta_k = beta_k, the supercharge identity Q^2 = (+-)Delta and the Z2 grading.",
+      "summary_zh": "超對稱四元數頂點對偶與複形四元數德朗姆幾何：分次交換子、分次 Jacobi 與實超跡；四元數頂點算子 V(z) 的對偶逐模滿足伴隨配對方程；截斷頂點代數結合律；Q 上與 H⊗C 上的有限單純鏈複形（∂∂ = 0、Betti 數、Euler 特徵、Hodge 拉普拉斯 dim ker Δ_k = β_k、超電荷 Q² = ⊕Δ_k 與 Z₂ 分次）。"
+    },
+    {
+      "id": "qgeom-qk",
+      "package": "qgeom-qk",
+      "layer": 3,
+      "files": [
+        "qgeom/qk/*.mbt"
+      ],
+      "depends_on": [
+        "qgeom-core"
+      ],
+      "summary_en": "Quaternionic Kaehler curvature tensor group space and the bijective compact quaternionic Jacobian variety: sp(2) with basis/Jacobi, the Cartan decomposition sp(2) = k (+) m with k = sp(1)(+)sp(1), the left/right quaternion actions realising I, J, K on m, symmetric-space curvature R(X,Y)Z = -[[X,Y],Z] with all algebraic identities, and integral structure matrices acting bijectively on the lattice with Sp(2g,Z)-invariant identity tensor and polarisation.",
+      "summary_zh": "四元數凱勒曲率張量群空間與雙射緊緻四元雅可比簇：sp(2) 的基底與 Jacobi、Cartan 分解 sp(2) = k ⊕ m（k = sp(1)⊕sp(1)）、在 m 上實現 I、J、K 的左／右四元數作用、對稱空間曲率 R(X,Y)Z = −[[X,Y],Z] 與全部代數恆等式，以及整數結構矩陣在格子上的雙射、Sp(2g,Z) 不變的恆等張量與極化。"
+    },
+    {
+      "id": "cmd-qgeom",
+      "package": "cmd-qgeom",
+      "layer": 4,
+      "files": [
+        "cmd/qgeom/*.mbt"
+      ],
+      "depends_on": [
+        "qgeom-core",
+        "qgeom-hal",
+        "qgeom-geom",
+        "qgeom-susy",
+        "qgeom-qk"
+      ],
+      "summary_en": "Executable law table for the qgeom federation: recomputes and prints every proposition of qgeom/core, qgeom/hal, qgeom/geom, qgeom/susy and qgeom/qk (179 propositions); exits non-zero if any is false.",
+      "summary_zh": "qgeom 聯邦的定律總表執行檔：當場重算並印出 qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk 的每個命題（179 個）；任何一條為假即以非零狀態結束。"
     }
   ],
   "exceptions": []

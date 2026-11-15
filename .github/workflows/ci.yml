@@ -62,6 +62,9 @@ jobs:
       - name: 第十聯邦定律總表（構造性泛代數 × 預層模板 × De Morgan 立方體，167 / 167）
         run: moon run cmd/ualg --target wasm-gc
 
+      - name: qgeom 子聯邦定律總表（軸向交換張量 × HAL × 平移射影 × 超對稱頂點 × 四元數凱勒，179 / 179）
+        run: moon run cmd/qgeom --target wasm-gc
+
       - name: Cubical 全量平衡管線（139 / 139；部分執行不能過閘）
         run: |
           set -o pipefail

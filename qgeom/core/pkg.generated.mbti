@@ -1,0 +1,273 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qgeom/core"
+
+import {
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn axial_apply(AxialVariant, CTensor, Int32) -> CTensor?
+
+pub fn chk(Array[(String, Bool)], String, Bool) -> Unit
+
+pub fn ct_add(CTensor, CTensor) -> CTensor
+
+pub fn ct_all_indices(Array[Int32]) -> Array[Array[Int32]]
+
+pub fn ct_alt_part(CTensor, Int32) -> CTensor?
+
+pub fn ct_contract_axis(CTensor, Int32) -> CTensor?
+
+pub fn ct_copy(CTensor) -> CTensor
+
+pub fn ct_cycle_axes(CTensor, Int32) -> CTensor?
+
+pub fn ct_eq(CTensor, CTensor) -> Bool
+
+pub fn ct_full_sum(CTensor) -> QQ
+
+pub fn ct_get(CTensor, Array[Int32]) -> QQ
+
+pub fn ct_is_alt_in(CTensor, Int32) -> Bool
+
+pub fn ct_is_sym_in(CTensor, Int32) -> Bool
+
+pub fn ct_is_zero(CTensor) -> Bool
+
+pub fn ct_lin(CTensor, Array[Int32]) -> Int32
+
+pub fn ct_of(Array[Int32], (Array[Int32]) -> QQ) -> CTensor
+
+pub fn ct_permute(CTensor, Array[Int32]) -> CTensor?
+
+pub fn ct_probe(Array[Int32], Array[Int32]) -> CTensor
+
+pub fn ct_rank(CTensor) -> Int32
+
+pub fn ct_rank1(QQ, Array[Array[QQ]]) -> CTensor
+
+pub fn ct_scale(QQ, CTensor) -> CTensor
+
+pub fn ct_shape_copy(Array[Int32]) -> Array[Int32]
+
+pub fn ct_signed_swap(CTensor, Int32) -> CTensor?
+
+pub fn ct_size(Array[Int32]) -> Int32
+
+pub fn ct_strides(Array[Int32]) -> Array[Int32]
+
+pub fn ct_sub(CTensor, CTensor) -> CTensor
+
+pub fn ct_swap_axes(CTensor, Int32) -> CTensor?
+
+pub fn ct_sym_part(CTensor, Int32) -> CTensor?
+
+pub fn ct_zeros(Array[Int32]) -> CTensor
+
+pub fn law_axial_cycle_variant() -> Array[(String, Bool)]
+
+pub fn law_axial_exchange_algebra() -> Array[(String, Bool)]
+
+pub fn law_axial_signed_variant() -> Array[(String, Bool)]
+
+pub fn law_axial_symmetric_decomposition() -> Array[(String, Bool)]
+
+pub fn law_axial_variant_table() -> Array[(String, Bool)]
+
+pub fn law_axial_yang_baxter() -> Array[(String, Bool)]
+
+pub fn law_quaternion_left_regular() -> Array[(String, Bool)]
+
+pub fn law_quaternion_ring() -> Array[(String, Bool)]
+
+pub fn law_rational_field() -> Array[(String, Bool)]
+
+pub fn qm_add(Array[Array[Quat]], Array[Array[Quat]]) -> Array[Array[Quat]]
+
+pub fn qm_cols(Array[Array[Quat]]) -> Int32
+
+pub fn qm_conj_transpose(Array[Array[Quat]]) -> Array[Array[Quat]]
+
+pub fn qm_eq(Array[Array[Quat]], Array[Array[Quat]]) -> Bool
+
+pub fn qm_hermitian_re(Array[Array[Quat]], Array[Array[Quat]]) -> QQ
+
+pub fn qm_mul(Array[Array[Quat]], Array[Array[Quat]]) -> Array[Array[Quat]]?
+
+pub fn qm_mul_unchecked(Array[Array[Quat]], Array[Array[Quat]]) -> Array[Array[Quat]]
+
+pub fn qm_neg(Array[Array[Quat]]) -> Array[Array[Quat]]
+
+pub fn qm_rows(Array[Array[Quat]]) -> Int32
+
+pub fn qm_sub(Array[Array[Quat]], Array[Array[Quat]]) -> Array[Array[Quat]]
+
+pub fn qm_trace(Array[Array[Quat]]) -> Quat
+
+pub fn qm_zero(Int32, Int32) -> Array[Array[Quat]]
+
+pub fn qmat_add(Array[Array[QQ]], Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_cols(Array[Array[QQ]]) -> Int32
+
+pub fn qmat_copy(Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_det(Array[Array[QQ]]) -> QQ?
+
+pub fn qmat_eq(Array[Array[QQ]], Array[Array[QQ]]) -> Bool
+
+pub fn qmat_from_int(Array[Array[Int32]]) -> Array[Array[QQ]]
+
+pub fn qmat_identity(Int32) -> Array[Array[QQ]]
+
+pub fn qmat_is_square(Array[Array[QQ]]) -> Bool
+
+pub fn qmat_is_zero_matrix(Array[Array[QQ]]) -> Bool
+
+pub fn qmat_mul(Array[Array[QQ]], Array[Array[QQ]]) -> Array[Array[QQ]]?
+
+pub fn qmat_mul_unchecked(Array[Array[QQ]], Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_nullity(Array[Array[QQ]]) -> Int32
+
+pub fn qmat_rank(Array[Array[QQ]]) -> Int32
+
+pub fn qmat_rows(Array[Array[QQ]]) -> Int32
+
+pub fn qmat_scale(QQ, Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_span_coords(Array[Array[QQ]], Array[QQ]) -> Array[QQ]?
+
+pub fn qmat_sub(Array[Array[QQ]], Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_transpose(Array[Array[QQ]]) -> Array[Array[QQ]]
+
+pub fn qmat_vec(Array[Array[QQ]], Array[QQ]) -> Array[QQ]?
+
+pub fn qmat_vec_unchecked(Array[Array[QQ]], Array[QQ]) -> Array[QQ]
+
+pub fn qmat_zero(Int32, Int32) -> Array[Array[QQ]]
+
+pub fn qq_add(QQ, QQ) -> QQ
+
+pub fn qq_cmp(QQ, QQ) -> Int32
+
+pub fn qq_div(QQ, QQ) -> QQ
+
+pub fn qq_eq(QQ, QQ) -> Bool
+
+pub fn qq_frac(Int32, Int32) -> QQ
+
+pub fn qq_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
+pub fn qq_half() -> QQ
+
+pub fn qq_int(Int32) -> QQ
+
+pub fn qq_inv(QQ) -> QQ?
+
+pub fn qq_is_zero(QQ) -> Bool
+
+pub fn qq_list_eq(Array[QQ], Array[QQ]) -> Bool
+
+pub fn qq_lt(QQ, QQ) -> Bool
+
+pub fn qq_make(@bigint.BigInt, @bigint.BigInt) -> QQ
+
+pub fn qq_mul(QQ, QQ) -> QQ
+
+pub fn qq_neg(QQ) -> QQ
+
+pub fn qq_one() -> QQ
+
+pub fn qq_pow(QQ, Int32) -> QQ
+
+pub fn qq_show(QQ) -> String
+
+pub fn qq_sub(QQ, QQ) -> QQ
+
+pub fn qq_zero() -> QQ
+
+pub fn quat_add(Quat, Quat) -> Quat
+
+pub fn quat_basis(Int32) -> Quat
+
+pub fn quat_conj(Quat) -> Quat
+
+pub fn quat_eq(Quat, Quat) -> Bool
+
+pub fn quat_i() -> Quat
+
+pub fn quat_inv(Quat) -> Quat?
+
+pub fn quat_is_zero(Quat) -> Bool
+
+pub fn quat_j() -> Quat
+
+pub fn quat_k() -> Quat
+
+pub fn quat_left_mat(Quat) -> Array[Array[QQ]]
+
+pub fn quat_make(QQ, QQ, QQ, QQ) -> Quat
+
+pub fn quat_mul(Quat, Quat) -> Quat
+
+pub fn quat_neg(Quat) -> Quat
+
+pub fn quat_norm(Quat) -> QQ
+
+pub fn quat_of_int(Int32, Int32, Int32, Int32) -> Quat
+
+pub fn quat_of_qq(QQ) -> Quat
+
+pub fn quat_one() -> Quat
+
+pub fn quat_re(Quat) -> QQ
+
+pub fn quat_right_mat(Quat) -> Array[Array[QQ]]
+
+pub fn quat_scale(QQ, Quat) -> Quat
+
+pub fn quat_show(Quat) -> String
+
+pub fn quat_sub(Quat, Quat) -> Quat
+
+pub fn quat_to_vec(Quat) -> Array[QQ]
+
+pub fn quat_zero() -> Quat
+
+pub fn qvec_dot(Array[QQ], Array[QQ]) -> QQ
+
+pub fn qvec_zero(Int32) -> Array[QQ]
+
+// Errors
+
+// Types and methods
+pub(all) enum AxialVariant {
+  AxialSwap
+  AxialSigned
+  AxialCycle
+}
+
+pub(all) struct CTensor {
+  shape : Array[Int32]
+  data : Array[QQ]
+}
+
+pub(all) struct QQ {
+  num : @bigint.BigInt
+  den : @bigint.BigInt
+}
+
+pub(all) struct Quat {
+  re : QQ
+  qi : QQ
+  qj : QQ
+  qk : QQ
+}
+
+// Type aliases
+
+// Traits

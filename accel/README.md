@@ -183,3 +183,25 @@ moon check --deny-warn --target wasm-gc
 moon run cmd/showcase --target wasm-gc
 # 瀏覽器直開：../webgpu/index.html（自動偵測 navigator.gpu，8 個 WGSL 管線全數對齊註冊表並回退至 CPU SWAR 對照）
 ```
+
+---
+
+## 9. 第八聯邦的 qgeom 子聯邦（2026-11-15 加入）
+
+`accel` 聯邦同時承載 `qgeom/` 這個**幾何 × 硬體抽象**子聯邦，它有五個套件與一個執行檔：
+
+| 套件 | L | 內容 | 命題 |
+|---|---:|---|---:|
+| [`qgeom/core`](../qgeom/core/README.md) | 0 | 精確有理數、四元數、任意秩張量；軸向交換三變體 τ／σ／ρ（Yang–Baxter、S_n Coxeter、Burnside 軌道數） | 57 |
+| [`qgeom/hal`](../qgeom/hal/README.md) | 1 | `FusedBackend` trait 與三種排程後端；合體恆等 `contract(τ₀₁T,0) = contract(T,1)`；合併代數、正規化、分塊覆蓋、流量模型 | 20 |
+| [`qgeom/geom`](../qgeom/geom/README.md) | 2 | 平移的射影提升 `M(t) = [[I,t],[0,1]]`、交比不變；雅可比的鏈鎖律、`rank(A⊗B) = rank A·rank B`、全射性 | 35 |
+| [`qgeom/susy`](../qgeom/susy/README.md) | 2 | 分次代數與實超跡、四元數頂點對偶方程；有限複形上的 `∂² = 0`、Betti、Hodge、超電荷 `Q² = Δ`、`H ⊗ C` | 28 |
+| [`qgeom/qk`](../qgeom/qk/README.md) | 3 | `sp(2) = k ⊕ m`、四元數凱勒結構、對稱空間曲率；整數結構矩陣的格子雙射、`Sp(2g,Z)` 不變的恆等張量 | 39 |
+| [`cmd/qgeom`](../cmd/qgeom/README.md) | 4 | 五個套件的定律總表 | **179** |
+
+與本資料夾的其他加速引擎相比，qgeom 的定位是**語意端**：`accel/*` 證明「某個硬體技巧算的是同一個定義」，
+`qgeom/hal` 則把「合體運算的抽象邊界」本身寫成可以逐位元比對的契約（18 條計畫 × 7 個後端）。
+
+```bash
+moon run cmd/qgeom --target wasm-gc      # 通過 179 / 179 個命題
+```

@@ -1,0 +1,91 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qgeom/geom"
+
+import {
+  "vv0101v01/cubical-hermitian/qgeom/core",
+}
+
+// Values
+pub fn geom_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn law_cross_ratio_invariance() -> Array[(String, Bool)]
+
+pub fn law_harmonic_and_symmetry() -> Array[(String, Bool)]
+
+pub fn law_jacobian_chain_rule() -> Array[(String, Bool)]
+
+pub fn law_projective_translation_group() -> Array[(String, Bool)]
+
+pub fn law_tensor_product_surjectivity() -> Array[(String, Bool)]
+
+pub fn map_compose(Array[MPoly], Array[MPoly]) -> Array[MPoly]
+
+pub fn map_eval(Array[MPoly], Array[@core.QQ]) -> Array[@core.QQ]
+
+pub fn map_jacobian(Array[MPoly], Array[@core.QQ]) -> Array[Array[@core.QQ]]
+
+pub fn mat_is_surjective(Array[Array[@core.QQ]]) -> Bool
+
+pub fn mat_kronecker(Array[Array[@core.QQ]], Array[Array[@core.QQ]]) -> Array[Array[@core.QQ]]
+
+pub fn mpoly_add(MPoly, MPoly) -> MPoly
+
+pub fn mpoly_const(Int32, @core.QQ) -> MPoly
+
+pub fn mpoly_eval(MPoly, Array[@core.QQ]) -> @core.QQ
+
+pub fn mpoly_mul(MPoly, MPoly) -> MPoly
+
+pub fn mpoly_neg(MPoly) -> MPoly
+
+pub fn mpoly_partial(MPoly, Int32) -> MPoly
+
+pub fn mpoly_scale(@core.QQ, MPoly) -> MPoly
+
+pub fn mpoly_sub(MPoly, MPoly) -> MPoly
+
+pub fn mpoly_substitute_all(MPoly, Array[MPoly]) -> MPoly
+
+pub fn mpoly_var(Int32, Int32) -> MPoly
+
+pub fn mpoly_zero(Int32) -> MPoly
+
+pub fn proj_apply(Array[Array[@core.QQ]], Array[@core.QQ]) -> Array[@core.QQ]?
+
+pub fn proj_cross_ratio(Array[@core.QQ], Array[@core.QQ], Array[@core.QQ], Array[@core.QQ]) -> @core.QQ?
+
+pub fn proj_cross_ratio_image(Array[Array[@core.QQ]], Array[@core.QQ], Array[@core.QQ], Array[@core.QQ], Array[@core.QQ]) -> @core.QQ?
+
+pub fn proj_det2(Array[@core.QQ], Array[@core.QQ]) -> @core.QQ
+
+pub fn proj_eq(Array[@core.QQ], Array[@core.QQ]) -> Bool
+
+pub fn proj_incident(Array[@core.QQ], Array[@core.QQ]) -> Bool
+
+pub fn proj_is_zero(Array[@core.QQ]) -> Bool
+
+pub fn proj_mat_minus_identity(Array[Array[@core.QQ]]) -> Array[Array[@core.QQ]]
+
+pub fn proj_mat_pow(Array[Array[@core.QQ]], Int32) -> Array[Array[@core.QQ]]
+
+pub fn proj_mobius(@core.QQ, @core.QQ, @core.QQ, @core.QQ) -> Array[Array[@core.QQ]]
+
+pub fn proj_of_affine(Array[@core.QQ]) -> Array[@core.QQ]
+
+pub fn proj_to_affine(Array[@core.QQ]) -> Array[@core.QQ]?
+
+pub fn proj_translation_inverse_transpose(Array[@core.QQ]) -> Array[Array[@core.QQ]]
+
+pub fn proj_translation_matrix(Array[@core.QQ]) -> Array[Array[@core.QQ]]
+
+// Errors
+
+// Types and methods
+pub(all) struct MPoly {
+  nvars : Int32
+  terms : Array[(Array[Int32], @core.QQ)]
+}
+
+// Type aliases
+
+// Traits

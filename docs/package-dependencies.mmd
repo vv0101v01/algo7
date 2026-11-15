@@ -8,6 +8,7 @@ flowchart BT
     accel_swar["accel/swar"]
     ualg_core["ualg/core"]
     ualg_site["ualg/site"]
+    qgeom_core["qgeom/core"]
   end
   subgraph L1["Package layer 1"]
     algebra_core["algebra/core"]
@@ -23,6 +24,7 @@ flowchart BT
     meta_iit["meta/iit"]
     condensed_core["condensed/core"]
     ualg_demorgan["ualg/demorgan"]
+    qgeom_hal["qgeom/hal"]
   end
   subgraph L2["Package layer 2"]
     algebra["algebra"]
@@ -38,6 +40,8 @@ flowchart BT
     meta_reflect["meta/reflect"]
     topos_site["topos/site"]
     ualg_cube["ualg/cube"]
+    qgeom_geom["qgeom/geom"]
+    qgeom_susy["qgeom/susy"]
   end
   subgraph L3["Package layer 3"]
     cubical_hermitian["cubical/hermitian"]
@@ -52,12 +56,14 @@ flowchart BT
     cmd_metatheory["cmd/metatheory"]
     discovery_kernel["conjecture/kernel"]
     cmd_ualg["cmd/ualg"]
+    qgeom_qk["qgeom/qk"]
   end
   subgraph L4["Package layer 4"]
     semiring_app["semiring/app"]
     condensed["condensed"]
     semiring_par_host["semiring/par_host"]
     accel["accel"]
+    cmd_qgeom["cmd/qgeom"]
   end
   subgraph L5["Package layer 5"]
     cubical_autonomy["cubical/autonomy"]
@@ -254,3 +260,12 @@ flowchart BT
   ualg_core --> ualg_cube
   ualg_site --> ualg_cube
   ualg_demorgan --> ualg_cube
+  qgeom_core --> qgeom_hal
+  qgeom_core --> qgeom_geom
+  qgeom_core --> qgeom_susy
+  qgeom_core --> qgeom_qk
+  qgeom_core --> cmd_qgeom
+  qgeom_hal --> cmd_qgeom
+  qgeom_geom --> cmd_qgeom
+  qgeom_susy --> cmd_qgeom
+  qgeom_qk --> cmd_qgeom

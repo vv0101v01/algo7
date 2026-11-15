@@ -1,0 +1,127 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qgeom/susy"
+
+import {
+  "vv0101v01/cubical-hermitian/qgeom/core",
+}
+
+// Values
+pub fn cm_apply(Array[Array[CQuat]], Array[CQuat]) -> Array[CQuat]
+
+pub fn cm_from_qq(Array[Array[@core.QQ]]) -> Array[Array[CQuat]]
+
+pub fn cm_is_zero(Array[Array[CQuat]]) -> Bool
+
+pub fn cm_mul(Array[Array[CQuat]], Array[Array[CQuat]]) -> Array[Array[CQuat]]
+
+pub fn cm_transpose(Array[Array[CQuat]]) -> Array[Array[CQuat]]
+
+pub fn cq_J(CQuat) -> CQuat
+
+pub fn cq_add(CQuat, CQuat) -> CQuat
+
+pub fn cq_conj(CQuat) -> CQuat
+
+pub fn cq_eq(CQuat, CQuat) -> Bool
+
+pub fn cq_from_quat(@core.Quat) -> CQuat
+
+pub fn cq_hdot(Array[CQuat], Array[CQuat]) -> @core.QQ
+
+pub fn cq_make(@core.Quat, @core.Quat) -> CQuat
+
+pub fn cq_mul(CQuat, CQuat) -> CQuat
+
+pub fn cq_of_int(Int32) -> CQuat
+
+pub fn cq_one() -> CQuat
+
+pub fn cq_unit() -> CQuat
+
+pub fn cq_zero() -> CQuat
+
+pub fn face_sorted(Array[Int32]) -> Array[Int32]
+
+pub fn law_derham_chain_complex() -> Array[(String, Bool)]
+
+pub fn law_derham_complexified() -> Array[(String, Bool)]
+
+pub fn law_superalgebra() -> Array[(String, Bool)]
+
+pub fn law_vertex_duality() -> Array[(String, Bool)]
+
+pub fn qm_apply(Array[Array[@core.Quat]], Array[@core.Quat]) -> Array[@core.Quat]
+
+pub fn sc_betti(SimplicialComplex) -> Array[Int32]
+
+pub fn sc_boundary(SimplicialComplex, Int32) -> Array[Array[@core.QQ]]
+
+pub fn sc_build(Int32, Array[Array[Int32]]) -> SimplicialComplex
+
+pub fn sc_count(SimplicialComplex, Int32) -> Int32
+
+pub fn sc_d_total(SimplicialComplex) -> Array[Array[@core.QQ]]
+
+pub fn sc_dd(SimplicialComplex, Int32) -> Array[Array[@core.QQ]]
+
+pub fn sc_euler_betti(SimplicialComplex) -> Int32
+
+pub fn sc_euler_counts(SimplicialComplex) -> Int32
+
+pub fn sc_hodge(SimplicialComplex, Int32) -> Array[Array[@core.QQ]]
+
+pub fn sc_hodge_total(SimplicialComplex) -> Array[Array[@core.QQ]]
+
+pub fn sc_supercharge(SimplicialComplex) -> Array[Array[@core.QQ]]
+
+pub fn slad_bracket(SLad, SLad) -> SLad
+
+pub fn slad_eq(SLad, SLad) -> Bool
+
+pub fn slad_new(Array[Array[@core.Quat]], Int32) -> SLad
+
+pub fn slad_sign(SLad, SLad) -> Int32
+
+pub fn susy_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn susy_hdot(Array[@core.Quat], Array[@core.Quat]) -> @core.QQ
+
+pub fn susy_supertrace(Array[Array[@core.Quat]], Int32, Int32) -> @core.QQ
+
+pub fn vertex_conv_coeff(VertexOp, VertexOp, Int32) -> Array[Array[@core.Quat]]
+
+pub fn vertex_dual(VertexOp) -> VertexOp
+
+pub fn vertex_modes(VertexOp) -> Int32
+
+pub fn vertex_mul(VertexOp, VertexOp, Int32) -> VertexOp
+
+pub fn vertex_of(Array[Array[Array[@core.Quat]]]) -> VertexOp
+
+pub fn vertex_pairing(VertexOp, Int32, Array[@core.Quat], Array[@core.Quat]) -> @core.QQ
+
+// Errors
+
+// Types and methods
+pub(all) struct CQuat {
+  ca : @core.Quat
+  cb : @core.Quat
+}
+
+pub(all) struct SLad {
+  mat : Array[Array[@core.Quat]]
+  par : Int32
+}
+
+pub(all) struct SimplicialComplex {
+  n_vertices : Int32
+  faces : Array[Array[Array[Int32]]]
+}
+
+pub(all) struct VertexOp {
+  modes : Array[Array[Array[@core.Quat]]]
+}
+
+// Type aliases
+
+// Traits

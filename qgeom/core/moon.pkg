@@ -1,0 +1,2 @@
+// qgeom/core — 四元數幾何與軸向張量變體的精確代數核心。
+// 零外部依賴：只用 `moonbitlang/core` 內建的 `BigInt`／`Array`，不匯入任何其他套件。

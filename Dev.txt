@@ -1074,3 +1074,141 @@ Dev.txt（本節）、agent.md、agent.v2.md、lean/README.md、lean/UNIVERSAL.m
 - CI https://github.com/vv0101v01/kt/actions/runs/43607632185 ：completed/success，head SHA 精確匹配。
 - 下載logs及theorem-pipeline-events核對：Meta631、Ualg167、Cubical139唯一且全true/full_verified、Showcase50、registry39、checker15、arch327/204558，介面/文檔/定律漂移皆過。
 - 這次只追加實際回執，不改演算法／artifact／測量值；回執推送後再確認最新main CI。憑證未入source或evidence，artifact redirect不傳PAT。
+
+
+## 2026-11-15：qgeom 子聯邦 — 八項幾何題目的獨立實作與合併（第八聯邦內）
+
+**方法**：沿用 Dev.txt 第 1 輪的規矩——每個數學題目先做成**獨立套件**（自己一份精確算術與自己一份定律），
+再接起來；每一條主張都必須是純函式（`law_*` / `*_all_laws()`）回傳 `Array[(String, Bool)]` 中的一個布林。
+沒有 `*_test.mbt`、沒有 `test { }` 區塊、沒有 `for "test"` 依賴、沒有基準測試。
+
+### 套件（6 個新包，Layer 0→4，全部只依賴 `qgeom/core`）
+
+| 套件 | L | 題目 | 檔案／行數 | 章節／命題 |
+|---|---:|---|---|---:|
+| `qgeom/core` | 0 | 1. 軸向交換張量變體（τ／σ／ρ） | `rational` 220、`linear` 534、`quaternion` 450、`tensor` 464、`laws` 802 = 2,470 | 9 / 57 |
+| `qgeom/hal` | 1 | 2. 高維合體運算的硬體抽象層 | `hal` 538、`laws` 539 = 1,077 | 5 / 20 |
+| `qgeom/geom` | 2 | 3. 平移射影 ＋ 8. 雅可布全射張量積 | `projective` 248、`poly` 262、`laws` 570 = 1,080 | 5 / 35 |
+| `qgeom/susy` | 2 | 4. 超對稱四元數頂點對偶 ＋ 6. 複形四元數德朗姆型恆等 | `susy` 312、`derham` 443、`laws` 626 = 1,381 | 4 / 28 |
+| `qgeom/qk` | 3 | 7. 四元數凱勒曲率張量群空間 ＋ 5. 雙射緊緻四元雅可比簇 | `sp2` 199、`lattice` 192、`laws` 797 = 1,188 | 6 / 39 |
+| `cmd/qgeom` | 4 | 定律總表 | `main` 59、`moon.pkg` 8 | — / 179 |
+
+合計 **7,255 行**、**29 章、179 條命題**；全套件零外部依賴（除 `moonbitlang/core`）。
+
+### 主要結果（每條都是執行時算出來的）
+
+- **軸向交換**：秩 3 的 braid `τ₀₁τ₁₂τ₀₁ = τ₁₂τ₀₁τ₁₂ = [2,1,0]`；秩 4 兩處 braid＋`|i−j| ≥ 2` 交換＋S₄ 長元素兩種字都 `= [3,2,1,0]`；`σ = −τ` 帶號 braid 多一個負號；`ρ = τ₀₁∘τ₁₂`、`ρ³ = 1`、Burnside 軌道數 `(d³+2d)/3` 實算 4／11／24；`dim Sym = 18`、`dim Alt = 9`（用投影後基準家族的秩實算）。
+- **HAL**：18 條可執行計畫 × 7 個後端 = **126 次比較逐位元相同**；合體恆等 `contract(τ₀₁T,0) = contract(T,1)`（`sum` 都 = 156）；`simplify` 保存語意且冪等（共省 4 步）；三連逐元素步未合併流量 36、合併後 12；312 組 `(n, span)` 分塊恰好覆蓋每點一次（最大道浪費 7）。
+- **平移射影**：`M(t) = [[I,t],[0,1]]` 群律／`det = 1`／保無窮遠點／`(M−I)² = 0`／`M(t)^k = M(kt) ≠ id`；交比 `(0,1;7/2,5) = 28/25`，平移與 4 個分式線性映射都不改；調和共軛 `d = 3/5` 使交比 `= −1`。
+- **雅可比**：`J(g∘f)(x) = J_g(f(x))J_f(x)` 三點精確；`rank(A⊗B) = rank A·rank B`（25 對）＋核維數恆等＋全射封閉＋`det(A⊗B) = 100`（2×2）。
+- **超對稱**：分次 Jacobi 64 組全零；`str(EE') = −5`、`str(O'O) = −3`、`str([A,B]) = 0`；頂點對偶 `⟨A_n u,w⟩ = ⟨u,A_n†w⟩` 6 個模＋`V** = V`；五個複形 `∂² = 0` 精確、Betti `(1,0,0)／(1,0,1)／(1,0,1)／(1,2,1)／(1,0,0)`、`dim ker Δ_k = β_k`、`Q² = ⊕Δ_k`、`Z₂` 分次；`H ⊗_R C` 上 `∂∂ = 0`、`J(∂a) = ∂(Ja)`。
+- **四元數凱勒**：`sp(2)` 10 維、`k` 6 ＋ `m` 4、`[m,m] ⊂ k`、`k ⊥ m`、`R(X,Y)Z ∈ m`（16×4）、`R ∈ k ⇔ R = 0`（64 三元組，40 個為零）、配對對稱 256 組、第一 Bianchi 4³ 組、64 三元組中 24 個非零（負控制）；`I,J,K` 整數、`det = 1`、`IJ = K`、盒 `[−1,1]⁴` 的 81 點在 `I` 下每點恰好被擊中一次、軌道 `81 = 1 + 4·20`、`det(2I) = 16`；`MᵗΩM = Ω`（`g = 1, 2`）、`Ω(X,Y) = ⟨IX,Y⟩`、`h(x,x) = (6,0,0,0)`、`ω(IX,IY) = ω(X,Y)`、`ω(JX,JY) = −ω(X,Y)`。
+
+### 被定律抓出來並修正的錯誤（不是事後美化）
+
+1. `R(x)R(y) = R(xy)` **是錯的**；四元數右正則表示是反同態，正確式 `R(x)R(y) = R(yx)`。
+2. 多項式複合若**依序**代換 `x₀`、`x₁`，會把先前代換進來的 `x₁` 再代換一次 → 必須用 `mpoly_substitute_all` 同時代換；代值核對 `(g∘f)(1,2) = (5,6)` 才與鏈鎖律同時成立。
+3. `cm_apply` 的維度寫反造成 wasm `RuntimeError: unreachable`（`a ∈ C_1 = qmat_cols(∂₁)`、`b ∈ C_0 = qmat_rows(∂₁)`）。
+4. **四元數上的超跡只能取實部**：`tr(AB) = tr(BA)` 對四元數係數不成立（1×1 分塊退化成 `ab ≠ ba`），`Re tr` 才成立，因此 `susy_supertrace` 回傳 `QQ`；配套要求宣告「偶」的矩陣必須 (1|1) 分塊對角、奇必須非對角。
+5. `qmat_nullity` 是 **cols − rank**，不是 rows − rank（線性映射的核維數）。
+6. 兩個負控制在算出後被**撤回**：曲率三元組 `R(M₀,M₁)M₂` 其實是零、`R(X,Y)Z ∉ k` 不可能（`k ⊥ m`），改為「64 個三元組中 24 個非零」與等價式 `R ∈ k ⇔ R = 0`。
+7. 硬體複現 bug：`k` 目錄殘留的 `scratch_tmp3/` 讓 `moon check` 失敗（`mpoly_substitute` 已被 `mpoly_substitute_all` 取代）；`qgeom/hal` 的 `hal_shapes` 與 `LaneCore::tile_span(self)` 觸發 `--deny-warn` 的 `unused_value`。三處清除後全綠。
+8. 標籤字串 bug：`"…其中 \\{zero_triples} 個為零"` 被轉義成字面文字，改為 `\\{total_triples}`／`\\{zero_triples}` 真插值，現在印出「64 個三元組，其中 40 個為零」。
+
+### 架構與文檔
+
+- `architecture.json`：新增 6 個 package／6 個 component，掛在既有第八聯邦 `accel` 之下（**仍然是 10 個聯邦，沒有新增第 11 個**）；`cmd/qgeom` 依賴五個新套件。
+- 新增 README：`qgeom/README.md` ＋ `qgeom/{core,hal,geom,susy,qk}/README.md` ＋ `cmd/qgeom/README.md`；`accel/README.md` 增第 9 節；`cmd/README.md` 增一列；root `README.md` 更新套件／元件數與 qgeom 條目。
+- `docs/FEDERATION_ARCHITECTURE.md`、`docs/FEDERATION_OVERVIEW.html`、`docs/package-dependencies.mmd` 由 `tools/federation_docs.py` 重新生成（`--check` 通過）。
+- CI 新增一步：`moon run cmd/qgeom --target wasm-gc`。
+
+### 本地驗收（Tier A + Tier C）
+
+- `moon check --deny-warn --target wasm-gc` → 0 警告；`moon build --target wasm-gc` → 成功；`moon fmt qgeom cmd/qgeom` 無殘留。
+- `python3 tools/arch_check.py` → **10 federations + unification apex、63 packages、72 components、344 .mbt、211,853 行**。
+- `python3 tools/gen_laws.py` → 無差異；`python3 tools/federation_docs.py --check` → fresh。
+- `moon run cmd/qgeom --target wasm-gc` → **通過 179 / 179 個命題**（core 57、hal 20、geom 35、susy 28、qk 39）。
+- 既有入口的輸出不含新內容、未被本輪改動（本輪不改 `meta`／`ualg`／`cubical` 任何檔案）。
+
+### 未做／不宣稱
+
+- 未 push、未跑 GitHub Actions；本輪只做本地實作與本地閘門。
+- 未宣稱任何 Lean／外部證明助理核驗；wasm-gc 之外沒有跑其他後端。
+- 「雅可比簇」是 `H^g/Λ`（`g = 1, 2`）的具體格子模型，不是代數曲線的 Jacobian variety，也沒有 theta 函數。
+- HAL 的三個後端是同一 wasm 目標上的**排程模擬**（走訪順序不同），流量是計數模型，不是量測值；沒有 GPU 後端，也沒有加速比宣稱。
+- 每條命題都是在標籤所列的有限樣本／有限複形／固定基底上重算出來的布林，不是任意輸入的形式證明。
+
+
+## 2026-11-15（第二輪）：qgeom 代碼健檢、去重、減債與死碼清除
+
+**範圍**：本輪只動 qgeom 子聯邦（`qgeom/*`、`cmd/qgeom`，6,933 行）；`qgeom` 以外的 344 檔未修改。
+**原則**：每一項改動都先量測再動手，改完立刻跑 Tier A／Tier C；命題數不變（仍是 179），只改「誰被用、誰被留」。
+
+### 三個機械掃描（先量測，後動手）
+
+1. **死碼掃描**：把每個 `pub fn/struct/enum` 的識別字在同套件（裸名）與跨套件（`@pkg.name`）全文計數，扣除宣告本身；
+   計數為 0 者即「宣告了但沒有任何命題或呼叫者用它」。首掃 **280 個 pub 宣告中 31 個為 0 引用**。
+2. **重複掃描**：抽 324 個函式體、正規化（去註解／字串／數字／識別字）後取雜湊；>6 行的相同體才報。
+3. **文檔漂移掃描**：把五份 README 裡所有 `\`backtick_identifier\`` 抽出來，逐一比對是否真的存在於公開介面。
+
+### 死碼清除（36 個 0 引用宣告 → 0）
+
+刪除 32 個公開宣告 ＋ 3 個 qk 私有輔助 ＋ 4 份重複的 `chk`：
+
+| 套件 | 刪除 |
+|---|---|
+| `qgeom/core` | `qq_abs`、`qq_of_big`、`qq_to_double`（唯一浮點出口，違反「只用精確算術」）、`qq_sign`、`qvec_add`、`qvec_sub`、`qvec_of_int`、`qvec_is_zero`、`qvec_scale`、`qmat_trace`、`qm_from_int`、`qm_scale`、`qm_identity`、`quat_of_vec`、`ct_entries`、`ct_set`、`axial_variant_name` |
+| `qgeom/hal` | `plan_count`、`plan_show`（除錯印表機）、`stage_label` |
+| `qgeom/geom` | `mat_identity_qq`（`@core.qmat_identity` 的重複）、`proj_normalize` |
+| `qgeom/susy` | `cq_show`、`cq_sub`、`cq_neg`、`slad_is_zero` |
+| `qgeom/qk` | `sp2_combine`、`sp2_quat_of_m`；另外 3 個**私有**鏡像輔助 `qq_to_small`／`ql_structure_int`／`int_mat_vec`（見下） |
+
+### 去重（4 處真正的重複）
+
+1. **`chk` 五份 → 一份**：`qgeom/core` 的 `pub fn chk` 成為唯一實作，其餘四包刪掉自己的副本，
+   122 個呼叫點改寫為 `@core.chk(...)`（hal 20、geom 35、susy 28、qk 39）。四包本來就依賴 `core`，沒有新增依賴。
+2. **qk 的 Int32 鏡像層整層刪除**：`laws.mbt` 曾為了格子計數另外寫了 `qq_to_small`／`ql_structure_int`／`int_mat_vec`
+   與手寫的位數展開，等於把 `ql_structure`／`ql_box_points` 重新實作一遍（**同一組矩陣的兩個真相源**）。
+   現在雙射與軌道都走 QQ：`ql_box_points(4, 1)` 產生盒、`ql_I` 取像、`ql_pt_eq` 比對，
+   以「點在盒中的索引」記錄已訪狀態。矩陣只有一個來源，`ql_structure_int` 之類的平行資料不再存在。
+3. **`susy_supertrace` 兩段手寫對角迴圈 → `Re tr(D·M)`**：`D = diag(I_p, −I_q)`，
+   用既有的 `qm_mul_unchecked` 與 `qm_trace` 一行算完，`qm_trace` 因此從死碼變成被使用。
+4. **文件重複的事實改為單一來源**：README 的行數表、函式名改由實際介面決定（見下）。
+
+### 死碼「接線」而非刪除（5 個有語意角色的）
+
+| 宣告 | 接到哪裡 | 效果 |
+|---|---|---|
+| `axial_apply` | core 的 τ² 定律 | 三變體統一調度（`AxialVariant` 列舉）進入主線，不再只有三個分支函式被呼叫 |
+| `proj_of_affine`／`proj_to_affine` | geom 的平移定律 | 「仿射圖上 `[3,−1,1] ↦ [4,1,1]`」現在同時用齊次嵌入與仿射讀回兩條路徑 |
+| `ql_structure_g` | qk 的恆等張量定律（g = 2） | 8×8 上同時驗 `MᵗΩM = Ω` 與 `I₈² = −id` |
+| `ql_box_points`／`ql_pt_eq`／`ql_I` | qk 的格子雙射定律 | 取代被刪掉的 Int32 鏡像層 |
+| `quat_show` | qk 的正定性標籤 | 標籤裡的 `h(x,x)` 由 `(6,0,0,0)` 固定字串改為執行時算出的四元數 |
+
+### 文檔漂移（README 與程式不符，已修正）
+
+* `qgeom/geom/README.md`：`mpoly_jacobian`→`map_jacobian`、`mpoly_compose`→`map_compose`、
+  `proj_translate`→`proj_translation_matrix`、`proj_det`→`proj_det2`、`proj_parabolic`→`proj_mat_minus_identity`；
+  調和共軛在程式裡是定律內公式，沒有同名函式，README 已改寫成實情。
+* `qgeom/hal/README.md`：`plan_exec`／`plan_exec_ref`→`hal_stage_apply`／`hal_exec`、
+  `hal_block_cover`→`hal_blocks`、`hal_walk_order`（不存在）→ `hal_lane_passes`。
+* `qgeom/susy/README.md`：`chain_betti`→`sc_betti`、`susy_bracket`→`slad_bracket`。
+* `qgeom/qk/README.md`：`ql_J`／`ql_K` 從未存在，改為 `ql_structure(2)`／`ql_structure(3)`。
+* 五份 README 的行數表全部重算；`qgeom/README.md` 合計 7,255 → **6,933 行**。
+
+### 本地驗收（Tier A + Tier C，全部重跑）
+
+- `moon check --deny-warn --target wasm-gc`、`moon build --target wasm-gc`、`moon fmt`、`moon info`：0 警告。
+- `python3 tools/arch_check.py` → 10 federations + apex、63 packages、72 components、344 .mbt、**211,491 行**（前 211,853，−362）。
+- `python3 tools/gen_laws.py` 無差異；`python3 tools/federation_docs.py --check` fresh。
+- `moon run cmd/qgeom --target wasm-gc` → **通過 179 / 179 個命題**（章節與計數完全不變：57/20/35/28/39）。
+- 死碼掃描複跑：**248 個公開宣告、0 個 0 引用**。
+
+### 未做／邊界
+
+- 沒有為了「減少行數」而合併數學上不同的實作：`qmat_add`↔`qmat_sub`、`ct_sym_part`↔`ct_alt_part`、
+  `qm_neg`↔`qm_conj_transpose` 這些在正規化雜湊下「看起來相同」的配對，逐一讀過後確認語意不同，**不刪**。
+- 定律函式仍保持單一長函式（最長 158 行）：命題是依序 `chk` 的序列，拆成子函式只會把狀態搬來搬去；
+  本輪只做了「同一事實的兩個實作」的合併，沒有為了行數重排定律。
+- 沒有新增或刪除任何命題（仍 179），因此 `Dev.txt`／README／CI 的命題計數不需變動。
+- 未量測效能；`qgeom` 端到端時間（約 35 秒）與前一輪同數量級，不是受控比較。

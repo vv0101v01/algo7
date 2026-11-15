@@ -1,0 +1,9 @@
+import {
+  "vv0101v01/cubical-hermitian/qgeom/core",
+  "vv0101v01/cubical-hermitian/qgeom/hal",
+  "vv0101v01/cubical-hermitian/qgeom/geom",
+  "vv0101v01/cubical-hermitian/qgeom/susy",
+  "vv0101v01/cubical-hermitian/qgeom/qk",
+}
+
+pkgtype(kind: "executable")

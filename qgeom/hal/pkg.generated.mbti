@@ -1,0 +1,81 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qgeom/hal"
+
+import {
+  "vv0101v01/cubical-hermitian/qgeom/core",
+}
+
+// Values
+pub fn hal_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn hal_blocks(Int32, Int32) -> Array[Array[Int32]]
+
+pub fn hal_exec(Plan, @core.CTensor) -> @core.CTensor?
+
+pub fn[T : FusedBackend] hal_exec_backend(T, Plan, @core.CTensor) -> @core.CTensor?
+
+pub fn hal_lane_passes(Int32, Int32) -> Int32
+
+pub fn[T : FusedBackend] hal_order(T, Int32) -> Array[Int32]
+
+pub fn hal_stage_apply(@core.CTensor, Stage) -> @core.CTensor?
+
+pub fn[T : FusedBackend] hal_stage_apply_backend(T, @core.CTensor, Stage) -> @core.CTensor?
+
+pub fn law_hal_backend_equivalence() -> Array[(String, Bool)]
+
+pub fn law_hal_determinism_and_purity() -> Array[(String, Bool)]
+
+pub fn law_hal_fusion_algebra() -> Array[(String, Bool)]
+
+pub fn law_hal_stage_semantics() -> Array[(String, Bool)]
+
+pub fn law_hal_tiling_partition() -> Array[(String, Bool)]
+
+pub fn plan_concat(Plan, Plan) -> Plan
+
+pub fn plan_fused_traffic(Plan, Array[Int32]) -> Int32
+
+pub fn plan_new(Array[Stage]) -> Plan
+
+pub fn plan_simplify(Plan) -> Plan
+
+pub fn plan_traffic(Plan, Array[Int32]) -> Int32
+
+pub fn stage_is_elementwise(Stage) -> Bool
+
+// Errors
+
+// Types and methods
+pub(all) struct BlockedCore {
+  lanes : Int32
+  block : Int32
+}
+
+pub(all) struct LaneCore {
+  lanes : Int32
+}
+
+pub(all) struct Plan {
+  stages : Array[Stage]
+}
+
+pub(all) struct ScalarCore {
+  tag : Int32
+}
+
+pub(all) enum Stage {
+  StSwap(Int32)
+  StScale(@core.QQ)
+  StAdd(@core.QQ)
+  StContract(Int32)
+}
+
+// Type aliases
+
+// Traits
+pub(open) trait FusedBackend {
+  fn backend_label(Self) -> String
+  fn lane_width(Self) -> Int32
+  fn tile_span(Self) -> Int32
+}

@@ -1,0 +1,77 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qgeom/qk"
+
+import {
+  "vv0101v01/cubical-hermitian/qgeom/core",
+}
+
+// Values
+pub fn law_qk_cartan_decomposition() -> Array[(String, Bool)]
+
+pub fn law_qk_curvature_identities() -> Array[(String, Bool)]
+
+pub fn law_qk_identity_tensor() -> Array[(String, Bool)]
+
+pub fn law_qk_lattice_bijection() -> Array[(String, Bool)]
+
+pub fn law_qk_quaternionic_structure() -> Array[(String, Bool)]
+
+pub fn law_qk_symplectic_algebra() -> Array[(String, Bool)]
+
+pub fn qk_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn ql_I(Array[@core.QQ]) -> Array[@core.QQ]
+
+pub fn ql_block_diag(Array[Array[@core.QQ]], Array[Array[@core.QQ]]) -> Array[Array[@core.QQ]]
+
+pub fn ql_box_points(Int32, Int32) -> Array[Array[@core.QQ]]
+
+pub fn ql_form(Array[Array[@core.QQ]], Array[@core.QQ], Array[@core.QQ]) -> @core.QQ
+
+pub fn ql_hermitian(Array[@core.QQ], Array[@core.QQ]) -> @core.Quat
+
+pub fn ql_is_integral(Array[Array[@core.QQ]]) -> Bool
+
+pub fn ql_polarization(Int32) -> Array[Array[@core.QQ]]
+
+pub fn ql_pt_eq(Array[@core.QQ], Array[@core.QQ]) -> Bool
+
+pub fn ql_sl2z_samples() -> Array[Array[Array[Int32]]]
+
+pub fn ql_structure(Int32) -> Array[Array[@core.QQ]]
+
+pub fn ql_structure_g(Int32, Int32) -> Array[Array[@core.QQ]]
+
+pub fn ql_symplectic_generator(Array[Array[Int32]], Array[Array[Int32]]) -> Array[Array[@core.QQ]]
+
+pub fn sp2_basis() -> Array[Array[Array[@core.Quat]]]
+
+pub fn sp2_bracket(Array[Array[@core.Quat]], Array[Array[@core.Quat]]) -> Array[Array[@core.Quat]]
+
+pub fn sp2_coords(Array[Array[Array[@core.Quat]]], Array[Array[@core.Quat]]) -> Array[@core.QQ]?
+
+pub fn sp2_curvature(Array[Array[@core.Quat]], Array[Array[@core.Quat]], Array[Array[@core.Quat]]) -> Array[Array[@core.Quat]]
+
+pub fn sp2_flatten(Array[Array[@core.Quat]]) -> Array[@core.QQ]
+
+pub fn sp2_inner(Array[Array[@core.Quat]], Array[Array[@core.Quat]]) -> @core.QQ
+
+pub fn sp2_is_skew(Array[Array[@core.Quat]]) -> Bool
+
+pub fn sp2_k_basis() -> Array[Array[Array[@core.Quat]]]
+
+pub fn sp2_left_mul(@core.Quat, @core.Quat) -> @core.Quat
+
+pub fn sp2_m_basis() -> Array[Array[Array[@core.Quat]]]
+
+pub fn sp2_m_of_quat(@core.Quat) -> Array[Array[@core.Quat]]
+
+pub fn sp2_right_mul(@core.Quat, @core.Quat) -> @core.Quat
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
