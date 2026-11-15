@@ -1541,4 +1541,36 @@ python3 tools/arch_check.py                           → 10 federations + apex,
 python3 tools/health_scan.py                          → 6,748 defs, 0 dead functions, 0 dead types, 0 empty enums, 0 exact duplicates
 moon run cmd/{metatheory,ualg,qgeom,qprob,showcase}   → 631/631, 167/167, 179/179, 70/70, 39 active + 50/50 certs + semiring-wasm-suite=true
 python3 tools/run_pipeline.py --jobs=4 --require-full → 139/139 passed, full_verified=true
+GitHub Actions (branch 7.1, commit 0d898ee)           → run 43741515486 completed/success
 ```
+
+
+## 2026-11-15（第五輪）：Stage VI `qprob/context_cat` — 雙範疇態射、主命題纖維化、機率單子與量子機率脈絡範疇合流
+
+### 1. 四步範疇化架構與合流路徑
+
+在 `qprob/nc_measure`(L4) 之上新增 **`qprob/context_cat`(L5)**（`cmd/qprob` 升至 L6，並掛載至 `cmd/showcase` L9），以四步連續構造完成合流：
+
+1. **空間與子場雙範疇 `ℬ_qprob`**（`SpaceSubfieldCell0` / `SpaceMorphism1` / `SpaceCell2`）：
+   - 0-胞涵蓋子場塔 `ℚ, ℚ(√d), ℚ((ε))_≤M` 與五階空間 `lim_←V_k, Op*(𝒟), ℱ_q(ℋ), CCR(L²), NCMeas`；
+   - 1-態射實作子場嵌入與正規化跡／標準部左逆截面及跨空間提升；2-態射實作雙線性 Whiskering 複合並滿足 **Godement 縱橫互換律**。
+2. **主命題纖維化 `π : ∫ Prop → ℬ_qprob`**（`FiberPrincipalProp` / `PrincipalPropMorphism`）：
+   - 建立八個空間與子場的實算主命題錨定切面（子場族單位不變量 `1`、量子空間四階矩／對易不變量 `2`）；
+   - 實作逆變拉回贗函子 `f*`、笛卡兒提升 `Cart(f, Q)` 與唯一泛因式分解 `factor_through_cartesian_lift`，貫通五階主命題笛卡兒態射鏈並拒絕非正定 `q=2` 變形態射。
+3. **精確有理機率單子 `(D_ℚ, η, μ)` 與 `Kl(D_ℚ)`**（`ProbDist[T]`）：
+   - 實作去重正規形有理分佈單子（拒絕負權重準機率與零質量）、單子三律、雙層壓平 `μ`、交換單子 Fubini 邊際化，以及 CPTP Kraus 量子通道與 Kleisli 隨機核的 Schrödinger–Heisenberg 對偶。
+4. **量子機率脈絡範疇 `QProbCtx` 與菱形合流大定理**（`QuantumProbContext` / `ContextMorphism`）：
+   - 以兩兩對易自伴觀測量族 `[A_i, A_j] = 0` 與相容完備 POVM 刻畫 Bohr 觀測脈絡（Heisenberg 非對易對 `{σ_x, σ_z}` 由公理拒絕）；
+   - 驗證粗粒化脈絡預層截面自然性（粗單子期望值 = 細單子拉回期望值 = 算子跡泛函），並證明不等價中間脈絡 `C_left ← C_apex → C_right` 在 `QProbCtx` 與機率單子 `D_ℚ` 下零誤差合流至終端宇稱脈絡 `C_nadir`。
+
+### 2. 驗收摘要
+
+```text
+moon check --deny-warn --target wasm-gc / moon build  → 0 warnings, 0 errors
+python3 tools/arch_check.py                           → 70 packages, 79 components, 359 .mbt, 218,061 lines
+python3 tools/health_scan.py                          → 6,796 defs, 0 dead functions, 0 exact duplicates
+python3 tools/federation_docs.py --check              → fresh
+moon run cmd/qprob --target wasm-gc                   → 通過 88 / 88 個結構演化定理與演算法命題
+moon run cmd/showcase --target wasm-gc                → 39 active, 50/50 certs, quantum probability context confluence holds=true
+```
+

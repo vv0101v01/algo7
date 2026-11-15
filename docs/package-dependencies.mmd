@@ -74,10 +74,11 @@ flowchart BT
     cubical_autonomy["cubical/autonomy"]
     conjecture["conjecture"]
     cmd_semiringreport["cmd/semiringreport"]
-    cmd_qprob["cmd/qprob"]
+    qprob_context_cat["qprob/context_cat"]
   end
   subgraph L6["Package layer 6"]
     cubical_structures["cubical/structures"]
+    cmd_qprob["cmd/qprob"]
   end
   subgraph L7["Package layer 7"]
     root["."]
@@ -222,6 +223,7 @@ flowchart BT
   symlib --> cmd_showcase
   root --> cmd_showcase
   semiring_app --> cmd_showcase
+  qprob_context_cat --> cmd_showcase
   semiring_par --> semiring_par_host
   semiring_algebra --> cmd_semiringreport
   semiring_matrix --> cmd_semiringreport
@@ -287,8 +289,14 @@ flowchart BT
   qprob_unbounded --> qprob_nc_measure
   qprob_fock --> qprob_nc_measure
   qprob_ccr_field --> qprob_nc_measure
+  qprob_asymptotic --> qprob_context_cat
+  qprob_unbounded --> qprob_context_cat
+  qprob_fock --> qprob_context_cat
+  qprob_ccr_field --> qprob_context_cat
+  qprob_nc_measure --> qprob_context_cat
   qprob_asymptotic --> cmd_qprob
   qprob_unbounded --> cmd_qprob
   qprob_fock --> cmd_qprob
   qprob_ccr_field --> cmd_qprob
   qprob_nc_measure --> cmd_qprob
+  qprob_context_cat --> cmd_qprob

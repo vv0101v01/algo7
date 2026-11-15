@@ -1,0 +1,186 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "vv0101v01/cubical-hermitian/qprob/context_cat"
+
+import {
+  "vv0101v01/cubical-hermitian/qprob/asymptotic",
+  "vv0101v01/cubical-hermitian/qprob/nc_measure",
+  "vv0101v01/cubical-hermitian/qprob/unbounded",
+}
+
+// Values
+pub fn bicat_atom1(SpaceSubfieldCell0, SpaceSubfieldCell0, String, @asymptotic.QVal, Bool) -> SpaceMorphism1
+
+pub fn bicat_check_interchange(SpaceCell2, SpaceCell2, SpaceCell2, SpaceCell2) -> Bool
+
+pub fn bicat_comp1(SpaceMorphism1, SpaceMorphism1) -> SpaceMorphism1?
+
+pub fn bicat_eq1(SpaceMorphism1, SpaceMorphism1) -> Bool
+
+pub fn bicat_eq2(SpaceCell2, SpaceCell2) -> Bool
+
+pub fn bicat_hcomp2(SpaceCell2, SpaceCell2) -> SpaceCell2?
+
+pub fn bicat_id1(SpaceSubfieldCell0) -> SpaceMorphism1
+
+pub fn bicat_id2(SpaceMorphism1) -> SpaceCell2
+
+pub fn bicat_make2(SpaceMorphism1, SpaceMorphism1, @asymptotic.QVal, String) -> SpaceCell2?
+
+pub fn bicat_vcomp2(SpaceCell2, SpaceCell2) -> SpaceCell2?
+
+pub fn canonical_principal_prop_section() -> Array[FiberPrincipalProp]
+
+pub fn cartesian_lift_morphism(SpaceMorphism1, FiberPrincipalProp) -> PrincipalPropMorphism?
+
+pub fn cell0_label(SpaceSubfieldCell0) -> String
+
+pub fn context_cat_all_laws() -> Array[(String, Array[(String, Bool)])]
+
+pub fn[A, B : Eq] dist_bind(ProbDist[A], (A) -> ProbDist[B]) -> ProbDist[B]
+
+pub fn[T : Eq] dist_eq(ProbDist[T], ProbDist[T]) -> Bool
+
+pub fn[T] dist_expect_q(ProbDist[T], (T) -> @asymptotic.QVal) -> @asymptotic.QVal
+
+pub fn[T : Eq] dist_flatten(ProbDist[ProbDist[T]]) -> ProbDist[T]
+
+pub fn[A, B : Eq] dist_map(ProbDist[A], (A) -> B) -> ProbDist[B]
+
+pub fn[T : Eq] dist_normalize(Array[(T, @asymptotic.QVal)]) -> ProbDist[T]?
+
+pub fn[T : Eq] dist_prob(ProbDist[T], T) -> @asymptotic.QVal
+
+pub fn[A : Eq, B : Eq] dist_product(ProbDist[A], ProbDist[B]) -> ProbDist[(A, B)]
+
+pub fn[T] dist_pure(T) -> ProbDist[T]
+
+pub fn factor_through_cartesian_lift(PrincipalPropMorphism, SpaceMorphism1, PrincipalPropMorphism) -> PrincipalPropMorphism?
+
+pub fn fiber_entails_in_base(FiberPrincipalProp, FiberPrincipalProp) -> Bool
+
+pub fn fiber_prop_eq(FiberPrincipalProp, FiberPrincipalProp) -> Bool
+
+pub fn[A, B, C : Eq] kleisli_compose((A) -> ProbDist[B], (B) -> ProbDist[C]) -> (A) -> ProbDist[C]
+
+pub fn law_principal_prop_fibration() -> Array[(String, Bool)]
+
+pub fn law_quantum_context_confluence() -> Array[(String, Bool)]
+
+pub fn law_rational_probability_monad() -> Array[(String, Bool)]
+
+pub fn law_space_subfield_bicategory() -> Array[(String, Bool)]
+
+pub fn make_prop_morphism(FiberPrincipalProp, FiberPrincipalProp, SpaceMorphism1) -> PrincipalPropMorphism?
+
+pub fn prop_morphism_comp(PrincipalPropMorphism, PrincipalPropMorphism) -> PrincipalPropMorphism?
+
+pub fn prop_morphism_id(FiberPrincipalProp) -> PrincipalPropMorphism
+
+pub fn pullback_principal_prop(SpaceMorphism1, FiberPrincipalProp) -> FiberPrincipalProp?
+
+pub fn pushforward_outcome_dist(ProbDist[Int32], Array[Int32]) -> ProbDist[Int32]
+
+pub fn qctx_is_valid(QuantumProbContext) -> Bool
+
+pub fn qctx_morphism_comp(ContextMorphism, ContextMorphism) -> ContextMorphism?
+
+pub fn qctx_morphism_id(QuantumProbContext) -> ContextMorphism
+
+pub fn qctx_morphism_is_valid(ContextMorphism) -> Bool
+
+pub fn qctx_to_prob_monad(QuantumProbContext) -> ProbDist[Int32]?
+
+pub fn subfield_jet_roundtrip(@asymptotic.QVal, @asymptotic.QVal, Int32) -> @asymptotic.QVal?
+
+pub fn subfield_quad_roundtrip(@asymptotic.QVal, Int32) -> @asymptotic.QVal
+
+pub fn verify_cptp_kleisli_duality(Array[@unbounded.UnboundedOp], @unbounded.QuantumProbState, @nc_measure.PovmMeasure) -> Bool
+
+pub fn verify_grand_qprob_context_confluence() -> QuantumContextConfluenceReport
+
+pub fn verify_qctx_diamond_confluence(ContextMorphism, ContextMorphism, ContextMorphism, ContextMorphism) -> Bool
+
+pub fn verify_qctx_presheaf_section(ContextMorphism, Array[@asymptotic.QVal]) -> Bool
+
+// Errors
+
+// Types and methods
+pub(all) struct ContextMorphism {
+  src : QuantumProbContext
+  tgt : QuantumProbContext
+  outcome_map : Array[Int32]
+}
+
+pub(all) struct FiberPrincipalProp {
+  base : SpaceSubfieldCell0
+  prop_code : String
+  statement : String
+  invariant : @asymptotic.QVal
+  strength_rank : Int32
+  holds : Bool
+}
+
+pub(all) struct PrincipalPropMorphism {
+  src : FiberPrincipalProp
+  tgt : FiberPrincipalProp
+  base_map : SpaceMorphism1
+  is_cartesian : Bool
+}
+
+pub(all) struct ProbDist[T] {
+  support : Array[(T, @asymptotic.QVal)]
+}
+pub fn[T : Eq] ProbDist::equal(Self[T], Self[T]) -> Bool
+pub fn[T : Eq] ProbDist::not_equal(Self[T], Self[T]) -> Bool
+pub impl[T : Eq] Eq for ProbDist[T]
+
+pub(all) struct QuantumContextConfluenceReport {
+  bicat_cells_verified : Int32
+  fibered_props_verified : Int32
+  monad_kleisli_verified : Bool
+  bohr_presheaf_gluing_ok : Bool
+  diamond_confluence_ok : Bool
+  noncommuting_obstruction_detected : Bool
+  all_holds : Bool
+}
+
+pub(all) struct QuantumProbContext {
+  name : String
+  base_cell : SpaceSubfieldCell0
+  state : @unbounded.QuantumProbState
+  commuting_obs : Array[@unbounded.UnboundedOp]
+  povm : @nc_measure.PovmMeasure
+}
+
+pub(all) struct SpaceCell2 {
+  src : SpaceMorphism1
+  tgt : SpaceMorphism1
+  defect : @asymptotic.QVal
+  witness_tag : String
+}
+
+pub(all) struct SpaceMorphism1 {
+  dom : SpaceSubfieldCell0
+  cod : SpaceSubfieldCell0
+  steps : Array[String]
+  scale_factor : @asymptotic.QVal
+  preserves_order_positivity : Bool
+}
+
+#derive(Eq)
+pub(all) enum SpaceSubfieldCell0 {
+  SubfieldQ
+  SubfieldQuad(Int32)
+  SubfieldJet(Int32)
+  SpaceProjTower(Int32)
+  SpaceUnbounded(Int32)
+  SpaceFock(Int32, @asymptotic.QVal)
+  SpaceContinuumCCR(Int32)
+  SpaceNcMeasure(Int32)
+}
+pub fn SpaceSubfieldCell0::equal(Self, Self) -> Bool
+pub fn SpaceSubfieldCell0::not_equal(Self, Self) -> Bool
+
+// Type aliases
+
+// Traits

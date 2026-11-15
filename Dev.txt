@@ -1251,5 +1251,17 @@ Dev.txt（本節）、agent.md、agent.v2.md、lean/README.md、lean/UNIVERSAL.m
   1. `semiring/app/wasm_verify.mbt` 補驗 `DiGraph::hom_setmat` 與 `smat_plus`，並接入 `cmd/showcase` 與 `cmd/semiringreport`（遵守 2026-11-14 審計邊界，不將 `semiring/app` 加回 `bridge`），一次接通 29 個半環驗證宣告；
   2. `symlib/theorem_all.mbt` 將非薄群胚 `BG = S₃` 一般米田雙射 `verify_general_yoneda_bijection`、超八面體群 `PermGroup::hyperoctahedral(2)` 與 `burnside_mobius_solve` 併入既有證書（維持 20 條證書契約不變）；
   3. `ed25519_k5_merge_laws.mbt`、`facade.mbt`、`spec.mbt` 補齊 `dopen_arg_external`、`dopen_arg_decoded_val`、`dopen_val_term` 的正負控制檢驗。
-- **CI 與遠端分支 `7.1`**：`.github/workflows/ci.yml` 新增 `branches: [main, "7.*"]` 與 `cmd/qprob`（70/70）閘門；本地全套閘門（`moon check --deny-warn`、`moon build`、`moon info`、`moon fmt`、`gen_laws`、`gen_labels`、`federation_docs --check`、`arch_check`、`health_scan`、`cmd/{metatheory,ualg,qgeom,qprob,symdemo,showcase}`、`run_pipeline.py --require-full` 139/139）通過後推送至 `vv0101v01/algo7` 分支 `7.1`。
+- **CI 與遠端分支 `7.1`**：`.github/workflows/ci.yml` 新增 `branches: [main, "7.*"]` 與 `cmd/qprob`（70/70）閘門；本地全套閘門（`moon check --deny-warn`、`moon build`、`moon info`、`moon fmt`、`gen_laws`、`gen_labels`、`federation_docs --check`、`arch_check`、`health_scan`、`cmd/{metatheory,ualg,qgeom,qprob,symdemo,showcase}`、`run_pipeline.py --require-full` 139/139）通過後推送至 `vv0101v01/algo7` 分支 `7.1`（commit `0d898ee`，GitHub Actions run `43741515486` `completed/success`）。
+
+
+## 2026-11-15（第五輪）：雙範疇空間子場態射、主命題纖維化、機率單子與量子機率脈絡範疇合流（Stage VI `qprob/context_cat`）
+
+- **新增套件 `qprob/context_cat`（Layer 5，`cmd/qprob` 升至 Layer 6）**：3 個 `.mbt` 檔（2,009 行），使 `qprob` 演進為六階體系（15 個 `.mbt` 檔、6,503 行、24 章、**88 / 88 條命題**），並接入 `cmd/showcase` 觀察頂點。
+- **四層範疇化構造與定理**：
+  1. **空間與子場雙範疇 `ℬ_qprob`**（`bicat_fibration.mbt`）：0-胞統一子場塔 `ℚ`、`ℚ(√d)`、`ℚ((ε))_≤M` 與五階量子空間 `lim_←V_k`、`Op*(𝒟)`、`ℱ_q(ℋ)`、`CCR(L²)`、`NCMeas`；實作 1-態射複合與子場左逆截面、2-態射 Whiskering 水平／垂直複合，並驗證 **Godement 縱橫互換律**；
+  2. **主命題 Grothendieck 纖維化 `π : ∫ Prop → ℬ_qprob`**：將八個空間與子場的主命題（含當場重算之特徵不變量）纖維化，實作逆變拉回函子 `f*`、主命題間態射 `(f, θ) : (X, P) → (Y, Q)`、笛卡兒提升 `Cart(f, Q)` 與唯一泛因式分解 `factor_through_cartesian_lift`；
+  3. **精確有理機率單子 `(D_ℚ, η, μ)` 與 Kleisli 範疇 `Kl(D_ℚ)`**（`prob_monad_confluence.mbt`）：實作正規形去重有理分佈 `ProbDist[T]`，驗證單子三律、雙層壓平 `μ`、交換單子 Fubini 邊際化，以及 CPTP Kraus 量子通道之 Schrödinger–Heisenberg 單子對偶；
+  4. **量子機率脈絡範疇 `QProbCtx` 與菱形合流大定理**：以兩兩對易自伴觀測量族 `[A_i, A_j] = 0` 與相容完備 POVM 定義 Bohr 觀測脈絡（非對易對 `{σ_x, σ_z}` 由公理拒絕），驗證粗粒化預層截面三路自然性，並證明分叉細化脈絡 `C_left ← C_apex → C_right` 在 `QProbCtx` 與機率單子 `D_ℚ` 下零誤差合流至終端脈絡 `C_nadir`。
+- **健檢與閘門**：全倉 70 packages / 79 components、6,796 函式定義、**0 死碼、0 完全重複組**；`cmd/qprob` 88/88、`cmd/showcase` 含 `verify_grand_qprob_context_confluence` 全數通過。
+
 

@@ -65,7 +65,7 @@ jobs:
       - name: qgeom 子聯邦定律總表（軸向交換張量 × HAL × 平移射影 × 超對稱頂點 × 四元數凱勒，179 / 179）
         run: moon run cmd/qgeom --target wasm-gc
 
-      - name: qprob 子聯邦定律總表（無窮漸近極限 × 無界算子概率 × 全量子福克 × 連續算子場 × 非交換測度，70 / 70）
+      - name: qprob 子聯邦定律總表（漸近極限 × 無界概率 × 全福克 × 連續場 × 非交換測度 × 雙範疇纖維化與量子機率脈絡合流，88 / 88）
         run: moon run cmd/qprob --target wasm-gc
 
       - name: Cubical 全量平衡管線（139 / 139；部分執行不能過閘）

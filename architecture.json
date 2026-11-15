@@ -129,6 +129,7 @@
         "qprob-fock",
         "qprob-ccr-field",
         "qprob-nc-measure",
+        "qprob-context-cat",
         "cmd-qprob"
       ],
       "allowed_external_packages": [
@@ -715,7 +716,8 @@
         "semiring-graph",
         "symlib",
         "root",
-        "semiring-app"
+        "semiring-app",
+        "qprob-context-cat"
       ],
       "summary_en": "Single-snapshot active bridge inventory, native certificates and negative controls; no retired bridge execution.",
       "summary_zh": "單次快照的 active 橋功能枚舉、原生證書與負控制；不執行已刪橋。"
@@ -1069,9 +1071,9 @@
       "summary_zh": "L4 非交換隨機分佈與算子測度空間：非交換過完備 POVM、Born 機率律與 CPTP 量子馬可夫通道、Naimark 正交 PVM 等距擴張定理、Speicher 非交叉矩與自由累積量雙向轉換演算法、古典對非交換四階累積量分岔、Voiculescu 自由加性卷積與自由中心極限定理，以及五階結構大統一閉環。"
     },
     {
-      "id": "cmd-qprob",
-      "path": "cmd/qprob",
-      "moon": "vv0101v01/cubical-hermitian/cmd/qprob",
+      "id": "qprob-context-cat",
+      "path": "qprob/context_cat",
+      "moon": "vv0101v01/cubical-hermitian/qprob/context_cat",
       "layer": 5,
       "depends_on": [
         "qprob-asymptotic",
@@ -1080,8 +1082,24 @@
         "qprob-ccr-field",
         "qprob-nc-measure"
       ],
-      "summary_en": "Executable law runner for the 5-stage qprob mathematical-structure evolution chain: recomputes all 70 propositions and exits non-zero on any failure.",
-      "summary_zh": "qprob 五階數學結構演化鏈定律總表執行檔：當場重算並印出全部 70 個定理與演算法命題；任何一條為假即以非零狀態中止。"
+      "summary_en": "L5 space-subfield bicategory, Grothendieck fibration of principal propositions, exact rational Giry–Lawvere probability monad, and Bohr quantum probability context category with diamond confluence.",
+      "summary_zh": "L5 空間與子場雙範疇、主命題 Grothendieck 纖維化、精確有理機率單子，以及具菱形合流大定理之量子機率脈絡範疇。"
+    },
+    {
+      "id": "cmd-qprob",
+      "path": "cmd/qprob",
+      "moon": "vv0101v01/cubical-hermitian/cmd/qprob",
+      "layer": 6,
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field",
+        "qprob-nc-measure",
+        "qprob-context-cat"
+      ],
+      "summary_en": "Executable law runner for the 6-stage qprob mathematical-structure and quantum-context evolution chain: recomputes all 88 propositions and exits non-zero on any failure.",
+      "summary_zh": "qprob 六階數學結構與量子機率脈絡範疇定律總表執行檔：當場重算並印出全部 88 個定理與演算法命題；任何一條為假即以非零狀態中止。"
     }
   ],
   "components": [
@@ -1601,7 +1619,8 @@
       ],
       "depends_on": [
         "*",
-        "semiring-app"
+        "semiring-app",
+        "qprob-context-cat"
       ],
       "observer": true,
       "summary_en": "Ten-federation observer: 39 active bounded pairwise comparisons, 6 retired implementations removed; reusable structure transports, exact inventory validation, logical translations and 18 atlas entries. No lower federation may import this observer.",
@@ -2235,11 +2254,11 @@
       "summary_zh": "L4 非交換隨機分佈與算子測度空間：非交換過完備 POVM、Born 機率律與 CPTP 量子馬可夫通道、Naimark 正交 PVM 等距擴張定理、Speicher 非交叉矩與自由累積量雙向轉換演算法、古典對非交換四階累積量分岔、Voiculescu 自由加性卷積與自由中心極限定理，以及五階結構大統一閉環。"
     },
     {
-      "id": "cmd-qprob",
-      "package": "cmd-qprob",
+      "id": "qprob-context-cat",
+      "package": "qprob-context-cat",
       "layer": 5,
       "files": [
-        "cmd/qprob/*.mbt"
+        "qprob/context_cat/*.mbt"
       ],
       "depends_on": [
         "qprob-asymptotic",
@@ -2248,8 +2267,26 @@
         "qprob-ccr-field",
         "qprob-nc-measure"
       ],
-      "summary_en": "Executable law runner for the 5-stage qprob mathematical-structure evolution chain: recomputes all 70 propositions and exits non-zero on any failure.",
-      "summary_zh": "qprob 五階數學結構演化鏈定律總表執行檔：當場重算並印出全部 70 個定理與演算法命題；任何一條為假即以非零狀態中止。"
+      "summary_en": "L5 space-subfield bicategory, Grothendieck fibration of principal propositions, exact rational Giry–Lawvere probability monad, and Bohr quantum probability context category with diamond confluence.",
+      "summary_zh": "L5 空間與子場雙範疇、主命題 Grothendieck 纖維化、精確有理機率單子，以及具菱形合流大定理之量子機率脈絡範疇。"
+    },
+    {
+      "id": "cmd-qprob",
+      "package": "cmd-qprob",
+      "layer": 6,
+      "files": [
+        "cmd/qprob/*.mbt"
+      ],
+      "depends_on": [
+        "qprob-asymptotic",
+        "qprob-unbounded",
+        "qprob-fock",
+        "qprob-ccr-field",
+        "qprob-nc-measure",
+        "qprob-context-cat"
+      ],
+      "summary_en": "Executable law runner for the 6-stage qprob mathematical-structure and quantum-context evolution chain: recomputes all 88 propositions and exits non-zero on any failure.",
+      "summary_zh": "qprob 六階數學結構與量子機率脈絡範疇定律總表執行檔：當場重算並印出全部 88 個定理與演算法命題；任何一條為假即以非零狀態中止。"
     }
   ],
   "exceptions": []

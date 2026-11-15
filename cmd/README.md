@@ -10,7 +10,7 @@
 | [`metatheory`](metatheory/README.md) | 3 | meta 四個原生模組的定律總表，104 個 `law_*` 函式 | wasm-gc：631/631 |
 | [`ualg`](ualg/README.md) | 3 | 泛代數、預層模板、De Morgan、cubical 定律總表 | wasm-gc：167/167 |
 | [`qgeom`](qgeom/README.md) | 4 | qgeom 子聯邦五個套件（軸向交換張量、HAL、平移射影＋雅可比、超對稱頂點＋德朗姆、四元數凱勒＋四元簇）的定律總表 | wasm-gc：179/179 |
-| [`qprob`](qprob/README.md) | 5 | qprob 子聯邦五個套件（子場與無窮漸近極限空間、無界算子概率空間、全量子福克空間、連續創生湮滅算子場、非交換隨機分佈與測度空間）的結構演化定律總表 | wasm-gc：70/70 |
+| [`qprob`](qprob/README.md) | 6 | qprob 子聯邦六個套件（子場與無窮漸近極限空間、無界算子概率空間、全量子福克空間、連續創生湮滅算子場、非交換隨機分佈與測度空間、雙範疇命題纖維化與量子機率脈絡合流）的定律總表 | wasm-gc：88/88 |
 | [`showcase`](showcase/README.md) | 9 | 39 active 配對快照、50 證書、15 checker laws、6 retired 理由 | wasm-gc：exit 0；無 `[FAIL]` |
 | [`symdemo`](symdemo/README.md) | 2 | symlib 群作用、軌道折疊、單子／範疇等演示 | 本輪未執行 |
 | [`symbench`](symbench/README.md) | 2 | 同一問題的衍生演算法與直接演算法基準 | 本輪未執行 |

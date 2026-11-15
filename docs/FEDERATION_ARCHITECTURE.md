@@ -8,7 +8,7 @@
 2. **Component DAG**：同一實體 package 可以包含數個邏輯層，不能把 component L4 當成 package L4。
 3. **語義橋圖**：無向邊表示一個有界跨表示核驗，不是 import、網路連線、分散式節點，也不是無條件數學等價。按聯邦收縮 package 圖可出現雙向依賴，不能將其誤稱為聯邦 DAG。
 
-當前：**10 聯邦 + observer 頂點、69 packages、78 components、356 `.mbt` 檔、216,043 行**。
+當前：**10 聯邦 + observer 頂點、70 packages、79 components、359 `.mbt` 檔、218,061 行**。
 歷史 45 配對中 **39 active、6 retired**。這是 K₁₀ 的子圖，不是完全圖。
 
 ![聯邦橋圖](federation-graph.svg)
@@ -22,8 +22,8 @@
 | L2 | 16 | `algebra`, `cubical/kernel`, `cmd/symdemo`, `cmd/symbench`, `semiring/matrix`, `semiring/monoid`, `semiring/trop`, `semiring/bp`, `semiring/io`, `tensor`, `meta/reflect`, `topos/site`, `ualg/cube`, `qgeom/geom`, `qgeom/susy`, `qprob/fock` |
 | L3 | 14 | `cubical/hermitian`, `cubical/elaborator`, `cubical/homotopy`, `cubical/store`, `semiring/graph`, `semiring/spline`, `semiring/cat`, `topos`, `scheme`, `cmd/metatheory`, `conjecture/kernel`, `cmd/ualg`, `qgeom/qk`, `qprob/ccr_field` |
 | L4 | 6 | `semiring/app`, `condensed`, `semiring/par_host`, `accel`, `cmd/qgeom`, `qprob/nc_measure` |
-| L5 | 4 | `cubical/autonomy`, `conjecture`, `cmd/semiringreport`, `cmd/qprob` |
-| L6 | 1 | `cubical/structures` |
+| L5 | 4 | `cubical/autonomy`, `conjecture`, `cmd/semiringreport`, `qprob/context_cat` |
+| L6 | 2 | `cubical/structures`, `cmd/qprob` |
 | L7 | 1 | `.` |
 | L8 | 2 | `cmd/main`, `bridge` |
 | L9 | 1 | `cmd/showcase` |
@@ -40,7 +40,7 @@ L0 有 7 個業務基礎套件；不是只得五個。`hostfs` 及部分 semirin
 | F4 `topos` | 2 | L2, L3 | 第四聯邦 — Grothendieck 與初等 Topos、子 Topos Lawvere–Tierney 核、Kripke–Joyal 力迫、群胚疊與神經上同調。 |
 | F5 `scheme` | 1 | L3 | 第五聯邦 — 多變量 Gröbner 理想、Zariski 黏合概形、Kähler 微分與 Eisenbud Fitting 平滑性、Serre 對偶、吹脹與 Chow 動機。 |
 | F6 `condensed` | 3 | L0, L1, L4 | 凝聚有限模型與精確消元：有限逆系塔、solid/liquid 報告、截斷 Adams Ext、Serre/AHSS、P¹ Laurent Čech 維數、規範商與不變量賬本。舊名 CondAnalyticStack 不是已構造的解析棧，亦不宣稱 X 交換性。 |
-| F7 `discovery` | 9 | L0, L1, L2, L3, L4, L5 | 第七聯邦（多線性張量場論與 Lakatos 猜想演化創造聯邦） — F_3 全體 6,561 張量超行列式與秩圖譜、有限平面離散 Radon 反演、Clifford 拉蒙旋量與 T² 規範模空間、非交叉森林層景、VR 持續同調、6 大演化轉移定律、5 大認識論透鏡與 7 項已決猜想。 第七聯邦另設 qprob 子聯邦（qprob/asymptotic、qprob/unbounded、qprob/fock、qprob/ccr_field、qprob/nc_measure、cmd/qprob）：有序代數子場塔與無窮漸近極限空間、無界 *-代數概率空間與 Favard–Lanczos 矩重構、全量子／q-變形福克空間、連續塗抹創生與湮滅算子場（Wick 正規序與 Hudson–Parthasarathy 量子 Itô 微積分），以及非交換隨機分佈與正算子值測度空間（Naimark 擴張與 Speicher 自由累積量）——由 cmd/qprob 重算 70 個結構演化命題。 |
+| F7 `discovery` | 10 | L0, L1, L2, L3, L4, L5, L6 | 第七聯邦（多線性張量場論與 Lakatos 猜想演化創造聯邦） — F_3 全體 6,561 張量超行列式與秩圖譜、有限平面離散 Radon 反演、Clifford 拉蒙旋量與 T² 規範模空間、非交叉森林層景、VR 持續同調、6 大演化轉移定律、5 大認識論透鏡與 7 項已決猜想。 第七聯邦另設 qprob 子聯邦（qprob/asymptotic、qprob/unbounded、qprob/fock、qprob/ccr_field、qprob/nc_measure、cmd/qprob）：有序代數子場塔與無窮漸近極限空間、無界 *-代數概率空間與 Favard–Lanczos 矩重構、全量子／q-變形福克空間、連續塗抹創生與湮滅算子場（Wick 正規序與 Hudson–Parthasarathy 量子 Itô 微積分），以及非交換隨機分佈與正算子值測度空間（Naimark 擴張與 Speicher 自由累積量）——由 cmd/qprob 重算 70 個結構演化命題。 |
 | F8 `accel` | 8 | L0, L1, L2, L3, L4 | 第八聯邦（CPU SWAR 與瀏覽器免費 WebGPU 前沿硬體加速聯邦） — L0 零依賴 SWAR 硬體底層（`accel/swar`）、M4RI GF(2) 格雷碼矩陣乘與行最簡消元、雙軌 64-trit GF(3) 位切片全體 6,561 張量超行列式掃描、64 路 Face 超立方體 #SAT、Ozaki Scheme II INT8 DP4A 中國剩餘定理精確／FP64 矩陣乘、32 位 RNS Stockham 免位反轉 NTT 與 30 位 Montgomery 規約、Scanbox 解耦回看前綴掃描、三相無衝突共享記憶體熱帶 Kleene 閉包、HVM2 扁平競技場並行交互組合子與閉合 Peano λ 求值器，以及 8 個經靜態可移植性審計之 W3C 瀏覽器 WebGPU WGSL 計算著色器。第八聯邦另設 qgeom 子聯邦（qgeom/core、qgeom/hal、qgeom/geom、qgeom/susy、qgeom/qk、cmd/qgeom）：軸向交換張量變體、高維合體運算硬體抽象層、平移射影與雅可布全射張量積、超對稱四元數頂點對偶與複形四元數德朗姆複形，以及四元數凱勒曲率張量群空間與雙射緊緻四元雅可比簇——由 cmd/qgeom 重算 179 個命題。 |
 | F9 `meta` | 5 | L0, L1, L2, L3 | 第九聯邦 — 元理論：以序數／擬陣／Ramsey／複形為數學底層；全域實例的一致性與下降黏合；索引為項的歸納-歸納型別；可重放憑證的反射。 |
 | F10 `ualg` | 5 | L0, L1, L2, L3 | 第十聯邦 — 構造性泛代數 × 預層模板 × De Morgan 立方體：同餘格與商代數（Freese 閉包對暴力列舉）、Mal'cev 項的三個演算法、零元／吸收元與 Rees 商、Galois 連接（Fix ⊣ Stab、Mod ⊣ Th，NextClosure）、平移算子的譜；Alexandrov 景、Lawvere–Tierney 核子、雙重否定層化作為以計數驗證的左伴隨；自由 De Morgan 代數 DM(n) 與 Kalman 正規形、De Morgan 立方體範疇及其自同構群 B_n、仿射（read-once）片段、面格與 ∃ ⊣ w ⊣ ∀、開盒／懸掛／推出／環面的立方同調，以及 Hodge Laplace 譜。 第二輪新增 ualg/cube：立方體上的雙重否定核子（面 Heyting 代數上的 j = ¬¬、Glivenko：Fix(¬¬) ≅ P(頂點)）與立方體上的層化（Sh_¬¬(□ⁿ) ≃ Set^{頂點}、a(F)(x) = ∏_{v≤x}\|F(v)\|、子終層 = 正則子複形、層化只經由頂點決定）。 |
@@ -111,15 +111,16 @@ L0 有 7 個業務基礎套件；不是只得五個。`hostfs` 及部分 semirin
 | `qprob-nc-measure` / `qprob/nc_measure` | discovery | L4 / 4 | `qprob-asymptotic`, `qprob-unbounded`, `qprob-fock`, `qprob-ccr-field` | L4 非交換隨機分佈與算子測度空間：非交換過完備 POVM、Born 機率律與 CPTP 量子馬可夫通道、Naimark 正交 PVM 等距擴張定理、Speicher 非交叉矩與自由累積量雙向轉換演算法、古典對非交換四階累積量分岔、Voiculescu 自由加性卷積與自由中心極限定理，以及五階結構大統一閉環。 |
 | `semiring-app` / `semiring/app` | semiring | L4 / 4 | `semiring-algebra`, `semiring-matrix`, `semiring-sim`, `semiring-trop`, `semiring-graph`, `semiring-bp`, `semiring-nf`, `semiring-cat` | 代數路徑問題與多實作仲裁。 |
 | `semiring-par-host` / `semiring/par_host` | semiring | L4 / 4 | `semiring-par` | 可移植半環平行接縫的 native-only moonbitlang/async 主機後端。 |
-| `cmd-qprob` / `cmd/qprob` | discovery | L5 / 5 | `qprob-asymptotic`, `qprob-unbounded`, `qprob-fock`, `qprob-ccr-field`, `qprob-nc-measure` | qprob 五階數學結構演化鏈定律總表執行檔：當場重算並印出全部 70 個定理與演算法命題；任何一條為假即以非零狀態中止。 |
 | `cmd-semiringreport` / `cmd/semiringreport` | semiring | L5 / 11 | `semiring-algebra`, `semiring-matrix`, `semiring-monoid`, `semiring-graph`, `semiring-spline`, `semiring-ratelimit`, `semiring-io`, `semiring-sim`, `semiring-par`, `semiring-par-host`, `semiring-trop`, `semiring-nf`, `semiring-cat`, `semiring-app`, `semiring-bp` | native-only 半環量測報告產生器；約 66 秒的報告只作慢閘門，永不進快速／預設閘門。 |
 | `conjecture` / `conjecture` | discovery | L5 / 6 | `gcd`, `algebra-core`, `symlib`, `semiring-trop`, `scheme`, `condensed`, `tensor`, `discovery-kernel` | 第七聯邦 Lakatos 猜想演化與定理創造引擎：6 大軌跡 [E-Derive]+[P-Transfer] 守恆律自動發現、寫入持久賬本之 5 大認識論關係透鏡與 7 項已決跨聯邦猜想。 |
 | `cubical-autonomy` / `cubical/autonomy` | cubical | L5 / 9 | `gcd`, `cubical-face-bdd`, `cubical-kernel`, `cubical-elaborator`, `cubical-homotopy`, `symlib`, `topos`, `accel` | 構造性泛代數自主類型論（瑪爾切夫一步同餘可換、商代數、吸收零與點化零二分）、仿射與雙德摩根立方集、Kripke–亞歷山德羅夫類型有效性、退化樹、變長 Moore 自由路徑、5 維交錯面微分、雙向範式修剪與雙重否定核預層黏合。 |
+| `qprob-context-cat` / `qprob/context_cat` | discovery | L5 / 5 | `qprob-asymptotic`, `qprob-unbounded`, `qprob-fock`, `qprob-ccr-field`, `qprob-nc-measure` | L5 空間與子場雙範疇、主命題 Grothendieck 纖維化、精確有理機率單子，以及具菱形合流大定理之量子機率脈絡範疇。 |
+| `cmd-qprob` / `cmd/qprob` | discovery | L6 / 6 | `qprob-asymptotic`, `qprob-unbounded`, `qprob-fock`, `qprob-ccr-field`, `qprob-nc-measure`, `qprob-context-cat` | qprob 六階數學結構與量子機率脈絡範疇定律總表執行檔：當場重算並印出全部 88 個定理與演算法命題；任何一條為假即以非零狀態中止。 |
 | `cubical-structures` / `cubical/structures` | cubical | L6 / 10 | `gcd`, `cubical-face-bdd`, `cubical-kernel`, `cubical-elaborator`, `cubical-homotopy`, `cubical-autonomy`, `symlib`, `topos`, `accel` | 全體 54 項高階立方結構（Swan 常數範圍嚴格相等類型、自由路徑纖維化、65,536 個 4-立方體 Eilenberg–Zilber 分裂、仿射雙向與極性聚焦搜尋、多項式容器米田與結構恆等原則 SIP、覆蓋空間伽羅瓦對應、環面與實射影平面撓率、高階合一動機重構、擬陣邊界修補、內部計算反射）及 26 運算動詞 × 14 範疇組合交互圖譜。 |
 | `root` / `.` | cubical | L7 / 11 | `gcd`, `algebra`, `hostfs`, `condensed`, `cubical-face-bdd`, `cubical-finite`, `cubical-hermitian`, `cubical-kernel`, `cubical-elaborator`, `cubical-homotopy`, `cubical-store`, `cubical-autonomy`, `cubical-structures` | 極薄相容門面（重導出精選跨聯邦 @cub 入口）與可執行定理／定律登記總表。 |
 | `bridge` / `bridge` | unification | L8 / 13 | `gcd`, `root`, `algebra`, `symlib`, `semiring-algebra`, `semiring-graph`, `semiring-matrix`, `semiring-trop`, `semiring-cat`, `semiring-nf`, `topos`, `scheme`, `condensed`, `tensor`, `conjecture`, `accel`, `cubical-structures`, `accel-swar`, `topos-site`, `discovery-kernel`, `meta-core`, `meta-instances`, `meta-iit`, `meta-reflect`, `cubical-face-bdd`, `ualg-core`, `ualg-site`, `ualg-demorgan`, `ualg-cube`, `cubical-kernel` | 十聯邦觀察頂點：39 條 active 有界配對核驗、6 條已刪除；可重用結構轉換、精確註冊表驗收、邏輯翻譯與 18 項圖譜。底層聯邦不得反向匯入。 |
 | `cmd-main` / `cmd/main` | cubical | L8 / 12 | `root` | 串流定理登記表，明示局部／全量覆蓋的執行入口。 |
-| `cmd-showcase` / `cmd/showcase` | unification | L9 / 14 | `bridge`, `semiring-graph`, `symlib`, `root`, `semiring-app` | 單次快照的 active 橋功能枚舉、原生證書與負控制；不執行已刪橋。 |
+| `cmd-showcase` / `cmd/showcase` | unification | L9 / 14 | `bridge`, `semiring-graph`, `symlib`, `root`, `semiring-app`, `qprob-context-cat` | 單次快照的 active 橋功能枚舉、原生證書與負控制；不執行已刪橋。 |
 
 ## 66 個邏輯元件按層排列
 
@@ -130,8 +131,8 @@ L0 有 7 個業務基礎套件；不是只得五個。`hostfs` 及部分 semirin
 | L2 | 15 | `numeric-hermitian`, `exact-algebra`, `symlib-core`, `semiring-matrix`, `semiring-monoid`, `semiring-trop`, `semiring-bp`, `semiring-io`, `hostfs-durability`, `meta-reflect`, `condensed-base`, `ualg-cube`, `qgeom-geom`, `qgeom-susy`, `qprob-fock` |
 | L3 | 11 | `models`, `semiring-graph`, `semiring-spline`, `semiring-cat`, `transcendental`, `tensor-core`, `cmd-metatheory`, `topos-site`, `cmd-ualg`, `qgeom-qk`, `qprob-ccr-field` |
 | L4 | 8 | `dependent-kernel`, `semiring-app`, `topos-core`, `scheme-core`, `semiring-par-host`, `discovery-kernel`, `cmd-qgeom`, `qprob-nc-measure` |
-| L5 | 4 | `dependent-kan-lines`, `condensed-core`, `accel-core`, `cmd-qprob` |
-| L6 | 5 | `elaborator-core`, `module-store`, `cubical`, `blakers-massey`, `conjecture-core` |
+| L5 | 4 | `dependent-kan-lines`, `condensed-core`, `accel-core`, `qprob-context-cat` |
+| L6 | 6 | `elaborator-core`, `module-store`, `cubical`, `blakers-massey`, `conjecture-core`, `cmd-qprob` |
 | L7 | 4 | `module-hotload`, `hou-match`, `associahedron`, `brunerie-pi4-s3` |
 | L8 | 1 | `homotopy-universal` |
 | L9 | 2 | `laws`, `cubical-autonomy` |

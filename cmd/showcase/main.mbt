@@ -161,8 +161,12 @@ fn main {
     None => false
   }
   let semiring_wasm_ok = @sapp.verify_semiring_wasm_suite()
+  let qprob_confluence = @qctx.verify_grand_qprob_context_confluence()
   println(
     "weighted C4: symmetries=\{weighted.weighted_symmetry_count}, reach=\{weighted.reachable_pairs}, symmetry-average projector=\{@cub.is_projector(weighted.symmetry_projector)}, Perm/Wiring roundtrip=\{wiring_ok}, semiring-wasm-suite=\{semiring_wasm_ok}",
+  )
+  println(
+    "quantum probability context confluence: bicat=\{qprob_confluence.bicat_cells_verified}, fibered_props=\{qprob_confluence.fibered_props_verified}, monad_kleisli=\{qprob_confluence.monad_kleisli_verified}, presheaf_gluing=\{qprob_confluence.bohr_presheaf_gluing_ok}, diamond_confluence=\{qprob_confluence.diamond_confluence_ok}, noncomm_obstruction=\{qprob_confluence.noncommuting_obstruction_detected}, holds=\{qprob_confluence.all_holds}",
   )
 
   println(
@@ -186,7 +190,8 @@ fn main {
     f236.all_holds &&
     frontier.all_holds &&
     wiring_ok &&
-    semiring_wasm_ok else {
+    semiring_wasm_ok &&
+    qprob_confluence.all_holds else {
     abort(
       "showcase failed: see failed construction, coverage or negative control above",
     )
