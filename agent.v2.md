@@ -1461,3 +1461,12 @@ moon run cmd/qgeom --target wasm-gc         通過 179 / 179（章節計數不�
 - 不拆長定律函式：命題是依序 `chk` 的序列，拆成子函式只搬狀態；本輪只合併「同一事實的兩個實作」。
 - 不新增／不刪除命題（仍 179），因此命題計數、章節標題、CI 步驟名稱都不需改。
 - 範圍限於 qgeom 子聯邦；其餘 344 檔未動，也沒有把 `qgeom` 以外的死碼掃描結果當成本輪工作。
+
+### 5. 推送回執（2026-11-15 UTC）
+
+- 本地 commit `df1ed384`（`feat(qgeom): geometry sub-federation + health pass`），父提交 `e43d0424`（`kt` main）。
+- 非強制推送至 `https://github.com/vv0101v01/algo7` 的 `main`；該倉推送前為空，因此整段歷史一併送入
+  （`algo7@main` = `kt` 全歷史 ＋ 本輪 commit）。
+- REST 核對：`default_branch = main`、head = `df1ed384`、上一筆 = `e43d0424`。
+- 憑證僅以單次推送 URL 使用，未落入 `.git/config` 或任何檔案；推送後掃過 `.git/` 無 token 字串。
+- `algo7` 沒有 CI run 可引用，**不宣稱遠端綠燈**；本地閘門見第 4 節。
