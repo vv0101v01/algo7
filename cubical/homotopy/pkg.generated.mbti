@@ -380,15 +380,19 @@ pub fn james_cell_dim(Int32, Int32) -> Int32
 
 pub fn james_cells(Int32, Int32) -> Array[Int32]
 
-pub fn james_nil_value(@kernel.DValue, level? : Int32) -> @kernel.DValue
+pub fn james_cons_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
 
-pub fn james_rec_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, Int32, level? : Int32) -> @kernel.DValue
+pub fn james_nil_value(@kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
+
+pub fn james_rec_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, Int32, level? : Int32) -> @kernel.DValue
 
 pub fn james_schema() -> @kernel.DHitSpec
 
 pub fn james_schema_at(Int32) -> @kernel.DHitSpec
 
-pub fn james_type_value(@kernel.DValue, level? : Int32) -> @kernel.DValue
+pub fn james_type_value(@kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
+
+pub fn james_unit_path_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
 
 pub fn join_dim(Int32, Int32) -> Int32
 
@@ -660,17 +664,21 @@ pub fn transport_roundtrip_path_value((@face_bdd.Dim) -> @kernel.DValue, @kernel
 
 pub fn transport_value((@face_bdd.Dim) -> @kernel.DValue, @kernel.DValue, Int32) -> @kernel.DValue
 
+pub fn trunc_hub_value(@kernel.DValue, Int32, @kernel.DValue, level? : Int32) -> @kernel.DValue
+
 pub fn trunc_inc_value(@kernel.DValue, Int32, @kernel.DValue, level? : Int32) -> @kernel.DValue
 
 pub fn trunc_point_term(@kernel.DTerm, @kernel.DTerm) -> @kernel.DTerm
 
 pub fn trunc_rec_unit_term(@kernel.DTerm) -> @kernel.DTerm
 
-pub fn trunc_rec_value(@kernel.DValue, Int32, @kernel.DValue, @kernel.DValue, Int32, level? : Int32) -> @kernel.DValue
+pub fn trunc_rec_value(@kernel.DValue, Int32, @kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, Int32, level? : Int32) -> @kernel.DValue
 
 pub fn trunc_schema(Int32) -> @kernel.DHitSpec
 
 pub fn trunc_schema_at(Int32, Int32) -> @kernel.DHitSpec
+
+pub fn trunc_spoke_path_value(@kernel.DValue, Int32, @kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
 
 pub fn trunc_squash_path_term(@kernel.DTerm, @kernel.DTerm, @kernel.DTerm) -> @kernel.DTerm
 
@@ -725,6 +733,8 @@ pub fn wedge_schema_at(Int32) -> @kernel.DHitSpec
 pub fn wedge_square_filler_report(Array[Int32], Array[Int32], Array[Int32], Array[Int32]) -> WedgeSquareFillerReport
 
 pub fn wedge_type_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
+
+pub fn wedge_wglue_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, @face_bdd.Dim, level? : Int32) -> @kernel.DValue
 
 pub fn wedge_winl_value(@kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, @kernel.DValue, level? : Int32) -> @kernel.DValue
 

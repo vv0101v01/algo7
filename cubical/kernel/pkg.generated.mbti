@@ -2066,8 +2066,8 @@ pub fn KernelizedCliqueReport::to_repr(Self) -> @debug.Repr
 #derive(Eq, @debug.Debug)
 pub(all) struct MahloReflectionCert {
   universe_level : Int32
-  closed_under_pi_sigma_path_w : Bool
-  ctx_ty_mutual_well_founded : Bool
+  closed_under_pi_sigma_path : Bool
+  rank_descent_below_omega_cubed : Bool
   mahlo_code_rank : CantorOrdinal
   super_universe_rank : CantorOrdinal
   strict_rank_descent : Bool
