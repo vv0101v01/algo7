@@ -8,7 +8,7 @@
 2. **Component DAG**：同一實體 package 可以包含數個邏輯層，不能把 component L4 當成 package L4。
 3. **語義橋圖**：無向邊表示一個有界跨表示核驗，不是 import、網路連線、分散式節點，也不是無條件數學等價。按聯邦收縮 package 圖可出現雙向依賴，不能將其誤稱為聯邦 DAG。
 
-當前：**10 聯邦 + observer 頂點、70 packages、79 components、359 `.mbt` 檔、218,464 行**。
+當前：**10 聯邦 + observer 頂點、70 packages、79 components、361 `.mbt` 檔、220,923 行**。
 歷史 45 配對中 **39 active、6 retired**。這是 K₁₀ 的子圖，不是完全圖。
 
 ![聯邦橋圖](federation-graph.svg)

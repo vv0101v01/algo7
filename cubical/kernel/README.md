@@ -46,7 +46,9 @@
 | | `schema_extensions.mbt` | 728 |
 | | `schema_universe_poly.mbt` | 1,816 |
 | | `schema_registry.mbt` | 585 |
-| **序數／能力邊界** | `ordinal_mahlo.mbt` | 217 |
+| **序數／能力邊界** | `ordinal_mahlo.mbt` | 243 |
+| **W-型別** | `wtype.mbt` | 1,476 |
+| **宇宙反射** | `universe_reflect.mbt` | 977 |
 
 ---
 
@@ -139,11 +141,32 @@ DTVar 索引規則：參數 → 較早的望遠鏡條目 → `DTVar(0)` 為最�
 
 ---
 
-## 7. `ordinal_mahlo.mbt` — 序數與能力邊界（217 行）
+## 7. `ordinal_mahlo.mbt` — 序數與能力邊界（243 行）
 
 * `[D-Cantor-CNF]`：`CantorOrdinal` 的 Cantor 正規形算術 `< ε₀`（`cantor_ord_nat`、`cantor_ord_omega_pow`、`cantor_ord_lt`、`cantor_ord_add`）⇒ 認證超限 `W`-型別的結構下降終止。
 * `[T-IdxContainer-Elim]`：`compile_indexed_container_to_positive_functor` 把索引容器 `(I, S, P, next_idx)` 編譯成 `DPositiveFunctor`（含 `DPath` 索引相干）。
 * `[Ax-Mahlo-Reflect]`：`verify_mahlo_universe_reflection` 驗歸納—歸納型（inductively-inductive）的 Tarski 反射（`Ctx`／`Ty`）。
+
+## 7b. `wtype.mbt` — W-型別（1,476 行）
+
+`W (x : A). B` 的完整實現（不改 `DTerm`，以自包含 AST + 核心橋接）：
+
+* **語法與形成**：`WExpr` AST（`WType`/`WSup`/`WElim` 等）；`wexpr_is_type`、`w_wtype_formation`、`w_sup_formation`、`w_elim_formation` 為結構預檢，深層檢查走橋接 `wtype_formation_kernel`（`d_as_type`/`d_check`）。
+* **構造子 `sup`**：`WSup(a, f)` 由標籤 `a : A` 與子樹映射 `f : (x : A) -> W A B` 生成樹；橋接 `w_sup_to_dterm`（`DIntro`）+ `w_sup_formation_kernel`。
+* **消除器 `ind-W` / `wf-rec`**：`w_elim_value` / `w_wf_rec` 只對直接子樹 `f x` 給遞迴假設；`w_accessible`、`w_subtree`、`w_height` 給終止論證，`w_elim_fuel` 給燃料界。
+* **β-歸約引擎**：`w_beta_step` 實現 `ind-W(m, s, sup(a, f)) ==> s[a, f, λx. ind-W(m, s, f x)]`（含普通 β 與同余閉包）；`w_normalize`（燃料界）、`w_beta_holds`。
+* **核心橋接**：`w_spec_of` 把 `W A B` 編成單構造子 `DInductiveSpec`（容器函子 `Σ (a : A), (B a -> X)`）；`wtype_to_dterm`、`w_elim_to_dterm`（`DInductiveElim`）、`wexpr_to_dterm_at`。
+* **定律**：`law_w_*`（21 條，`wtype_all_laws` 聚合；臨時 `moon test` 驗證後刪除，耐久命題為純函式）。
+
+## 7c. `universe_reflect.mbt` — 可判定保守宇宙反射與 Mahlo 極限反射（完整版，977 行）
+
+相依 Tarski 碼系統 + 無界可判定保守反射 + 一般 Mahlo 極限反射（不改 `DTerm`）：
+
+* **碼系統 `(Ctx, Ty, Tm)`**：`TyCode`（Var/Bool/Unit/Nat/Pi/Sigma/Path/W/Univ，Pi/Sigma/W 相依、第二分量在 binder 下）與 `TmCode`（Path 端點碼、W sup/elim 碼）與 `CtxCode`；解碼 `tycode_el`/`tmcode_el`/`ctxcode_el_ty`/`ctxcode_el_val` 進核心；`tycode_scoped`/`tmcode_scoped`（de Bruijn 作用域）、`tycode_wellformed`/`tmcode_wellformed`（核心 `d_as_type`/`d_check` 驗證）、`tycode_size`/`tmcode_size`、`tycode_rank`（`ω^size`）。
+* **無界可判定保守反射**：`reflect_code`/`reflect_tm`（層級坍縮至 0）、`is_reflected`；保守性 = `El` 對所有碼單射——`el_injective_all`（九構造子解碼兩兩不可轉換，結構歸納提升至任意碼）+ `tm_el_injective_all`（十二構造子頭符號可分辨）+ 有限枚舉 sanity（`el_injective_upto`/`conservative_reflection`，size≤3）+ 子宇宙閉包（`reflected_closed`）。
+* **一般 Mahlo 極限反射**：`u_mahlo = TyUniv(0)`；`is_mahlo`（任意 `TyUniv(i)`：`Type_i` 上 Pi/Sigma/Path/W 皆為型別，核心 `d_as_type` 驗證；非宇宙碼非 Mahlo）；`mahlo_rank`（`ω^(i+1)`）、`mahlo_chain`（`Type_2 > Type_1 > Type_0`）、`mahlo_chain_descending`、`limit_reflect`、`verify_mahlo_limit`（嚴格下降 + 極限 Mahlo，極限 rank 在 `ω^3` 天花板下）。
+* **定律**：`law_reflect_*`/`law_mahlo_*`（26 條，`universe_reflect_all_laws` 聚合；臨時 `moon test` 驗證 26/26 後刪除）。
+* **工程報告**：`docs/UNIVERSE_REFLECT_COMPLETE.md`（完成狀況、修訂一覽、完整 Mahlo 四準則證明、使用適要、注意事項、避坑指南）。
 
 ---
 

@@ -167,13 +167,19 @@ pub fn compile_indexed_container_to_positive_functor(
 ///     two ordinal ranks, and their conjunction with the closure facts.
 ///
 /// What it does NOT certify, and what an earlier revision of this docstring
-/// claimed it did: there is no mutual `(Ctx, Ty)` code system, no reflected
-/// sub-universe code `u_mahlo`, and no decoding `El(u_mahlo)` anywhere in this
-/// function.  `W`-container closure is not checked either — `DTerm` has no `W`
-/// constructor, so a `W`-type has to be built as a `DInductiveSpec` over
-/// `DFunctorContainer` (the route `compile_indexed_container_to_positive_functor`
-/// already provides) and validated separately; that is future work, not a
-/// property of this certificate.  The previous field names
+/// claimed it did: this function contains no mutual `(Ctx, Ty)` code system,
+/// no reflected sub-universe code `u_mahlo`, and no decoding `El(u_mahlo)`.
+/// Those live in `universe_reflect.mbt` (dependent Tarski codes
+/// `TyCode`/`TmCode`/`CtxCode` with decoding `tycode_el`/`tmcode_el`,
+/// unbounded decidable conservative reflection via `el_injective_all` /
+/// `conservative_reflection`, and general Mahlo limit reflection via
+/// `is_mahlo` / `verify_mahlo_limit`); the ordinal ranks here are the descent measure
+/// that file reuses.  `W`-container closure is not checked by this
+/// certificate either — `DTerm` has no `W` constructor, so a `W`-type is
+/// built as a `DInductiveSpec` (the route `wtype.mbt` provides via
+/// `w_spec_of` / `wtype_to_dterm`, with kernel-verified formation in
+/// `wtype_formation_kernel`); that validation lives in `wtype.mbt`, not in
+/// this certificate.  The previous field names
 /// `closed_under_pi_sigma_path_w` and `ctx_ty_mutual_well_founded` asserted
 /// `W`-closure and mutual well-foundedness respectively, while being assigned
 /// values that verified neither.

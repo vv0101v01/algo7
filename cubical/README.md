@@ -140,11 +140,12 @@
 | `schema_universe_poly.mbt` | 1,816 | **宇宙多型成為宣告語法**：`DUnivLevel(expr)` 節點在套用宣告時被替換；`dlevel_inductive_decl`／`dlevel_hit_decl`／`dlevel_term_decl`、`instantiate_level_*`、`dtype_operator_decl` + `extract_positive_functor`、巢狀迭代 `dnested_iter_decl`／`compile_nested_iter_decl`（`bush_decl`）、互宣告正性 `mutual_decl_positivity` |
 | `schema_registry.mbt` | 585 | 以 **plan** 形式 intern 描述子：驗證一次、telescope 在泛值上精緻化一次，之後結構相等的註冊直接回傳既有 plan；具體 telescope 精緻化以語義快取。`schema_registry_register_inductive/hit`、`schema_registry_validate_*`、`telescope_type_values_cached`、`schema_registry_snapshot`/`restore`/`merge_into`/`manifest` |
 
-### 6.5 序數與能力邊界（`ordinal_mahlo.mbt`，217 行）
+### 6.5 序數與能力邊界（`ordinal_mahlo.mbt`，248 行）+ 宇宙反射完整版（`universe_reflect.mbt`，977 行）
 
 * `[D-Cantor-CNF]`：`CantorOrdinal` 的 Cantor 正規形序數算術 `< ε₀` —— `cantor_ord_nat`、`cantor_ord_omega_pow`、`cantor_ord_lt`、`cantor_ord_add`，認證超限 `W`-型別的結構下降；
 * `[T-IdxContainer-Elim]`：`compile_indexed_container_to_positive_functor` 把索引容器 `(I,S,P,next_idx)` 編譯成 `DPositiveFunctor`（含 `DPath` 索引相干）；
-* `[Ax-Mahlo-Reflect]`：`verify_mahlo_universe_reflection` 驗歸納—歸納型（inductively-inductive）的 Tarski 反射（`Ctx`/`Ty`）。
+* `[Ax-Mahlo-Reflect]`：`verify_mahlo_universe_reflection` 驗歸納—歸納型（inductively-inductive）的 Tarski 反射（`Ctx`/`Ty`）；
+* **宇宙反射完整版**（`universe_reflect.mbt`）：相依 Tarski 碼系統 `(Ctx, Ty, Tm)` + 無界可判定保守反射（`el_injective_all` 結構歸納）+ 一般 Mahlo 極限反射（任意 `TyUniv(i)`、任意下降鏈）；26/26 定律。工程報告見 `docs/UNIVERSE_REFLECT_COMPLETE.md`。
 
 ---
 

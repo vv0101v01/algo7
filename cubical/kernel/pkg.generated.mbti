@@ -179,6 +179,8 @@ pub fn compile_mutual_inductive(String, Array[DInductiveSpec]) -> DMutualFamily?
 
 pub fn compile_nested_iter_decl(DNestedIterDecl) -> DNestedIterFamily?
 
+pub fn conservative_reflection(Int32) -> Bool
+
 pub fn container_tree_schema() -> DInductiveSpec
 
 pub fn conv_at(Int32, Int32, DValue, DValue, DValue) -> Bool
@@ -228,6 +230,14 @@ pub fn conv_terms_plain(Array[DTerm], DTerm, DTerm, DTerm) -> Bool
 pub fn conv_ty(Int32, Int32, DValue, DValue) -> Bool
 
 pub fn cs_finite_closed_inhabitants(DValue, depth_budget? : Int32, max_cases? : Int32) -> Array[DTerm]?
+
+pub fn ctxcode_el_ty(CtxCode) -> DEnv
+
+pub fn ctxcode_el_val(CtxCode) -> DEnv
+
+pub fn ctxcode_len(CtxCode) -> Int32
+
+pub fn ctxcode_lookup(CtxCode, Int32) -> TyCode?
 
 pub fn cube3_schema() -> DHitSpec
 
@@ -611,6 +621,8 @@ pub fn dterm_family_strictly_positive_declared(DTerm, String, Array[DPositivityD
 
 pub fn dterm_family_strictly_positive_functorial(Array[DTerm], DTerm, String, Array[DFunctorialPositivityCert], witnesses? : Array[DPositivityWitness]) -> Bool
 
+pub fn dterm_head_tag(DTerm) -> Int32
+
 pub fn dterm_instantiate_levels(DTerm, Array[Int32]) -> DTerm?
 
 pub fn dterm_intern(DTermInternTable, DTerm) -> DTerm
@@ -656,6 +668,10 @@ pub fn dvalue_of_ty(@finite.Ty) -> DValue
 pub fn dvalue_subst_dims(Int32, Int32, DValue, DValue, Array[@face_bdd.Dim]) -> (DValue, DValue)
 
 pub fn dvalue_to_pval(DValue) -> @finite.PVal
+
+pub fn el_injective_all() -> Bool
+
+pub fn el_injective_upto(Int32) -> Bool
 
 pub fn equal_nat_pair_schema() -> DInductiveSpec
 
@@ -877,7 +893,35 @@ pub fn instantiate_level_inductive_decl(DLevelInductiveDecl, Array[Int32]) -> DI
 
 pub fn instantiate_level_term_decl(DLevelTermDecl, Array[Int32]) -> DLevelTermInstance?
 
+pub fn is_mahlo(TyCode) -> Bool
+
+pub fn is_reflected(TyCode) -> Bool
+
 pub fn kernel_eval_closed_peano(DTerm) -> Int32?
+
+pub fn law_mahlo() -> Array[(String, Bool)]
+
+pub fn law_mahlo_limit() -> Array[(String, Bool)]
+
+pub fn law_reflect_codes() -> Array[(String, Bool)]
+
+pub fn law_reflect_conservative() -> Array[(String, Bool)]
+
+pub fn law_reflect_operator() -> Array[(String, Bool)]
+
+pub fn law_w_beta() -> Array[(String, Bool)]
+
+pub fn law_w_bridge() -> Array[(String, Bool)]
+
+pub fn law_w_formation() -> Array[(String, Bool)]
+
+pub fn law_w_normalize() -> Array[(String, Bool)]
+
+pub fn law_w_subtree_descent() -> Array[(String, Bool)]
+
+pub fn law_w_sup_formation() -> Array[(String, Bool)]
+
+pub fn law_w_wf_rec() -> Array[(String, Bool)]
 
 pub fn lazy_deval(DTerm, DEnv, DDimEnv) -> DValue
 
@@ -895,6 +939,8 @@ pub fn level_inductive_decl_validate(DLevelInductiveDecl) -> Bool
 
 pub fn level_term_decl_validate(DLevelTermDecl) -> Bool
 
+pub fn limit_reflect(Array[TyCode]) -> TyCode?
+
 pub fn list_level_decl() -> DLevelInductiveDecl
 
 pub fn list_level_scheme() -> DInductiveLevelScheme
@@ -902,6 +948,12 @@ pub fn list_level_scheme() -> DInductiveLevelScheme
 pub fn list_schema() -> DInductiveSpec
 
 pub fn lty_to_dterm(@finite.LTy) -> DTerm
+
+pub fn mahlo_chain() -> Array[TyCode]
+
+pub fn mahlo_chain_descending(Array[TyCode]) -> Bool
+
+pub fn mahlo_rank(TyCode) -> CantorOrdinal
 
 pub fn map_branches(DSystem, ((@face_bdd.Dim) -> DValue) -> (@face_bdd.Dim) -> DValue) -> DSystem
 
@@ -1009,9 +1061,17 @@ pub fn quotient_eq_term(Array[DTerm], DTerm, DTerm, DTerm, @face_bdd.Dim) -> DTe
 
 pub fn quotient_schema() -> DHitSpec
 
+pub fn reflect_code(TyCode) -> TyCode
+
 pub fn reflect_neutral_at_type(DNeutral, DValue) -> DValue
 
+pub fn reflect_tm(TmCode) -> TmCode
+
 pub fn reflect_var(Int32, DValue) -> DValue
+
+pub fn reflected_closed(TyCode) -> Bool
+
+pub fn reflected_tm_closed(TmCode) -> Bool
 
 pub fn registry_string_hash(String) -> Int32
 
@@ -1115,6 +1175,20 @@ pub fn telescope_type_values(Array[DTelescopeEntry], Array[DValue], Array[DValue
 
 pub fn telescope_type_values_cached(DSchemaRegistry, Array[DTelescopeEntry], Array[DValue], Array[DValue], Array[DValue]) -> Array[DValue]
 
+pub fn tm_el_injective_all() -> Bool
+
+pub fn tmcode_el(TmCode) -> DTerm
+
+pub fn tmcode_head_tag(TmCode) -> Int32
+
+pub fn tmcode_of_size(Int32, Int32) -> Array[TmCode]
+
+pub fn tmcode_scoped(TmCode, Int32) -> Bool
+
+pub fn tmcode_size(TmCode) -> Int32
+
+pub fn tmcode_wellformed(TmCode, TyCode) -> Bool
+
 pub fn torus_dims_of(DValue) -> (@face_bdd.Dim, @face_bdd.Dim)
 
 pub fn torus_point(@face_bdd.Dim, @face_bdd.Dim) -> DValue
@@ -1137,9 +1211,27 @@ pub fn tube_paths_conv_under_face_in(DEnv, Int32, Int32, @face_bdd.Face, (@face_
 
 pub fn tube_system_nf_at(Int32, Int32, (@face_bdd.Dim) -> DValue, DSystem, @face_bdd.Dim) -> DSystemNF
 
+pub fn tycode_all_upto(Int32) -> Array[TyCode]
+
+pub fn tycode_el(TyCode) -> DTerm
+
+pub fn tycode_of_size(Int32, Int32) -> Array[TyCode]
+
+pub fn tycode_rank(TyCode) -> CantorOrdinal
+
+pub fn tycode_representatives() -> Array[TyCode]
+
+pub fn tycode_scoped(TyCode, Int32) -> Bool
+
+pub fn tycode_size(TyCode) -> Int32
+
+pub fn tycode_wellformed(TyCode) -> Bool
+
 pub fn type_operator_is_strictly_positive(DTypeOperatorDecl) -> Bool
 
 pub fn type_operator_positivity(DTypeOperatorDecl) -> DPositivityReport
+
+pub fn u_mahlo() -> TyCode
 
 pub fn ua_line_value(DValue, DValue, DValue, Int32) -> (@face_bdd.Dim) -> DValue
 
@@ -1147,11 +1239,139 @@ pub fn ua_type_at(DValue, DValue, DValue, Int32, @face_bdd.Dim) -> DValue
 
 pub fn ua_value(DValue, DValue, DValue, Int32) -> DValue
 
+pub fn universe_reflect_all_laws() -> Array[(String, Bool)]
+
+pub fn universe_reflect_demo() -> String
+
 pub fn vec_schema() -> DInductiveSpec
+
+pub fn verify_mahlo_limit(Array[TyCode]) -> Bool
 
 pub fn verify_mahlo_universe_reflection() -> MahloReflectionCert
 
+pub fn w_accessible(WValue) -> Bool
+
+pub fn w_app(WExpr, WExpr) -> WExpr
+
+pub fn w_beta_holds(WExpr, WExpr, WExpr, WExpr) -> Bool
+
+pub fn w_beta_step(WExpr) -> WExpr?
+
+pub fn w_bool_ty() -> WExpr
+
+pub fn w_bridge_a() -> DTerm
+
+pub fn w_bridge_b() -> DTerm
+
+pub fn w_bridge_sup() -> DTerm
+
+pub fn w_elim(WExpr, WExpr, WExpr) -> WExpr
+
+pub fn w_elim_formation(WExpr, WExpr, WExpr, WExpr) -> Bool
+
+pub fn w_elim_formation_kernel(DTerm, DTerm, DTerm, DTerm) -> Bool
+
+pub fn w_elim_fuel((WValue) -> WValue, (WValue, (WValue) -> WValue, (WValue) -> WValue) -> WValue, WValue, Int32) -> WValue?
+
+pub fn w_elim_to_dterm(DTerm, DTerm, DTerm, DTerm, DTerm) -> DTerm
+
+pub fn w_elim_value((WValue) -> WValue, (WValue, (WValue) -> WValue, (WValue) -> WValue) -> WValue, WValue) -> WValue
+
+pub fn w_example_elim() -> WExpr
+
+pub fn w_example_shape() -> WExpr
+
+pub fn w_example_sup() -> WExpr
+
+pub fn w_example_tree() -> WValue
+
+pub fn w_height(WValue) -> Int32
+
+pub fn w_height_via_elim(WValue) -> WValue
+
+pub fn w_lam(WExpr) -> WExpr
+
+pub fn w_nat_elim_value((WValue) -> WValue, WValue, WValue, WValue) -> WValue
+
+pub fn w_nat_max(WValue, WValue) -> WValue
+
+pub fn w_nat_ty() -> WExpr
+
+pub fn w_node_count(WValue) -> Int32
+
+pub fn w_normalize(WExpr, Int32) -> (WExpr, Int32, Bool)
+
 pub fn w_schema() -> DInductiveSpec
+
+pub fn w_spec_of(DTerm, DTerm, Int32) -> DInductiveSpec
+
+pub fn w_step_id(WValue, (WValue) -> WValue, (WValue) -> WValue) -> WValue
+
+pub fn w_subtree(WValue, WValue) -> Bool
+
+pub fn w_sup(WExpr, WExpr) -> WExpr
+
+pub fn w_sup_formation(WExpr, WExpr, WExpr) -> Bool
+
+pub fn w_sup_formation_kernel(DTerm, DTerm, DTerm) -> Bool
+
+pub fn w_sup_to_dterm(DTerm, DTerm, DTerm, DTerm) -> DTerm
+
+pub fn w_type(WExpr, WExpr) -> WExpr
+
+pub fn w_unit_ty() -> WExpr
+
+pub fn w_value_eq(WValue, WValue) -> Bool
+
+pub fn w_wf_rec((WValue) -> WValue, (WValue, (WValue) -> WValue, (WValue) -> WValue) -> WValue, WValue) -> WValue
+
+pub fn w_wtype_formation(WExpr, WExpr) -> Bool
+
+pub fn wapp(WValue, WValue) -> WValue
+
+pub fn wenv_at(WEnv, Int32) -> WValue?
+
+pub fn wenv_cons(WValue, WEnv) -> WEnv
+
+pub fn wenv_empty() -> WEnv
+
+pub fn wenv_extend(Array[WValue], WEnv) -> WEnv
+
+pub fn wenv_len(WEnv) -> Int32
+
+pub fn wexpr_children(WExpr) -> Array[WExpr]
+
+pub fn wexpr_eval(WExpr, WEnv) -> WValue
+
+pub fn wexpr_is_type(WExpr) -> Bool
+
+pub fn wexpr_is_type_under(WExpr, WExpr) -> Bool
+
+pub fn wexpr_map_vars_at(WExpr, Int32, (Int32, Int32) -> WExpr) -> WExpr
+
+pub fn wexpr_shift(WExpr, Int32, Int32) -> WExpr
+
+pub fn wexpr_size(WExpr) -> Int32
+
+pub fn wexpr_subst(WExpr, Int32, WExpr) -> WExpr
+
+pub fn wexpr_subst_step(WExpr, WExpr, WExpr, WExpr) -> WExpr
+
+pub fn wexpr_to_dterm(WExpr) -> DTerm?
+
+pub fn wexpr_to_dterm_at(WExpr, WExpr?) -> DTerm?
+
+pub fn wfst(WValue) -> WValue
+
+pub fn wsnd(WValue) -> WValue
+
+pub fn wtype_all_laws() -> Array[(String, Bool)]
+
+pub fn wtype_demo() -> String
+
+pub fn wtype_formation_kernel(DTerm, DTerm) -> Bool
+
+pub fn wtype_to_dterm(DTerm, DTerm, Int32) -> DTerm
 
 // Errors
 
@@ -1192,6 +1412,15 @@ pub struct CircleSquareWindingReport {
   net_boundary_winding : Int32
   used_hspace_glue : Bool
 }
+
+#derive(Eq, @debug.Debug)
+pub(all) enum CtxCode {
+  CtxEmpty
+  CtxExtend(CtxCode, TyCode)
+}
+pub fn CtxCode::equal(Self, Self) -> Bool
+pub fn CtxCode::not_equal(Self, Self) -> Bool
+pub fn CtxCode::to_repr(Self) -> @debug.Repr
 
 #derive(Eq, @debug.Debug)
 pub(all) enum DArgKind {
@@ -2087,6 +2316,85 @@ pub(all) struct SheafPartitionConvReport {
 pub fn SheafPartitionConvReport::equal(Self, Self) -> Bool
 pub fn SheafPartitionConvReport::not_equal(Self, Self) -> Bool
 pub fn SheafPartitionConvReport::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum TmCode {
+  TmVar(Int32)
+  TmBoolLit(Bool)
+  TmUnitLit
+  TmNatZero
+  TmSucc(TmCode)
+  TmPair(TmCode, TmCode)
+  TmFst(TmCode)
+  TmSnd(TmCode)
+  TmLam(TyCode, TmCode)
+  TmApp(TmCode, TmCode)
+  TmSup(TyCode, TmCode, TmCode)
+  TmWElim(TyCode, TmCode, TmCode, TmCode)
+}
+pub fn TmCode::equal(Self, Self) -> Bool
+pub fn TmCode::not_equal(Self, Self) -> Bool
+pub fn TmCode::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum TyCode {
+  TyVar(Int32)
+  TyBool
+  TyUnit
+  TyNat
+  TyPi(TyCode, TyCode)
+  TySigma(TyCode, TyCode)
+  TyPath(TyCode, TmCode, TmCode)
+  TyW(TyCode, TyCode)
+  TyUniv(Int32)
+}
+pub fn TyCode::equal(Self, Self) -> Bool
+pub fn TyCode::not_equal(Self, Self) -> Bool
+pub fn TyCode::to_repr(Self) -> @debug.Repr
+
+pub(all) enum WEnv {
+  WEnvNil
+  WEnvCons(WValue, WEnv, Int32)
+}
+
+#derive(Eq, @debug.Debug)
+pub(all) enum WExpr {
+  WVar(Int32)
+  WUniv(Int32)
+  WBoolTy
+  WUnitTy
+  WNatTy
+  WPi(WExpr, WExpr)
+  WSigma(WExpr, WExpr)
+  WType(WExpr, WExpr)
+  WSup(WExpr, WExpr)
+  WElim(WExpr, WExpr, WExpr)
+  WLam(WExpr)
+  WApp(WExpr, WExpr)
+  WPair(WExpr, WExpr)
+  WFst(WExpr)
+  WSnd(WExpr)
+  WUnit
+  WBoolLit(Bool)
+  WBoolElim(WExpr, WExpr, WExpr, WExpr)
+  WNatZero
+  WSucc(WExpr)
+  WNatElim(WExpr, WExpr, WExpr, WExpr)
+}
+pub fn WExpr::equal(Self, Self) -> Bool
+pub fn WExpr::not_equal(Self, Self) -> Bool
+pub fn WExpr::to_repr(Self) -> @debug.Repr
+
+pub(all) enum WValue {
+  WVSup(WValue, (WValue) -> WValue)
+  WVLam((WValue) -> WValue)
+  WVPair(WValue, WValue)
+  WVUnit
+  WVBool(Bool)
+  WVZero
+  WVSucc(WValue)
+  WVNeutral(Int32)
+}
 
 // Type aliases
 
