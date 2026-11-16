@@ -1,4 +1,4 @@
-# `cmd/` — 八個生產執行入口
+# `cmd/` — 九個生產執行入口
 
 這些套件只消費下層 API，不供底層反向匯入。以下是 **2026-11-15 審計後**的入口及實體 package layer；不要把它與 component layer 混用。
 
@@ -29,6 +29,7 @@ python3 tools/federation_docs.py --check
 moon run cmd/metatheory --target wasm-gc
 moon run cmd/ualg --target wasm-gc
 moon run cmd/qgeom --target wasm-gc
+moon run cmd/qprob --target wasm-gc
 moon run cmd/main --target wasm-gc
 moon run cmd/showcase --target wasm-gc
 ```

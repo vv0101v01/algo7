@@ -1262,6 +1262,17 @@ Dev.txt（本節）、agent.md、agent.v2.md、lean/README.md、lean/UNIVERSAL.m
   2. **主命題 Grothendieck 纖維化 `π : ∫ Prop → ℬ_qprob`**：將八個空間與子場的主命題（含當場重算之特徵不變量）纖維化，實作逆變拉回函子 `f*`、主命題間態射 `(f, θ) : (X, P) → (Y, Q)`、笛卡兒提升 `Cart(f, Q)` 與唯一泛因式分解 `factor_through_cartesian_lift`；
   3. **精確有理機率單子 `(D_ℚ, η, μ)` 與 Kleisli 範疇 `Kl(D_ℚ)`**（`prob_monad_confluence.mbt`）：實作正規形去重有理分佈 `ProbDist[T]`，驗證單子三律、雙層壓平 `μ`、交換單子 Fubini 邊際化，以及 CPTP Kraus 量子通道之 Schrödinger–Heisenberg 單子對偶；
   4. **量子機率脈絡範疇 `QProbCtx` 與菱形合流大定理**：以兩兩對易自伴觀測量族 `[A_i, A_j] = 0` 與相容完備 POVM 定義 Bohr 觀測脈絡（非對易對 `{σ_x, σ_z}` 由公理拒絕），驗證粗粒化預層截面三路自然性，並證明分叉細化脈絡 `C_left ← C_apex → C_right` 在 `QProbCtx` 與機率單子 `D_ℚ` 下零誤差合流至終端脈絡 `C_nadir`。
-- **健檢與閘門**：全倉 70 packages / 79 components、6,796 函式定義、**0 死碼、0 完全重複組**；`cmd/qprob` 88/88、`cmd/showcase` 含 `verify_grand_qprob_context_confluence` 全數通過。
+- **健檢與閘門**：全倉 70 packages / 79 components、6,796 函式定義、**0 死碼、0 完全重複組**；`cmd/qprob` 88/88、`cmd/showcase` 含 `verify_grand_qprob_context_confluence` 全數通過；提交 `518c8b8` 推送至 `vv0101v01/algo7` 分支 `7.1`，GitHub Actions run `43771268689` 全部 19 個步驟 `completed/success`。
+
+
+## 2026-11-15（第六輪）：文檔體系深化 — 開發成果詳述與 88 條定理／26 項演算法完整目錄
+
+- **新增專章目錄 [`docs/QPROB_THEOREMS_AND_ALGORITHMS.md`](docs/QPROB_THEOREMS_AND_ALGORITHMS.md)**：
+  1. 系統記錄並介紹跨六階 **26 項核心符號／代數演算法**（含正規形有理與負次冪、二次擴張 Galois 有理化求逆、Laurent 噴流長除法與標準部、精確列梯形秩、Richardson–Neville 外推、Shanks–Aitken $\Delta^2$、Wynn $\varepsilon$-菱形遞迴、Cesàro 平均、無界 $^*$-代數成長階追蹤、Robertson–Schrödinger 證書、Yosida 預解逼近、Favard–Chebyshev–Lanczos 正交多項式矩重構、稀疏全福克 $q$-湮滅、Bożejko–Speicher $q$-Gram 商空間秩、二次量子化 $\Gamma/d\Gamma$、塗抹場原函數 $L^2$ 積分、遞迴 Leibniz–Wick 正規序縮併、Weyl 辛上循環与 Hudson–Parthasarathy 量子 Itô 微元積、構造性 Naimark 等距擴張、Speicher 非交叉矩—自由累積量雙向遞迴、雙範疇 1/2-胞複合與 Godement 互換檢驗、Grothendieck 笛卡兒提升與唯一泛分解、Giry–Lawvere 有理機率單子 $D_{\mathbb{Q}}$、CPTP–Kleisli 對偶與 Bohr 脈絡菱形合流）；
+  2. 逐條記錄全部 **88 條形式驗證命題 `[001]–[088]`**（含 16 條負控制與四階交叉分岔命題）之章節歸屬、數學陳述與 `cmd/qprob` 執行期精確有理數見證。
+- **全面升級模組與頂層文檔**：
+  - 擴充 `qprob/README.md`、`qprob/{asymptotic,unbounded,fock,ccr_field,nc_measure,context_cat}/README.md` 與 `cmd/qprob/README.md`，逐包對齊 `.mbti` 真實公開 API 簽名、檔案行數、演算法原理與定理見證；
+  - 同步更新根目錄 `README.md`（修正過時套件數 `63→70`、補入 `qprob`/`qgeom` 驗收指令與定理目錄入口）、`cmd/README.md`（九個執行入口與 `cmd/qprob` 指令）、`cmd/showcase/README.md`（補入 `semiring/app` 與 `qprob/context_cat` 整合說明）及 `agent.v2.md`。
+
 
 

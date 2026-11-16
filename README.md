@@ -6,15 +6,15 @@
 
 ## 當前狀態（2026-11-15 審計）
 
-- **10 聯邦 + observer 頂點；70 packages、79 components。** 檔數、行數及每層完整配置由[架構清單](docs/FEDERATION_ARCHITECTURE.md)自動產生。
+- **10 聯邦 + observer 頂點；70 packages、79 components、359 個 `.mbt` 檔、218,061 行程式碼；全倉 6,796 個函式／方法定義維持 `0` 死碼、`0` 空殼列舉、`0` 完全重複組。** 檔數、行數及每層完整配置由[架構清單](docs/FEDERATION_ARCHITECTURE.md)自動產生。
 - **39 條 active 配對橋，6 條已刪除。** 歷史 45 個配對槽位仍可追溯，但執行圖是 **K₁₀ 的子圖**，不是 45/45 完全圖。
-- `cmd/showcase` 產生 **50 個原生／圖譜／輔助證書**（含 18 個 atlas），與配對橋數分開。原來的 X 交換性「證書」已移除，沒有用其他旗標填回數目。
+- `cmd/showcase` 產生 **50 個原生／圖譜／輔助證書**（含 18 個 atlas），與配對橋數分開，並同步驗收半環 `wasm-gc` 套件（`semiring-wasm-suite=true`）與量子機率脈絡六階大合流（`quantum probability context confluence: bicat=8, fibered_props=8, monad_kleisli=true, presheaf_gluing=true, diamond_confluence=true, noncomm_obstruction=true, holds=true`）。原來的 X 交換性「證書」已移除，沒有用其他旗標填回數目。
 - 最新非 nightly 官方通道在本次核對為 **`moonc v0.10.20+65efd5b93`**；CI 以同一版本固定重建。
 - **`qgeom` 子聯邦（第八聯邦內）：5 個套件 + 1 執行檔，`moon run cmd/qgeom --target wasm-gc` 重算 179 個命題。**
   軸向交換張量變體、高維合體運算硬體抽象層、平移射影、超對稱四元數頂點對偶、雙射緊緻四元雅可比簇、
   複形四元數德朗姆型恆等、四元數凱勒曲率張量群空間、雅可布全射張量積——見 [`qgeom/README.md`](qgeom/README.md)。
-- **`qprob` 子聯邦（第七聯邦內）：6 個套件 + 1 執行檔，`moon run cmd/qprob --target wasm-gc` 重算 88 個結構演化與脈絡合流命題。**
-  有序代數子場塔與無窮漸近極限空間、無界算子概率空間與矩重構、全量子福克空間與 `q`-變形分裂、連續創生與湮滅算子場（Wick 正規序與量子 Itô 代數）、非交換隨機分佈與正算子值測度空間（Naimark 擴張與自由累積量），以及**空間子場雙範疇、主命題纖維化、有理機率單子與量子機率脈絡範疇合流**——見 [`qprob/README.md`](qprob/README.md)。
+- **`qprob` 子聯邦（第七聯邦內，分支 `7.1` 核心成果）：6 個套件 + 1 執行檔（16 檔、6,503 行、24 章），`moon run cmd/qprob --target wasm-gc` 重算 88 個結構演化與脈絡合流命題（含 16 個負控制與分岔命題）。**
+  有序代數子場塔與無窮漸近極限空間（Richardson／Aitken／Wynn-$\varepsilon$／Cesàro 外推）、無界算子概率空間與 Favard–Jacobi 矩重構、全量子福克空間與 Bożejko–Speicher `q`-變形三統計分裂、連續創生與湮滅算子場（Wick 正規序與 Hudson–Parthasarathy 量子 Itô 代數）、非交換隨機分佈與正算子值測度空間（Naimark 等距擴張與 Speicher 自由累積量），以及**空間子場雙範疇 $\mathcal{B}_{\mathrm{qprob}}$、Grothendieck 主命題纖維化 $\pi : \int\mathrm{Prop}\to\mathcal{B}_{\mathrm{qprob}}$、Giry–Lawvere 有理機率單子 $D_{\mathbb{Q}}$ 與量子機率脈絡範疇 $\mathbf{QProbCtx}$ 菱形合流**——見 [`qprob/README.md`](qprob/README.md) 與 **[88 條定理與 26 項演算法完整記錄](docs/QPROB_THEOREMS_AND_ALGORITHMS.md)**。
 - 歷史工作紀錄留在 [`agent.v2.md`](agent.v2.md) 與 [`Dev.txt`](Dev.txt)。舊日期的 45/45、40 active、51/51 等數字是歷史截面，不是當前承諾。
 
 ## 全局圖與閱讀入口
@@ -23,7 +23,9 @@
 |---|---|
 | 全局圖、分層與可篩選功能清單 | [離線總覽](docs/FEDERATION_OVERVIEW.html) |
 | 十聯邦語義橋圖 | [SVG 全局圖](docs/federation-graph.svg) |
-| 每一層住甚麼、63 包／72 元件、所有直接 import | [完整架構清單](docs/FEDERATION_ARCHITECTURE.md)／[實體 DAG](docs/package-dependencies.mmd) |
+| 每一層住甚麼、70 包／79 元件、所有直接 import | [完整架構清單](docs/FEDERATION_ARCHITECTURE.md)／[實體 DAG](docs/package-dependencies.mmd) |
+| `qprob` 六階 88 條定理、26 項演算法與實算見證 | [量子概率定理與演算法完整記錄](docs/QPROB_THEOREMS_AND_ALGORITHMS.md)／[`qprob/README.md`](qprob/README.md) |
+| `qgeom` 五階 179 條四元數與超對稱幾何命題 | [`qgeom/README.md`](qgeom/README.md) |
 | 每條橋產出甚麼、真正收益、輸入範圍及限制 | [39 active + 6 retired 功能枚舉](docs/BRIDGE_CATALOG.md) |
 | 刪除原因與破壞性 API 遷移 | [遷移說明](docs/BRIDGE_MIGRATION.md) |
 | 輸入→計算→輸出、平衡管線及 BDD／LLL 改寫 | [效能與管線設計](docs/PERFORMANCE_PIPELINE.md) |
@@ -81,8 +83,10 @@ python3 tools/federation_docs.py --check
 # 原生與跨聯邦驗收；順序執行，不加 --release
 moon run cmd/metatheory --target wasm-gc    # 631 / 631
 moon run cmd/ualg --target wasm-gc          # 167 / 167
+moon run cmd/qgeom --target wasm-gc         # 179 / 179
+moon run cmd/qprob --target wasm-gc         #  88 /  88
 moon run cmd/main --target wasm-gc          # 139 / 139
-moon run cmd/showcase --target wasm-gc      # 39 active、6 retired、50 certificates
+moon run cmd/showcase --target wasm-gc      # 39 active、6 retired、50 certificates + qprob confluence
 ```
 
 修改來源後的生成順序：

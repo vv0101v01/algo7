@@ -1,6 +1,6 @@
 # agent.v2 — 工程治理、即時驗證制度與架構重構總綱
 
-> **現行狀態（2026-11-14，取代下方舊日期的現況數字）**：正式工具鏈 `moonc v0.10.20+65efd5b93`；10 聯邦＋observer、57 套件、66 元件；39 active 配對、6 retired（實作已刪）、50 個原生／atlas／輔助證書。X 交換性及自動晉升管線已移除。最新生成層表／功能枚舉見 `docs/`；橋審計報告見文末 `2026-11-14-federation-audit`；後續 BDD／LLL／訊息管線及實測見 `2026-11-14-performance-pipeline`。舊章節是歷史截面，不能當成當前完全圖或未執行證明。
+> **現行狀態（2026-11-15，取代下方舊日期的現況數字）**：正式工具鏈 `moonc v0.10.20+65efd5b93`；10 聯邦＋observer、70 套件、79 元件、359 個 `.mbt`、218,061 行（`health_scan`：6,796 定義、`0` 死碼、`0` 空殼列舉、`0` 完全重複組）；39 active 配對、6 retired（實作已刪）、50 個原生／atlas／輔助證書，另含第八聯邦 `qgeom`（179/179）與第七聯邦 `qprob` 六階量子機率脈絡合流（88/88，並接入 `cmd/showcase`）。X 交換性及自動晉升管線已移除。最新生成層表／功能枚舉見 `docs/`（含 `docs/QPROB_THEOREMS_AND_ALGORITHMS.md`）；橋審計與各輪實測報告見文末。舊章節是歷史截面，不能當成當前完全圖或未執行證明。
 
 本文件為專案 **v2 唯一開發與架構治理規範**（v1 舊文檔已永久封存於 Git 標籤 `v1-final`，不再維護任何雙語附錄或手工符號鏡像表）。所有參與開發與重構的 Agent 必須遵守以下準則，以**穩健、零警告、零技術債堆積**為最高原則。
 
@@ -1572,5 +1572,14 @@ python3 tools/health_scan.py                          → 6,796 defs, 0 dead fun
 python3 tools/federation_docs.py --check              → fresh
 moon run cmd/qprob --target wasm-gc                   → 通過 88 / 88 個結構演化定理與演算法命題
 moon run cmd/showcase --target wasm-gc                → 39 active, 50/50 certs, quantum probability context confluence holds=true
+GitHub Actions (branch 7.1, commit 518c8b8)           → run 43771268689 completed/success
 ```
+
+
+## 2026-11-15（第六輪）：文檔體系全面深化 — 開發成果總結與 88 條定理／26 項演算法記錄
+
+1. **新增 [`docs/QPROB_THEOREMS_AND_ALGORITHMS.md`](docs/QPROB_THEOREMS_AND_ALGORITHMS.md)**：完整收錄 `qprob` 六階 26 項核心演算法的數學原理、複雜度與邊界防禦機制，以及 `[001]–[088]` 全部 88 條命題（含 16 條負控制與交叉配分分岔）的逐條陳述與執行期精確有理數見證。
+2. **重寫與擴充 `qprob/README.md`、六個子套件 `README.md` 與 `cmd/qprob/README.md`**：逐包記錄數學演變動因、檔案職責、對齊 `.mbti` 的核心演算法簽名與分章定理表。
+3. **同步頂層導覽與治理入口**：更新 `README.md`、`cmd/README.md`、`cmd/showcase/README.md` 與 `Dev.txt`，消除舊截面套件數殘留並補齊 `qprob`／`qgeom` 驗收指令與專章連結。
+
 

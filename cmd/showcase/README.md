@@ -1,6 +1,6 @@
 # `cmd/showcase/` — 單次快照的聯邦功能與驗收
 
-位置：**pkgL9 / compL14**。直接 import `bridge`、`semiring/graph`、`symlib`、root；沒有底層 package 依賴本入口。
+位置：**pkgL9 / compL14**。直接 import `bridge`、`semiring/graph`、`semiring/app`、`symlib`、`qprob/context_cat`、root；沒有底層 package 依賴本入口。
 
 ```bash
 moon run cmd/showcase --target wasm-gc
@@ -17,7 +17,7 @@ moon run cmd/showcase --target wasm-gc
 5. 旋轉關係對齊及 4 個反例後修正的直覺猜想。
 6. **50 個原生／atlas／輔助證書**，其中 atlas=18；它們不增加配對橋數。
 7. ualg 9 條與第一／二波 6+7 替換，都從同一配對快照選取。
-8. F2×F3×F6 真正共享圖構造；F8×F5×F1 及前沿有限案例整合。
+8. F2×F3×F6 真正共享圖構造；F8×F5×F1、半環 `wasm-gc` 全量驗證（`verify_semiring_wasm_suite()`）、`qprob` 六階量子機率脈絡合流總驗算（`verify_grand_qprob_context_confluence()`）及前沿有限案例整合。
 9. **6 個 `[RETIRED]` 理由**，僅列 metadata，沒有失敗占位橋或退役計算。
 
 X-Overlap、沒有可靠性傳輸的 promotion、Malcev/Presheaf/Autonomy 獨立旗標包裝已刪。不要再把舊的 `45/45` 或 `chiasm_commutes` 當成現行輸出。

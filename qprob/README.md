@@ -1,75 +1,93 @@
-# `qprob/` — 六階量子概率與量子機率脈絡範疇演化子聯邦
+# `qprob/` — 量子概率、非交換隨機空間與量子機率脈絡範疇合流（六階子聯邦總覽）
 
-> **架構位置**：`architecture.json` 中的 qprob 子聯邦，歸屬第七聯邦 `discovery`（多線性張量與猜想發現聯邦）。
-> 套件：`qprob-asymptotic`(L0) → `qprob-unbounded`(L1) → `qprob-fock`(L2) → `qprob-ccr-field`(L3) → `qprob-nc-measure`(L4) → `qprob-context-cat`(L5) → `cmd-qprob`(L6)。
-> 唯一聚合執行入口：`moon run cmd/qprob --target wasm-gc` → **88 / 88 個結構演化定理與演算法命題**。
+> **架構位置**：第七聯邦 `discovery` 下的獨立六層演進子聯邦（`qprob-asymptotic` → `qprob-unbounded` → `qprob-fock` → `qprob-ccr-field` → `qprob-nc-measure` → `qprob-context-cat`，執行入口 `cmd/qprob` 並匯入旗艦驗算入口 `cmd/showcase`）。
+> **零浮點純精確算術**：全程建立在正規形任意精度有理數 $\mathbb{Q}$、二次代數子場 $\mathbb{Q}(\sqrt{d})$、高斯有理複數 $\mathbb{Q}(i)$ 與截斷非阿基米德漸近 Laurent 噴流 $\mathbb{Q}((\varepsilon))_{\le M}$ 之上，無任何 `Double` 近似誤差。
+> **整體規模**：6 個核心庫套件 + 1 個執行器套件，共 **16 個 `.mbt` 檔、6,503 行**（核心庫 15 檔 6,440 行 + 執行器 63 行），**24 章、88 條執行期命題**（含 **16 條負控制與分岔命題**），`88 / 88` 全數通過。
 
 ---
 
-## 1. 數學結構的六階演變脈絡（如何推導出定理與演算法）
+## 1. 六階數學演變脈絡與雙範疇合流圖
 
+```text
+  Stage I · Layer 0 : qprob/asymptotic (1,230 LOC · Ch 1–4 · Laws [001]–[021])
+    代數子場塔 Q ⊂ Q(√d) ⊂ Q((ε))_≤M  +  射影極限塔 lim← V_k  +  Richardson / Aitken / Wynn-ε / Cesàro 外推
+          │
+          ▼  截斷維度 d → ∞ 使粒子數 N 與正則對 Q, P 範數發散，突破有界 C*-代數框架
+  Stage II · Layer 1 : qprob/unbounded (906 LOC · Ch 5–8 · Laws [022]–[033])
+    共同不變稠密核 Op*(D)  +  GNS 量子態  +  Robertson–Schrödinger 界  +  Yosida 預解  +  Favard–Jacobi 矩重構
+          │
+          ▼  高斯矩重構湧現線性 Jacobi 權重 β_k = k，自由半圓矩對應常數權重 β_k = 1
+  Stage III · Layer 2 : qprob/fock (776 LOC · Ch 9–12 · Laws [034]–[046])
+    全量子福克空間 F_0(H)  +  Bożejko–Speicher q-對易內積核  +  三統計分裂 q ∈ {0, +1, -1}  +  Γ(T), dΓ(H)
+          │
+          ▼  單粒子離散模態 Q^d 經格點外推過渡至連續時間測試函數空間 L^2([a,b], dt)
+  Stage IV · Layer 3 : qprob/ccr_field (727 LOC · Ch 13–16 · Laws [047]–[057])
+    塗抹連續算子場 [A(g), A†(f)] = ⟨g,f⟩I  +  Wick 正規序縮併  +  Weyl 辛 2-上循環  +  Hudson–Parthasarathy 量子 Itô 代數
+          │
+          ▼  不對易場觀測量無古典聯合機率空間，古典測度分裂為算子值測度與非交叉自由累積量
+  Stage V · Layer 4 : qprob/nc_measure (792 LOC · Ch 17–20 · Laws [058]–[070])
+    過完備 POVM / CPTP 通道  +  Naimark 等距擴張 C^d ↪ C^(Kd)  +  Speicher 自由累積量 κ_n  +  Voiculescu 自由極限定理
+          │
+          ▼  雙範疇空間轉移、依值主命題纖維化與有理機率單子 D_Q 的頂點統合
+  Stage VI · Layer 5 : qprob/context_cat (2,009 LOC · Ch 21–24 · Laws [071]–[088])
+    雙範疇 B_qprob (0/1/2-胞)  +  Grothendieck 纖維化 π: ∫Prop → B_qprob  +  機率單子 D_Q  +  量子機率脈絡範疇 QProbCtx 合流
 ```
-[Stage I · L0] 有序代數子場塔 ℚ ⊂ ℚ(√d) ⊂ ℚ((ε))_≤M 與無窮漸近極限空間 lim_← V_k
-   │  (演變動因：當維度 d→∞ 時，粒子數與座標算子範數發散，有界代數不再封閉)
-   ▼
-[Stage II · L1] 無界算子 *-代數概率空間 (𝒟, Op*(𝒟), φ) 與 Favard–Lanczos 矩重構
-   │  (演變動因：高斯矩反演出 β_k = k，半圓矩反演出 β_k = 1；需要統一承載多粒子激發的希爾伯特空間)
-   ▼
-[Stage III · L2] 全量子福克空間 ℱ_0(ℋ) = ⨁ ℋ^{⊗n} 與 Bożejko–Speicher q-變形子空間
-   │  (演變動因：單粒子空間由離散模態 ℚ^d 細分為連續時間區間 L²([0,T], dt)，逐點對易子發散為 δ(s−t))
-   ▼
-[Stage IV · L3] 連續創生與湮滅算子場 [A(g), A†(f)] = ⟨g,f⟩_{L²}、Wick 正規序與量子 Itô 代數
-   │  (演變動因：非交換場與過完備觀測量不存在古典聯合 σ-代數測度，配分格由 Π(n) 收縮為非交叉 NC(n))
-   ▼
-[Stage V · L4] 非交換隨機分佈、正算子值測度（POVM ↪ Naimark PVM）與 Speicher 自由累積量統合
-   │  (演變動因：將各空間與子場態射組織為雙範疇，把各層主命題纖維化，再以機率單子統一各交換觀測脈絡)
-   ▼
-[Stage VI · L5] 空間子場雙範疇 ℬ_qprob、主命題纖維化 ∫ Prop、有理機率單子 D_ℚ 與量子機率脈絡範疇 QProbCtx 合流
-```
-
-全部計算在 `BigInt` 精確有理數 `QVal`、二次域 `QuadElem`、複有理數 `QComplex`、截斷 Laurent 噴流 `AsymJet` 與有理機率單子 `ProbDist[T]` 上執行，**零浮點誤差、零近似容差**。
 
 ---
 
-## 2. 檔案與規模總覽
+## 2. 套件分層與量化指標總表
 
-| 套件 | Layer | 檔案 | 行數 | 章節 | 命題 |
-|---|---:|---|---:|---:|---:|
-| [`qprob/asymptotic`](asymptotic/README.md) | L0 | `subfield.mbt` (546)、`projective_limit.mbt` (332)、`laws.mbt` (352) | 1,230 | 4 | 21 |
-| [`qprob/unbounded`](unbounded/README.md) | L1 | `probability_space.mbt` (543)、`laws.mbt` (363) | 906 | 4 | 12 |
-| [`qprob/fock`](fock/README.md) | L2 | `full_fock.mbt` (435)、`laws.mbt` (341) | 776 | 4 | 13 |
-| [`qprob/ccr_field`](ccr_field/README.md) | L3 | `continuum_field.mbt` (425)、`laws.mbt` (302) | 727 | 4 | 11 |
-| [`qprob/nc_measure`](nc_measure/README.md) | L4 | `noncommutative_measure.mbt` (384)、`laws.mbt` (408) | 792 | 4 | 13 |
-| [`qprob/context_cat`](context_cat/README.md) | L5 | `bicat_fibration.mbt` (597)、`prob_monad_confluence.mbt` (693)、`laws.mbt` (719) | 2,009 | 4 | 18 |
-| [`cmd/qprob`](../cmd/qprob/README.md) | L6 | `main.mbt` (63) | 63 | — | **88** |
-| **合計** | **L0–L6** | **15 個 `.mbt` 檔** | **6,503** | **24** | **88** |
-
----
-
-## 3. 由結構演變導出的核心定理與演算法
-
-| 階段 | 導出定理 | 導出演算法 |
-|---|---|---|
-| **Stage I** `asymptotic` | Galois 不動子場 `Fix(σ) = ℚ`；標準部商同態 `st : ℚ[[ε]] → ℚ`（`ker(st) = εℚ[[ε]]`）；射影塔 Mittag-Leffler 穩定秩定理 | `richardson_extrapolate_limit`（Neville–Richardson 零誤差消去 `N⁻¹..N⁻ᵐ`）、`shanks_aitken_step`、`wynn_epsilon_limit`（`ε_{2K}` 零誤差消去多模態幾何暫態）、`cesaro_mean` |
-| **Stage II** `unbounded` | 稠密核 `Op*(𝒟)` 成長階加法封閉性；GNS Cauchy–Schwarz；Robertson–Schrödinger 不確定性不等式與基態飽和；Yosida 有界預解正則化 `‖A_γ‖ < γ` | `reconstruct_jacobi_from_moments`（Favard–Chebyshev–Lanczos 正交多項式三項遞迴：由無界高斯矩反演出 `β=[1,2,3]`，由 Poisson Bell 矩反演出 `α=[1,2,3], β=[1,2]`） |
-| **Stage III** `fock` | Cuntz–Toeplitz 等距恆等式與真空餘投影 `I − Σ ℓ*_i ℓ_i = \|Ω⟩⟨Ω\|`；全福克場 `ℓ*+ℓ` 生成半圓律 Catalan 矩；Bożejko–Speicher `q`-對易與三統計維度分裂（`d^n` / `C(d+n-1,n)` / `C(d,n)` Pauli 核）；`[dΓ(A), dΓ(B)] = dΓ([A,B])` | `fock_q_gram_matrix`（逆序數加權 `q`-Gram 核秩計算）、`fock_gamma` / `fock_dgamma` 二次量子化算子提升器 |
-| **Stage IV** `ccr_field` | 離散福克格點場對易子經 Richardson 外推 `N→∞` 零誤差收斂至連續 `L²` 內積 `[A(g), A†(f)] = ∫ gf dt`；高斯場 4 點關聯三配對定理；Weyl 辛形式 2-上循環恆等式；Hudson–Parthasarathy 量子隨機演化么正性判準 | `wick_normal_order` / `wick_vacuum_expectation`（遞迴 Leibniz 縮併正規序展開器）、`qsde_ito_product`（非交換量子 Itô 二次變差代數） |
-| **Stage V** `nc_measure` | 非交換過完備 POVM 與 Born 機率律；Naimark 等距擴張 `V† P_k V = E_k`；半圓律自由累積量消失 `κ_{n≠2}=0`；古典 vs 自由四階分岔（交叉配分 `(13)(24)`）；自由加性卷積半群律與自由中心極限定理（Free CLT）；五階大統一對偶閉環 | `verify_naimark_dilation`、`moments_to_free_cumulants` / `free_cumulants_to_moments`（非交叉 Cauchy 卷積冪 Möbius 正逆轉換）、`free_additive_convolution_moments`、`apply_cptp_channel` |
-| **Stage VI** `context_cat` | 空間子場雙範疇 Godement 縱橫互換律；Grothendieck 主命題纖維化逆變拉回與笛卡兒提升泛性質；Giry–Lawvere 有理機率單子三律、Fubini 積與 CPTP 對偶；量子機率脈絡範疇 Bohr 相容性、預層截面自然性與菱形合流大定理 | `bicat_check_interchange`、`pullback_principal_prop`、`factor_through_cartesian_lift`、`dist_bind` / `dist_flatten`、`qctx_to_prob_monad`、`verify_qctx_presheaf_section`、`verify_qctx_diamond_confluence`、`verify_grand_qprob_context_confluence` |
+| 階段 | 層級 | 套件路徑 | 套件名稱 | `.mbt` 檔數 | 行數 | 章節 | 命題區間 | 負控制數 | 詳細文檔 |
+|---|---:|---|---|---:|---:|---:|---|---:|---|
+| Stage I | L0 | `qprob/asymptotic` | `qprob-asymptotic` | 3 | 1,230 | Ch 1–4 | `[001]–[021]` (21) | 4 | [`asymptotic/README.md`](./asymptotic/README.md) |
+| Stage II | L1 | `qprob/unbounded` | `qprob-unbounded` | 2 | 906 | Ch 5–8 | `[022]–[033]` (12) | 3 | [`unbounded/README.md`](./unbounded/README.md) |
+| Stage III | L2 | `qprob/fock` | `qprob-fock` | 2 | 776 | Ch 9–12 | `[034]–[046]` (13) | 2 | [`fock/README.md`](./fock/README.md) |
+| Stage IV | L3 | `qprob/ccr_field` | `qprob-ccr-field` | 2 | 727 | Ch 13–16 | `[047]–[057]` (11) | 2 | [`ccr_field/README.md`](./ccr_field/README.md) |
+| Stage V | L4 | `qprob/nc_measure` | `qprob-nc-measure` | 2 | 792 | Ch 17–20 | `[058]–[070]` (13) | 2 | [`nc_measure/README.md`](./nc_measure/README.md) |
+| Stage VI | L5 | `qprob/context_cat` | `qprob-context-cat` | 3 | 2,009 | Ch 21–24 | `[071]–[088]` (18) | 3 | [`context_cat/README.md`](./context_cat/README.md) |
+| Runner | L6 | `cmd/qprob` | `cmd-qprob` | 1 | 63 | 總驗算 | 全 `88 / 88` | — | [`../cmd/qprob/README.md`](../cmd/qprob/README.md) |
+| **合計** | **L0–L6** | — | **7 個組件** | **16** | **6,503** | **24 章** | **88 條命題** | **16** | [`../docs/QPROB_THEOREMS_AND_ALGORITHMS.md`](../docs/QPROB_THEOREMS_AND_ALGORITHMS.md) |
 
 ---
 
-## 4. 驗證與邊界說明
+## 3. 核心演算法索引（跨六階 26 項演算法）
+
+| 階段 | 演算法 | 所在檔案 | 核心數學方法與不變量 |
+|---|---|---|---|
+| I | 二次擴張有理化反元素 `quad_inv` | `asymptotic/subfield.mbt` | Galois 共軛 $(a-b\sqrt{d})/(a^2-db^2)$，精確攔截範數零因子（如 $d=4$ 時 $2+\sqrt{4}$）。 |
+| I | Laurent 噴流長除法與標準部 `jet_inv` / `jet_standard_part` | `asymptotic/subfield.mbt` | 提最低賦值階 $\varepsilon^v$ 後形式級數截斷求逆；標準部商同態 $\mathbb{Q}[[\varepsilon]] \twoheadrightarrow \mathbb{Q}$。 |
+| I | 精確有理列梯形秩與 Mittag-Leffler 穩定像 `qmat_rank` / `tower_mittag_leffler_stable_rank` | `asymptotic/projective_limit.mbt` | $O(\min(r,c)rc)$ 精確高斯列梯形消去，計算遠端射影轉移映射穩定像維度。 |
+| I | Richardson–Neville 多項式極限外推 `richardson_extrapolate_limit` | `asymptotic/projective_limit.mbt` | 步長節點 $h_i = 1/N_i$ 在 $h=0$ 處 Neville 插值，零誤差消去 $O(N^{-1}..N^{-(m-1)})$ 截斷項。 |
+| I | Wynn $\varepsilon$-演算法 / Padé–Shanks 加速 `wynn_epsilon_limit` | `asymptotic/projective_limit.mbt` | 菱形反差分遞迴 $\varepsilon_{k+1}^{(n)} = \varepsilon_{k-1}^{(n+1)} + (\Delta \varepsilon_k^{(n)})^{-1}$，同時消除多模態幾何暫態。 |
+| II | 無界 $^*$-代數複合與成長階追蹤 `uop_mul` | `unbounded/probability_space.mbt` | 共同稠密核 $\mathcal{D}$ 上追蹤 Sobolev 多項式成長階 $\deg(AB)=\deg(A)+\deg(B)$，零算子自動收斂階 $0$。 |
+| II | Robertson–Schrödinger 證書 `check_robertson_schrodinger` | `unbounded/probability_space.mbt` | 同時精確計算對易子平方界與反交換中心協方差界，判定量子態是否飽和最小不確定性。 |
+| II | Yosida 預解正則化 `yosida_diagonal_approximant` | `unbounded/probability_space.mbt` | 有界逼近算子 $A_\gamma = \gamma A(\gamma I+A)^{-1}$ 單調遞增逼近無界非負自伴算子期望。 |
+| II | Favard–Chebyshev–Lanczos 矩重構 `reconstruct_jacobi_from_moments` | `unbounded/probability_space.mbt` | 由前 $2n$ 階矩單一線性泛函反演三對角 Jacobi 係數 $(\alpha_k,\beta_k)$，並以 $h_k \le 0$ 偵測非正定偽矩。 |
+| III | 全福克稀疏正規形與 $q$-湮滅 `fock_normalize` / `fock_annihilate_q` | `fock/full_fock.mbt` | 張量詞字典序唯一表示與 $q$-Leibniz 跨位縮併 $\sum_{k=1}^n q^{k-1}\langle g, e_{i_k}\rangle$。 |
+| III | Bożejko–Speicher $q$-Gram 秩分裂 `fock_q_gram_matrix` | `fock/full_fock.mbt` | 對稱群 $S_n$ 逆序數核 $\sum_{\sigma \in S_n} q^{\mathrm{inv}(\sigma)}$ 與精確秩計算，導出自由／玻色／費米維度分裂。 |
+| III | 乘法與微商二次量子化 `fock_gamma` / `fock_dgamma` | `fock/full_fock.mbt` | 單粒子算子函子提升 $\Gamma(AB)=\Gamma(A)\Gamma(B)$ 與 Lie 同態 $[d\Gamma(A),d\Gamma(B)]=d\Gamma([A,B])$。 |
+| IV | 塗抹測試函數精確 $L^2$ 內積 `continuum_l2_inner` | `ccr_field/continuum_field.mbt` | 多項式卷積與原函數解析定積分，零數值求積誤差。 |
+| IV | 遞迴 Leibniz–Wick 正規序縮併 `wick_normal_order` | `ccr_field/continuum_field.mbt` | 任意創生／湮滅場序列遞迴化為正規序並提取高斯場 $2n$ 點配對真空關聯函數。 |
+| IV | Weyl 辛形式與 Hudson–Parthasarathy 量子 Itô 積 `qsde_ito_product` | `ccr_field/continuum_field.mbt` | 相空間辛 2-上循環與非交換隨機微元乘法表 $dA\,dA^\dagger = dt$ 么正演化檢驗。 |
+| V | 構造性 Naimark 等距擴張 `verify_naimark_dilation` | `nc_measure/noncommutative_measure.mbt` | 將過完備 POVM Kraus 根堆疊為分塊等距 $V:\mathbb{C}^d \hookrightarrow \mathbb{C}^{Kd}$，驗證 $E_k = V^\dagger P_k V$。 |
+| V | Speicher 非交叉矩—自由累積量雙射 `moments_to_free_cumulants` | `nc_measure/noncommutative_measure.mbt` | $O(N^3)$ Cauchy 卷積冪遞推實現 $m_n \leftrightarrow \kappa_n$ 正逆轉換與自由加性卷積 $\mu \boxplus \nu$。 |
+| VI | 雙範疇 1/2-胞複合與互換律檢驗 `bicat_hcomp2` / `bicat_vcomp2` / `bicat_check_interchange` | `context_cat/bicat_fibration.mbt` | 驗證空間—子場轉移路徑與兩條平行演化路徑間的 Godement 縱橫互換律。 |
+| VI | Grothendieck 笛卡兒提升與泛因式分解 `cartesian_lift_morphism` / `factor_through_cartesian_lift` | `context_cat/bicat_fibration.mbt` | 逆變拉回贗函子 $f^*: \mathrm{Prop}(Y)\to\mathrm{Prop}(X)$ 與唯一笛卡兒提升分解。 |
+| VI | 有理機率單子、CPTP 對偶與菱形脈絡合流 `dist_bind` / `verify_cptp_kleisli_duality` / `verify_qctx_diamond_confluence` | `context_cat/prob_monad_confluence.mbt` | 精確 Giry–Lawvere 有限分佈單子 $D_{\mathbb{Q}}$、Bohr 對易觀測脈絡檢驗、預層截面自然性與菱形合流大定理。 |
+
+> 全部 **88 條命題逐條數學陳述、實算見證常數與負控制對照表** 請參閱專章文檔：[`docs/QPROB_THEOREMS_AND_ALGORITHMS.md`](../docs/QPROB_THEOREMS_AND_ALGORITHMS.md)。
+
+---
+
+## 4. 驗證指令
 
 ```bash
-export PATH="$HOME/.moon/bin:$PATH"
+# 編譯與靜態無警告檢查
 moon check --deny-warn --target wasm-gc
-moon build --target wasm-gc
-moon run cmd/qprob --target wasm-gc           # 通過 88 / 88 個命題
-python3 tools/arch_check.py                   # 70 packages / 79 components
-python3 tools/federation_docs.py --check      # 生成文檔一致
-```
 
-**誠實邊界**：
-* 全部 88 條命題是在具體有限截斷維度、精確多項式測試函數與有理樣本上當場重算的精確等式／不等式，並為每一層配置顯式負控制（如可約根號 `d=4`、無窮大噴流 `ε⁻¹`、非正 Hankel 矩、`q=2` 負範數態、忽略 Itô 修正項、不完備 POVM、負權重準機率、Heisenberg 非對易脈絡 `{σ_x, σ_z}`），**不是** Lean 形式化任意無窮維希爾伯特空間證明。
-* 連續算子場以 `L²([a,b], dt)` 中稠密的多項式代數 `ℚ[t]` 表達塗抹測試函數，藉此獲得精確原函數積分與 Euler–Maclaurin 漸近展開。
+# 執行 qprob 六階 24 章 88 條命題完整套件
+moon run cmd/qprob --target wasm-gc
+
+# 執行跨全聯邦大合流旗艦驗算（含 quantum probability context confluence holds=true）
+moon run cmd/showcase --target wasm-gc
+```
