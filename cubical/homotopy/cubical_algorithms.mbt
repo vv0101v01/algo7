@@ -36,10 +36,12 @@ using @algebra {
 
 ///|
 using @kernel {
+  type DArgKind,
   type DCheckedTypeLine,
   type DDimEnv,
   type DEnv,
   type DEquivParts,
+  type DHitCellSpec,
   type DHitSpec,
   type DInductiveSpec,
   type DNeutral,
@@ -124,6 +126,7 @@ using @kernel {
   quote_at,
   quote_ty,
   quotient_schema,
+  reflect_neutral_at_type,
   reflect_var,
   schema_intro_term,
   tube_branch,

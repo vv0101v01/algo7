@@ -155,15 +155,33 @@ pub fn compile_indexed_container_to_positive_functor(
 }
 
 ///|
-/// `[Ax-Mahlo-Reflect]` Mutual Inductively-Inductive Universe Reflection Certificate:
-/// certifies a finite mutual `(Ctx, Ty)` code system + reflected sub-universe code `u_mahlo`
-/// whose decoding `El(u_mahlo)` closes under `Pi`, `Sigma`, `Path`, and `W`-containers while
-/// strictly descending in `CantorOrdinal` rank below `omega^omega < epsilon_0`.
+/// `[Ax-Mahlo-Reflect]` Universe Reflection Certificate.
+///
+/// What each field actually certifies:
+///   * `closed_under_pi_sigma_path` — four separate kernel `d_infer` calls:
+///     `Pi Bool Bool : Type_0`, `Sigma Bool Unit : Type_0`,
+///     `Path Bool true true : Type_0`, and `Type_0 : Type_1`.
+///   * `rank_descent_below_omega_cubed` — pure `CantorOrdinal` arithmetic:
+///     `1 + omega == omega < omega + 1`, and `small_rank < omega^3`.
+///   * `mahlo_code_rank`, `super_universe_rank`, `strict_rank_descent` — the
+///     two ordinal ranks, and their conjunction with the closure facts.
+///
+/// What it does NOT certify, and what an earlier revision of this docstring
+/// claimed it did: there is no mutual `(Ctx, Ty)` code system, no reflected
+/// sub-universe code `u_mahlo`, and no decoding `El(u_mahlo)` anywhere in this
+/// function.  `W`-container closure is not checked either — `DTerm` has no `W`
+/// constructor, so a `W`-type has to be built as a `DInductiveSpec` over
+/// `DFunctorContainer` (the route `compile_indexed_container_to_positive_functor`
+/// already provides) and validated separately; that is future work, not a
+/// property of this certificate.  The previous field names
+/// `closed_under_pi_sigma_path_w` and `ctx_ty_mutual_well_founded` asserted
+/// `W`-closure and mutual well-foundedness respectively, while being assigned
+/// values that verified neither.
 #derive(Debug, Eq)
 pub(all) struct MahloReflectionCert {
   universe_level : Int32
-  closed_under_pi_sigma_path_w : Bool
-  ctx_ty_mutual_well_founded : Bool
+  closed_under_pi_sigma_path : Bool
+  rank_descent_below_omega_cubed : Bool
   mahlo_code_rank : CantorOrdinal
   super_universe_rank : CantorOrdinal
   strict_rank_descent : Bool
@@ -193,28 +211,32 @@ pub fn verify_mahlo_universe_reflection() -> MahloReflectionCert {
     cantor_ord_lt(omega1, cantor_ord_add(omega1, cantor_ord_nat(1)))
   let descent_ok = absorb_ok && cantor_ord_lt(small_rank, omega3)
 
-  // Kernel-verify `Type_0 : Type_1` + `Pi`/`Sigma`/`Path` closure inside `Type_0`
-  let pi_closed = match
-    d_infer(
-      DPi(DBoolTy, DPath(DBoolTy, DTVar(0), DTVar(0))),
-      denv_empty(),
-      denv_empty(),
-      ddim_empty(),
-    ) {
-    Some(inf) => conv_ty(0, 0, inf.ty, DVUniv(0))
-    None => false
+  // Kernel-verify `Type_0 : Type_1` and closure of `Type_0` under `Pi`,
+  // `Sigma` and `Path`.  Each is its own `d_infer` call so that a failure in
+  // one former cannot be masked by the others; the previous single call
+  // `d_infer(Pi Bool (Path Bool x x))` conflated `Pi` with `Path` and never
+  // mentioned `Sigma` at all.
+  let infer_univ0 = (t : DTerm) => {
+    match d_infer(t, denv_empty(), denv_empty(), ddim_empty()) {
+      Some(inf) => conv_ty(0, 0, inf.ty, DVUniv(0))
+      None => false
+    }
   }
+  let pi_closed = infer_univ0(DPi(DBoolTy, DBoolTy))
+  let sigma_closed = infer_univ0(DSigma(DBoolTy, DUnitTy))
+  let path_closed = infer_univ0(DPath(DBoolTy, DBoolLit(true), DBoolLit(true)))
   let u0_in_u1 = match
     d_infer(DUniv(0), denv_empty(), denv_empty(), ddim_empty()) {
     Some(inf) => conv_ty(0, 0, inf.ty, DVUniv(1))
     None => false
   }
+  let closure_ok = pi_closed && sigma_closed && path_closed && u0_in_u1
   MahloReflectionCert::{
     universe_level: 1,
-    closed_under_pi_sigma_path_w: pi_closed && u0_in_u1,
-    ctx_ty_mutual_well_founded: descent_ok,
+    closed_under_pi_sigma_path: closure_ok,
+    rank_descent_below_omega_cubed: descent_ok,
     mahlo_code_rank: small_rank,
     super_universe_rank: omega3,
-    strict_rank_descent: descent_ok && pi_closed && u0_in_u1,
+    strict_rank_descent: descent_ok && closure_ok,
   }
 }

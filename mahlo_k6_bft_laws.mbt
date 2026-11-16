@@ -3,7 +3,7 @@
 pub fn check_phase21_schema_dsystem_and_frontier_bdd() -> Bool {
   // 1. §4.1: Cantor Normal Form `< epsilon_0`, Mahlo Universe Reflection, & Indexed Container compiler
   let mahlo = verify_mahlo_universe_reflection()
-  if !mahlo.strict_rank_descent || !mahlo.closed_under_pi_sigma_path_w {
+  if !mahlo.strict_rank_descent || !mahlo.closed_under_pi_sigma_path {
     return false
   }
   let idx_spec = IndexedContainerSpec::{

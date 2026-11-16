@@ -1768,7 +1768,8 @@
         "algebra-core",
         "cubical",
         "gcd-core",
-        "associahedron"
+        "associahedron",
+        "brunerie-pi4-s3"
       ],
       "summary_en": "General homotopy type formers (join, wedge, n-truncation, James construction) declared as genuine DHitSpec HITs with recursion principles and computation rules.",
       "summary_zh": "通用同倫型別構造子（join、wedge、n-截斷、James 構造）以 DHitSpec 宣告為真正的 HIT，並給出遞迴原則與計算規則。"

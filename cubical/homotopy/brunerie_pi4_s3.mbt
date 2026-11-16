@@ -104,8 +104,18 @@ pub extend BrunerieNumber with Eq::{equal, not_equal}
 // ---------------------------------------------------------------------------
 
 ///|
-/// `S^m * S^n ~= S^(m+n+1)`.  The join of two spheres is a sphere one
-/// dimension higher than the sum.
+/// Join dimension bookkeeping, `dim(A * B) = dim A + dim B + 1`, which for
+/// spheres reads `S^m * S^n ~= S^(m+n+1)`.
+///
+/// This is the single implementation of that formula in the repository;
+/// `homotopy_universal.join_dim` delegates to it.  It used to be duplicated
+/// verbatim in both files, so the two could silently disagree while both
+/// stayed green.  The formula lives here rather than next to the join HIT
+/// because of the declared component layering: this file is component
+/// `brunerie-pi4-s3` at layer 7 and `homotopy_universal.mbt` is component
+/// `homotopy-universal` at layer 8, and `tools/arch_check.py` forbids an
+/// upward component edge.  Layer 8 therefore depends on layer 7, the same
+/// direction as the existing `homotopy-universal -> associahedron` edge.
 pub fn join_sphere_dim(m : Int32, n : Int32) -> Int32 {
   m + n + 1
 }
